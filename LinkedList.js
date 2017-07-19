@@ -43,16 +43,11 @@ class LinkedList {
   /* Check if node with given value exists in instance of LinkedList.
 
   Strategy: Loop through LL checking if value of node equals input value. End loop when we reach the last node based on node's next value.
-  
-  Edge case: empty list
 
   @param {*} value - checked if exists in list
-  @return {bool|string} - whether or not value exists in list | edge case message
+  @return {bool} - whether or not value exists in list
   */  
   contains(value) {
-    // Edge case: empty list
-    if (this.size === 0) { return 'list is empty'; }
-
     let curr = this.head;
     while (curr !== null) {
       if (curr.value === value) { return true; }
