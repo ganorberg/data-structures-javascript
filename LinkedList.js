@@ -12,7 +12,7 @@ class LinkedList {
     this.size = 0;
   }
 
-  /* Add nodes with given value to instance of LinkedList.
+  /** Add nodes with given value.
 
   Strategy: Since we have access to tail, append newly created Node to tail and move tail pointer to new node.
   
@@ -20,6 +20,9 @@ class LinkedList {
 
   @param {*} value - value to be inserted into new node
   @return {bool|string} - informs user that push was successful | edge case message
+
+  Time complexity: O(1)
+  Space complexity: O(1)
   */
   push(value) {
     if (value === null || value === undefined) {
@@ -40,12 +43,15 @@ class LinkedList {
     return true;
   }
 
-  /* Check if node with given value exists in instance of LinkedList.
+  /** Check if node with given value exists in instance of LinkedList.
 
   Strategy: Loop through LL checking if value of node equals input value. End loop when we reach the last node based on node's next value.
 
   @param {*} value - checked if exists in list
   @return {bool} - whether or not value exists in list
+
+  Time complexity: O(N)
+  Space complexity: O(1)
   */  
   contains(value) {
     let curr = this.head;
@@ -57,14 +63,17 @@ class LinkedList {
     return false;
   }
 
-  /* Remove nodes with given value from instance of LinkedList.
+  /** Remove nodes with given value from instance of LinkedList.
 
   Strategy: Loop through LL tracking previous and current nodes so you can remove reference to target node by pointing prev's next at current's next. Only removes first match.
   
-  Edge cases: empty list, remove head or tail, removing final node.
+  Edge cases: empty list, remove head or tail, remove final node.
 
   @param {*} value - value to be removed from list
   @return {object|string} - node removed | edge case message
+  
+  Time complexity: O(N)
+  Space complexity: O(1)
   */
   remove(value) {
     // Edge case: empty list
@@ -111,7 +120,7 @@ list.push(1);
 list.push(2);
 console.log(list.contains(2));
 list.push(3);
-list.remove(2);
+list.remove(3);
 console.log(list.contains(2));
 console.log(list);
 
