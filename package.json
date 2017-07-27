@@ -1,8 +1,7 @@
 {
   "name": "data-structures-javascript",
   "version": "1.0.0",
-  "description": "Hello, world!",
-  "main": "LinkedList.js",
+  "description": "Iron sharpens iron; scholar, the scholar.",
   "scripts": {
     "test": "mocha"
   },
