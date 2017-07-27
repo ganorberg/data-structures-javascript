@@ -4,17 +4,25 @@ let Stack;
 let stack;
 
 try {
-  Stack = require('../Stack.js');
+  Stack = require('../structures/Stack');
   stack = new Stack();
 } catch (e) {
-  throw 'Stack could not be tested due to faulty import, likely ' +
-  'from incorrect file path or non-constructor import';
+  throw new Error('Stack could not be tested due to faulty import, likely ' +
+  'from an incorrect file path or exporting a non-constructor from the file.');
 }
 
 // Follows AAA (Arrange -> Act -> Assert) unit testing pattern
 describe('Stack', () => {
   beforeEach(() => {
     stack = new Stack();
+  });
+
+  it('should be extensible', () => {
+    expect(stack).to.be.extensible;
+  });
+
+  it('should have properties granted from constructor call', () => {
+    expect(stack).to.have.all.keys('storage', 'capacity');
   });
 
   describe('#isEmpty()', () => {
