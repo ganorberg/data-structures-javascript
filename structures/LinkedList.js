@@ -1,11 +1,26 @@
+/** Class representing a node */
 class Node {
+  /**
+   * Quickly create nodes for linked lists
+   *
+   * @constructor
+   * @param {*} value - value held by node
+   */
   constructor(value) {
     this.value = value;
     this.next = null;
   }
 }
 
+/** Class representing a linked list */
 class LinkedList {
+  /**
+   * Track head, tail and key features of linked list. Provides access to tail
+   * so tail operations can occur in constant time. Provides size property for
+   * constant time access.
+   *
+   * @constructor
+   */
   constructor() {
     this.head = null;
     this.tail = null;
@@ -23,11 +38,11 @@ class LinkedList {
    * Space complexity: O(1)
    *
    * @param {*} value - value to be inserted into new node
-   * @return {Boolean|String} - true | edge case message
+   * @return {Boolean} - true means push was successful
    */
   push(value) {
     if (value === null || value === undefined) {
-      return 'Please don\'t push silly values :)';
+      throw new Error('Please avoid pushing silly values like null and undefined');
     }
 
     const node = new Node(value);
@@ -58,7 +73,7 @@ class LinkedList {
    * @return {Boolean|String} - whether or not value exists in list | edge case message
    */  
   contains(value) {
-    if (value === undefined) { return 'That is a silly value to check :)'; }
+    if (value === undefined) { throw new Error('That is a silly value to check'); }
 
     let curr = this.head;
     while (curr !== null) {
@@ -122,33 +137,35 @@ class LinkedList {
 }
 
 
-const list = new LinkedList();
-list.push(1);
-list.push(2);
-console.log(list.contains(2));
-list.push(3);
-list.remove(3);
-console.log(list.contains(2));
-console.log(list);
+// const list = new LinkedList();
+// list.push(1);
+// list.push(2);
+// console.log(list.contains(2));
+// list.push(3);
+// list.remove(3);
+// console.log(list.contains(2));
+// console.log(list);
 
-const list2 = new LinkedList();
-list2.push('I am alone');
-list2.remove('I am alone');
-console.log(list2);
+// const list2 = new LinkedList();
+// list2.push('I am alone');
+// list2.remove('I am alone');
+// console.log(list2);
 
-const list3 = new LinkedList();
-list3.push(1);
-list3.push('I will survive');
-list3.remove(1);
-console.log(list3);
+// const list3 = new LinkedList();
+// list3.push(1);
+// list3.push('I will survive');
+// list3.remove(1);
+// console.log(list3);
 
-const list4 = new LinkedList();
-list4.push('I will survive');
-list4.push(2);
-list4.remove(2);
-console.log(list4);
+// const list4 = new LinkedList();
+// list4.push('I will survive');
+// list4.push(2);
+// list4.remove(2);
+// console.log(list4);
 
-const notRemoved = new LinkedList();
-notRemoved.push(1);
-console.log(notRemoved.remove('Does not exist'));
-console.log(notRemoved);
+// const notRemoved = new LinkedList();
+// notRemoved.push(1);
+// console.log(notRemoved.remove('Does not exist'));
+// console.log(notRemoved);
+
+module.exports = LinkedList;
