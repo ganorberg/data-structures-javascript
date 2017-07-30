@@ -10,7 +10,7 @@ class Stack {
   }
 
   /** 
-   * Description: Check if stack contains any values
+   * Description: Check if stack is empty
    * Strategy: Use storage array length
    *
    * Time complexity: O(1)
