@@ -26,6 +26,51 @@ class Queue {
     this.capacity = capacity;
   }
 
+  /**
+   * Description: Remove node from front of queue
+   * Strategy: Reassign front to next node
+   *
+   * Time complexity: O(1)
+   * Space complexity: O(1)
+   *
+   * @return {*} - value removed from queue, or undefined if empty
+   */
+  dequeue() {
+    if (this.size === 0) { return; }
+
+    const value = this.front.value;
+    this.front = this.front.next;
+    this.size--;
+    return value;
+  }
+
+  /**
+   * Description: Add node with given input value to end of queue
+   * Strategy: Use native Array push method if under capacity
+   *
+   * Time complexity: O(1)
+   * Space complexity: O(1)
+   *
+   * @param {*} val - value added to queue
+   * @return {Number} - size of queue after value inserted
+   */
+  enqueue(val) {
+    if (this.size >= this.capacity) { return; }
+
+    const node = new Node(val);
+    this.size++;
+
+    // if queue was empty
+    if (this.front === null) {
+      this.front = this.rear = node;
+      return this.size;
+    }
+
+    this.rear.next = node;
+    this.rear = this.rear.next;
+    return this.size;
+  }
+
   /** 
    * Description: Check if queue is empty
    * Strategy: Use size property
@@ -63,51 +108,6 @@ class Queue {
    */
   peek() {
     if (this.front !== null) { return this.front.value; };
-  }
-
-  /**
-   * Description: Add node with given input value to end of queue
-   * Strategy: Use native Array push method if under capacity
-   *
-   * Time complexity: O(1)
-   * Space complexity: O(1)
-   *
-   * @param {*} val - value added to queue
-   * @return {Number} - size of queue after value inserted
-   */
-  enqueue(val) {
-    if (this.size >= this.capacity) { return; }
-
-    const node = new Node(val);
-    this.size++;
-
-    // if queue was empty
-    if (this.front === null) {
-      this.front = this.rear = node;
-      return this.size;
-    }
-
-    this.rear.next = node;
-    this.rear = this.rear.next;
-    return this.size;
-  }
-
-  /**
-   * Description: Remove node from front of queue
-   * Strategy: Reassign front to next node
-   *
-   * Time complexity: O(1)
-   * Space complexity: O(1)
-   *
-   * @return {*} - value removed from queue, or undefined if empty
-   */
-  dequeue() {
-    if (this.size === 0) { return; }
-
-    const value = this.front.value;
-    this.front = this.front.next;
-    this.size--;
-    return value;
   }
 
   /**
