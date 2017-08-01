@@ -10,7 +10,8 @@ class Stack {
   }
 
   /** 
-   * Description: Check if stack is empty
+   * @description Check if stack is empty
+   * 
    * Strategy: Use storage array length
    *
    * Time complexity: O(1)
@@ -23,7 +24,8 @@ class Stack {
   }
 
   /** 
-   * Description: Check if stack has reached capacity
+   * @description Check if stack has reached capacity
+   * 
    * Strategy: Check if storage array length matches capacity value
    *
    * Time complexity: O(1)
@@ -36,7 +38,8 @@ class Stack {
   }
 
   /**
-   * Description: View value at top of stack
+   * @description View value at top of stack
+   * 
    * Strategy: Look at storage array's final element using index
    *
    * Time complexity: O(1)
@@ -49,7 +52,8 @@ class Stack {
   }
 
   /**
-   * Description: Add input value to top of stack
+   * @description Add input value to top of stack
+   * 
    * Strategy: Use native Array push method if under capacity
    *
    * Time complexity: O(1)
@@ -64,7 +68,8 @@ class Stack {
   }
 
   /**
-   * Description: Remove value from top of stack
+   * @description Remove value from top of stack
+   * 
    * Strategy: Use native Array pop method
    *
    * Time complexity: O(1)
@@ -77,7 +82,8 @@ class Stack {
   }
 
   /**
-   * Description: Check size of stack
+   * @description Check size of stack
+   * 
    * Strategy: Use storage length
    *
    * Time complexity: O(1)

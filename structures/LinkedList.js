@@ -28,7 +28,8 @@ class LinkedList {
   }
 
   /**
-   * Description: Add nodes with given value to end of list.
+   * @description Add nodes with given value to end of list.
+   *
    * Strategy: Since we have access to tail, append newly created Node to tail
    * and move tail pointer to new node.
    *
@@ -60,7 +61,8 @@ class LinkedList {
   }
 
   /**
-   * Description: Check if node with given value exists in list.
+   * @description Check if node with given value exists in list.
+   *
    * Strategy: Loop through list checking if value of any node equals input
    * value. End loop when we reach the last node.
    *
@@ -85,7 +87,8 @@ class LinkedList {
   }
 
   /**
-   * Description: Remove first node with given value from list.
+   * @description Remove first node with given value from list.
+   *
    * Strategy: Loop through LL tracking previous and current nodes so you can
    * remove reference to target node by pointing prev's next at current's next.
    *

@@ -18,6 +18,7 @@ class Queue {
    * Use Linked List structure to trade space from extra pointers
    * for constant time complexity on all operations.
    * @constructor
+   * @param {Number=} capacity - limits Queue size
    */
   constructor(capacity = Infinity) {
     this.front = null;
@@ -27,7 +28,8 @@ class Queue {
   }
 
   /**
-   * Description: Remove node from front of queue
+   * @description Remove node from front of queue
+   * 
    * Strategy: Reassign front to next node
    *
    * Time complexity: O(1)
@@ -45,7 +47,8 @@ class Queue {
   }
 
   /**
-   * Description: Add node with given input value to end of queue
+   * @description Add node with given input value to end of queue
+   * 
    * Strategy: Use native Array push method if under capacity
    *
    * Time complexity: O(1)
@@ -72,7 +75,8 @@ class Queue {
   }
 
   /** 
-   * Description: Check if queue is empty
+   * @description Check if queue is empty
+   * 
    * Strategy: Use size property
    *
    * Time complexity: O(1)
@@ -85,7 +89,8 @@ class Queue {
   }
 
   /** 
-   * Description: Check if queue has reached capacity
+   * @description Check if queue has reached capacity
+   * 
    * Strategy: Check if size equals capacity
    *
    * Time complexity: O(1)
@@ -98,7 +103,8 @@ class Queue {
   }
 
   /**
-   * Description: View value at front of queue
+   * @description View value at front of queue
+   * 
    * Strategy: Look at front property
    *
    * Time complexity: O(1)
@@ -111,7 +117,8 @@ class Queue {
   }
 
   /**
-   * Description: Check size of queue
+   * @description Check size of queue
+   * 
    * Strategy: Use size property
    *
    * Time complexity: O(1)
