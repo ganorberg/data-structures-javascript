@@ -189,10 +189,10 @@ class BinarySearchTree {
    */
   traversePreOrder(callback, node = this.root) {
     if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
-    
+
     callback(node.value);
-    if (node.left !== null) { this.traverseInOrder(callback, node.left); }
-    if (node.right !== null) { this.traverseInOrder(callback, node.right); }
+    if (node.left !== null) { this.traversePreOrder(callback, node.left); }
+    if (node.right !== null) { this.traversePreOrder(callback, node.right); }
   }
 
   /**
@@ -214,8 +214,10 @@ class BinarySearchTree {
   traversePostOrder(callback, node = this.root) {
     if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
     
-    if (node.left !== null) { this.traverseInOrder(callback, node.left); }
-    if (node.right !== null) { this.traverseInOrder(callback, node.right); }
+    if (node.left !== null) { this.traversePostOrder(callback, node.left); }
+    if (node.right !== null) { this.traversePostOrder(callback, node.right); }
     callback(node.value);
   }
 }
+
+module.exports = BinarySearchTree;
