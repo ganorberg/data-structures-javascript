@@ -130,7 +130,7 @@ describe('LinkedList', () => {
       expect(removed.value).to.equal(1);
     });
 
-    it('should remove node from end of list', () => {
+    it('should remove node from end of list and reassign tail pointer', () => {
       list.push(0);
       list.push(1);
       list.push(2);
