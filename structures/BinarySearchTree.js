@@ -184,7 +184,7 @@ class BinarySearchTree {
    * Time complexity: O(N)
    * Space complexity: O(1)
    *
-   * @param {Function} callback - invoked on every node's value in-order
+   * @param {Function} callback - invoked on every node's value pre-order
    * @param {Object=} node - defaults to root and used to traverse recursively
    */
   traversePreOrder(callback, node = this.root) {
@@ -208,7 +208,7 @@ class BinarySearchTree {
    * Time complexity: O(N)
    * Space complexity: O(1)
    *
-   * @param {Function} callback - invoked on every node's value in-order
+   * @param {Function} callback - invoked on every node's value post-order
    * @param {Object=} node - defaults to root and used to traverse recursively
    */
   traversePostOrder(callback, node = this.root) {
