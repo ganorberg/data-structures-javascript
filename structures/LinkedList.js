@@ -88,7 +88,7 @@ class LinkedList {
    * Strategy: Loop through LL tracking previous and current nodes so you can
    * remove reference to target node by pointing prev's next at current's next.
    *
-   * Edge case(s): empty list, one node, remove head or tail
+   * Edge case(s): empty list, one node, remove head or tail, value not in list
    *
    * Time complexity: O(N)
    * Space complexity: O(1)
