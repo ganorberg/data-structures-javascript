@@ -106,6 +106,27 @@ class BinarySearchTree {
   }
 
   /**
+   * @description Find maximum value in tree.
+   *
+   * Strategy: Maximum is right-most node. Traverse tree by starting at root node
+   * and reassigning node to that node's right. When right pointer is null, current
+   * node's value will be the maximum value in the tree.
+   *
+   * Edge case(s): Empty tree
+   *
+   * Time complexity: O(log N)
+   * Space complexity: O(1)
+   *
+   * @return {Number|String} - maximum value in tree
+   */
+  max() {
+    let node = this.root;
+    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
+    while (node.right !== null) { node = node.right; }
+    return node.value;
+  }
+
+  /**
    * @description Find minimum value in tree.
    *
    * Strategy: Minimum is left-most node. Traverse tree by starting at root node
@@ -127,24 +148,22 @@ class BinarySearchTree {
   }
 
   /**
-   * @description Find maximum value in tree.
+   * @description Remove node with given value from the tree.
    *
-   * Strategy: Maximum is right-most node. Traverse tree by starting at root node
-   * and reassigning node to that node's right. When right pointer is null, current
-   * node's value will be the maximum value in the tree.
+   * Strategy: Traverse tree until parent sees that its child has the given value.
+   * While maintaining pointer to parent, traverse into child and count how many
+   * children it has. If 0, simply assign parent's pointer to null. If 1, assign
+   * parent's pointer to grandchild. If 2, 
    *
-   * Edge case(s): Empty tree
+   * Edge case(s): Empty tree, value does not exist in tree
    *
    * Time complexity: O(log N)
    * Space complexity: O(1)
    *
-   * @return {Number|String} - maximum value in tree
+   * @param {Number|String} value - value of node to be removed from tree
    */
-  max() {
-    let node = this.root;
-    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
-    while (node.right !== null) { node = node.right; }
-    return node.value;
+  remove(value) {
+    // 3 cases: 0, 1 or 2 children
   }
 
   /**
@@ -172,30 +191,6 @@ class BinarySearchTree {
   }
 
   /**
-   * @description Depth-first pre-order traversal that applies callback to
-   * all node values in this order: root, left leaf, right leaf
-   *
-   * Strategy: Callback is applied before recursive calls to left and right
-   * subtrees. End traversal in either direction when pointer in that direction
-   * is null.
-   *
-   * Edge case(s): Empty tree
-   *
-   * Time complexity: O(N)
-   * Space complexity: O(1)
-   *
-   * @param {Function} callback - invoked on every node's value pre-order
-   * @param {Object=} node - defaults to root and used to traverse recursively
-   */
-  traversePreOrder(callback, node = this.root) {
-    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
-
-    callback(node.value);
-    if (node.left !== null) { this.traversePreOrder(callback, node.left); }
-    if (node.right !== null) { this.traversePreOrder(callback, node.right); }
-  }
-
-  /**
    * @description Depth-first post-order traversal that applies callback to
    * all node values in this order: left leaf, right leaf, root
    *
@@ -217,6 +212,30 @@ class BinarySearchTree {
     if (node.left !== null) { this.traversePostOrder(callback, node.left); }
     if (node.right !== null) { this.traversePostOrder(callback, node.right); }
     callback(node.value);
+  }
+
+  /**
+   * @description Depth-first pre-order traversal that applies callback to
+   * all node values in this order: root, left leaf, right leaf
+   *
+   * Strategy: Callback is applied before recursive calls to left and right
+   * subtrees. End traversal in either direction when pointer in that direction
+   * is null.
+   *
+   * Edge case(s): Empty tree
+   *
+   * Time complexity: O(N)
+   * Space complexity: O(1)
+   *
+   * @param {Function} callback - invoked on every node's value pre-order
+   * @param {Object=} node - defaults to root and used to traverse recursively
+   */
+  traversePreOrder(callback, node = this.root) {
+    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
+
+    callback(node.value);
+    if (node.left !== null) { this.traversePreOrder(callback, node.left); }
+    if (node.right !== null) { this.traversePreOrder(callback, node.right); }
   }
 }
 
