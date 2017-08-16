@@ -13,6 +13,83 @@ class Node {
   }
 }
 
+
+/**
+ * @description: Helper for deleteNode function. Finds minimum of tree and
+ * deletes it.
+ *
+ * Strategy: Move parent and child pointers left until child is min. Upon match,
+ * update parent's left pointer to min's right subtree.
+ *
+ * Edge case(s): empty tree, incorrect input type. If root is min, then we
+ * cannot remove it from the tree, but we can still return the node.
+ *
+ * Time complexity: O(log N)
+ * Space complexity: O(1)
+ *
+ * @param {Object} root - tree whose minimum will be removed
+ * @return {Object} - node with minimum value in tree
+ */
+function deleteMin(root) {
+  let parent = root;
+  if (parent === null || typeof parent !== 'object') {
+    throw new Error('Please insert valid tree');
+  }
+
+  let child = root.left;
+  if (child === null) {
+    // no children means parent is min
+    return parent.right === null ? parent : parent.right;
+  }
+
+  while (child !== null && child.left !== null) {
+    parent = parent.left;
+    child = child.left;
+  }
+
+  // min may have right subtree, so point parent to that subtree (may also be null)
+  parent.left = child.right;
+  return child;
+}
+
+/**
+ * @description: Helper for delete method. Decides strategy based on number
+ * of children.
+ *
+ * Strategy: If no children, return null. If one child, return it. If two
+ * children, we have some work to do... delete and store minimum in right
+ * subtree, assign minimum's left and right pointers to those of the node to
+ * be deleted, then return min node.
+ *
+ * Edge case(s): right subtree contains only one node
+ *
+ * Time complexity: O(log N)
+ * Space complexity: O(1)
+ *
+ * @param {Object} node - node to be removed
+ * @return {Object} - null, node's only child, or right subtree minimum
+ */
+function deleteNode(node) {
+  let numberOfChildren = 0;
+  if (node.left !== null) { numberOfChildren++; }
+  if (node.right !== null) { numberOfChildren++; }
+
+  switch (numberOfChildren) {
+    case 0:
+      return null;
+    case 1:
+      return node.left === null ? node.right : node.left;
+    case 2:
+      const rightMin = deleteMin(node.right);
+      rightMin.left = node.left;
+
+      // if right subtree min is node's right child, then replace with null
+      // to avoid accidental circular reference
+      rightMin.right = node.right === rightMin ? null : node.right; 
+      return rightMin;
+  }
+}
+
 /** Class representing our tree */
 class BinarySearchTree {
   /**
@@ -32,7 +109,7 @@ class BinarySearchTree {
    * in that direction. If exists, set current node to that node to traverse.
    * If not, insert new node with input value.
    *
-   * Edge case(s): inappropriate inputs
+   * Edge case(s): inappropriate inputs, duplicates
    *
    * Time complexity: O(log N)
    * Space complexity: O(1)
@@ -43,17 +120,18 @@ class BinarySearchTree {
   add(value) {
     // Type checking
     if (value === undefined || typeof value === 'object' || isNaN(value)) {
-      throw new Error('Please avoid adding silly values like undefined, null, NaN or objects');
+      throw new Error('Please avoid adding silly values like undefined, null, objects or NaN');
     }
 
+    let newNode = new Node(value);
+    
     // If tree is empty...
     if (this.root === null) {
-      this.root = new Node(value);
+      this.root = newNode;
       return true;
     }
 
     let node = this.root;
-    let newNode = new Node(value);
 
     // Traverse tree
     while (node !== null) {
@@ -106,6 +184,70 @@ class BinarySearchTree {
   }
 
   /**
+   * @description: Hibbard deletion. Removes a node with the given value from
+   * the tree. If used extensively, slants tree and makes tree height sqrt(N),
+   * which slows typically logarithmic operations.
+   *
+   * Strategy: Traverse with parent pointer until find child node containing
+   * the given value. Call deleteNode on matched child and update parent pointer
+   * in the direction previously traversed.
+   *
+   * Edge case(s): delete root, input does not exist in tree, empty tree
+   *
+   * Time complexity: O(log N)
+   * Space complexity: O(1)
+   *
+   * @param {Number|String} value - value of node to be removed
+   * @return {Object} - node removed
+   */
+  delete(value) {
+    if (this.root === null) { throw new Error('Tree is empty, my dear friend!'); }
+    if (value === undefined || typeof value === 'object' || isNaN(value)) {
+      throw new Error('Values like undefined, null, objects and NaN do not exist for deletion');
+    }
+
+    let parent = this.root;
+    let child;
+
+    // direction remembers whether child is right or left subtree of parent
+    let direction;
+
+    // check if root is node to be deleted
+    if (value === parent.value) {
+      this.root = deleteNode(parent);
+      return parent;
+    }
+
+    // set initial child to check value against
+    if (value < parent.value) {
+      child = parent.left;
+      direction = 'left';
+    } else if (value > parent.value) {
+      child = parent.right;
+      direction = 'right';
+    }
+
+    // traverse tree
+    while (child !== null) {
+      if (value === child.value) {
+        // parent overwrites pointer to matched child
+        parent[direction] = deleteNode(child);
+        return child;
+      } else if (value < child.value) {
+        child = child.left;
+        parent = parent[direction];
+        direction = 'left';
+      } else if (value > child.value) {
+        child = child.right;
+        parent = parent[direction];
+        direction = 'right';
+      }
+    }
+
+    throw new Error('No match found for deletion.');
+  }
+
+  /**
    * @description Find maximum value in tree.
    *
    * Strategy: Maximum is right-most node. Traverse tree by starting at root node
@@ -145,25 +287,6 @@ class BinarySearchTree {
     if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
     while (node.left !== null) { node = node.left; }
     return node.value;
-  }
-
-  /**
-   * @description Remove node with given value from the tree.
-   *
-   * Strategy: Traverse tree until parent sees that its child has the given value.
-   * While maintaining pointer to parent, traverse into child and count how many
-   * children it has. If 0, simply assign parent's pointer to null. If 1, assign
-   * parent's pointer to grandchild. If 2, 
-   *
-   * Edge case(s): Empty tree, value does not exist in tree
-   *
-   * Time complexity: O(log N)
-   * Space complexity: O(1)
-   *
-   * @param {Number|String} value - value of node to be removed from tree
-   */
-  remove(value) {
-    // 3 cases: 0, 1 or 2 children
   }
 
   /**
