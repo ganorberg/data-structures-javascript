@@ -108,6 +108,313 @@ describe('BinarySearchTree', () => {
     });
   });
 
+  describe('#delete()', () => {
+    it('should delete a node from the bottom level of the tree', () => {
+      BST.add(10);
+      BST.add(5);
+      BST.add(3);
+      BST.add(1);
+      BST.add(4);
+      BST.add(7);
+      BST.add(6);
+      BST.add(8);
+      BST.add(15);
+
+      /*
+                  10
+                /    \
+              5      15
+            /   \   
+          3      7
+        / \     / \
+       1   4   6   8
+      */
+
+      BST.delete(4);
+
+      /*
+                  10
+                /    \
+              5      15
+            /   \   
+          4      7
+        /       / \
+       1       6   8
+      */
+      expect(BST.root.value).to.equal(10);
+      expect(BST.root.left.value).to.equal(5);
+      expect(BST.root.left.left.value).to.equal(3);
+      expect(BST.root.left.left.left.value).to.equal(1);
+      expect(BST.root.left.right.value).to.equal(7);
+      expect(BST.root.left.right.left.value).to.equal(6);
+      expect(BST.root.left.right.right.value).to.equal(8);
+      expect(BST.root.right.value).to.equal(15);      
+    });
+
+    it('should delete a node from the 2nd-to-last level of the tree', () => {
+      BST.add(10);
+      BST.add(5);
+      BST.add(3);
+      BST.add(1);
+      BST.add(4);
+      BST.add(7);
+      BST.add(6);
+      BST.add(8);
+      BST.add(15);
+
+      /*
+                  10
+                /    \
+              5      15
+            /   \   
+          3      7
+        / \     / \
+       1   4   6   8
+      */
+
+      BST.delete(3);
+
+      /*
+                  10
+                /    \
+              5      15
+            /   \   
+          4      7
+        /       / \
+       1       6   8
+      */
+      expect(BST.root.value).to.equal(10);
+      expect(BST.root.left.value).to.equal(5);
+      expect(BST.root.left.left.value).to.equal(4);
+      expect(BST.root.left.left.left.value).to.equal(1);
+      expect(BST.root.left.right.value).to.equal(7);
+      expect(BST.root.left.right.left.value).to.equal(6);
+      expect(BST.root.left.right.right.value).to.equal(8);
+      expect(BST.root.right.value).to.equal(15);
+    });
+  
+    it('should delete a node from the 3rd-to-last level of the tree', () => {
+      BST.add(10);
+      BST.add(5);
+      BST.add(3);
+      BST.add(1);
+      BST.add(4);
+      BST.add(7);
+      BST.add(6);
+      BST.add(8);
+      BST.add(15);
+
+      /*
+                  10
+                /    \
+              5      15
+            /   \   
+          3      7
+        / \     / \
+       1   4   6   8
+      */
+
+      BST.delete(5);
+
+      /*
+                  10
+                /    \
+              6      15
+            /  \   
+          3     7
+        /  \     \
+       1    4     8
+      */
+      expect(BST.root.value).to.equal(10);
+      expect(BST.root.left.value).to.equal(6);
+      expect(BST.root.right.value).to.equal(15);
+      expect(BST.root.left.left.value).to.equal(3);
+      expect(BST.root.left.right.value).to.equal(7);
+      expect(BST.root.left.left.left.value).to.equal(1);
+      expect(BST.root.left.left.right.value).to.equal(4);
+      expect(BST.root.left.right.right.value).to.equal(8);
+    });
+  
+    it('should delete the root of the tree', () => {
+      BST.add(10);
+      BST.add(5);
+      BST.add(3);
+      BST.add(1);
+      BST.add(4);
+      BST.add(7);
+      BST.add(6);
+      BST.add(8);
+      BST.add(15);
+
+      /*
+                  10
+                /    \
+              5      15
+            /   \   
+          3      7
+        / \     / \
+       1   4   6   8
+      */
+
+      BST.delete(10);
+
+      /*
+                  15
+                /
+              5
+            /   \
+          3      7
+        / \     / \
+       1   4   6   8
+      */
+      expect(BST.root.value).to.equal(15);
+      expect(BST.root.left.value).to.equal(5);
+      expect(BST.root.right).to.equal(null);
+      expect(BST.root.left.left.value).to.equal(3);
+      expect(BST.root.left.right.value).to.equal(7);
+      expect(BST.root.left.left.left.value).to.equal(1);
+      expect(BST.root.left.left.right.value).to.equal(4);
+      expect(BST.root.left.right.left.value).to.equal(6);
+      expect(BST.root.left.right.right.value).to.equal(8);
+    });
+
+    it('should delete the node containing the minimum value', () => {
+      BST.add(10);
+      BST.add(5);
+      BST.add(3);
+      BST.add(1);
+      BST.add(4);
+      BST.add(7);
+      BST.add(6);
+      BST.add(8);
+      BST.add(15);
+
+      /*
+                  10
+                /    \
+              5      15
+            /   \   
+          3      7
+        / \     / \
+       1   4   6   8
+      */
+
+      BST.delete(1);
+
+      /*
+                  10
+                /    \
+              5      15
+            /   \   
+          3      7
+          \     / \
+           4   6   8
+      */
+      expect(BST.root.value).to.equal(10);
+      expect(BST.root.left.value).to.equal(5);
+      expect(BST.root.right.value).to.equal(15);
+      expect(BST.root.left.left.value).to.equal(3);
+      expect(BST.root.left.right.value).to.equal(7);
+      expect(BST.root.left.left.left).to.equal(null);
+      expect(BST.root.left.left.right.value).to.equal(4);
+      expect(BST.root.left.right.left.value).to.equal(6);
+      expect(BST.root.left.right.right.value).to.equal(8);
+    });
+
+    it('should delete the node containing the maximum value', () => {
+      BST.add(10);
+      BST.add(5);
+      BST.add(3);
+      BST.add(1);
+      BST.add(4);
+      BST.add(7);
+      BST.add(6);
+      BST.add(8);
+      BST.add(15);
+
+      /*
+                  10
+                /    \
+              5      15
+            /   \   
+          3      7
+        / \     / \
+       1   4   6   8
+      */
+
+      BST.delete(15);
+
+      /*
+                  10
+                /
+              5
+            /   \
+          3      7
+        / \     / \
+       1  4   6   8
+      */
+      expect(BST.root.value).to.equal(10);
+      expect(BST.root.left.value).to.equal(5);
+      expect(BST.root.right).to.equal(null);
+      expect(BST.root.left.left.value).to.equal(3);
+      expect(BST.root.left.right.value).to.equal(7);
+      expect(BST.root.left.left.left.value).to.equal(1);
+      expect(BST.root.left.left.right.value).to.equal(4);
+      expect(BST.root.left.right.left.value).to.equal(6);
+      expect(BST.root.left.right.right.value).to.equal(8);
+    });
+
+    it('should return the deleted node', () => {
+      BST.add(10);
+      BST.add(5);
+      BST.add(3);
+      BST.add(1);
+      BST.add(4);
+      BST.add(7);
+      BST.add(6);
+      BST.add(8);
+      BST.add(15);
+      
+      /*
+                  10
+                /    \
+              5      15
+            /   \   
+          3      7
+        / \     / \
+       1   4   6   8
+      */
+
+      expect(BST.delete(1)).to.deep.equal({ value: 1, left: null, right: null });
+    });
+
+    it('should throw an error for values that do not exist in the tree', () => {
+      BST.add(10);
+
+      expect(() => BST.delete(5)).to.throw(Error);
+    });
+
+    it('should throw an error for empty trees', () => {
+      expect(() => BST.delete(1)).to.throw(Error);
+    });
+
+    it('should throw an error for undefined input', () => {
+      expect(() => BST.delete()).to.throw(Error);
+    });
+    
+    it('should throw an error for object input', () => {
+      expect(() => BST.delete({'objects': 'not allowed'})).to.throw(Error);
+    });
+
+    it('should throw an error for null input', () => {
+      expect(() => BST.delete(null)).to.throw(Error);
+    });
+
+    it('should throw an error for NaN input', () => {
+      expect(() => BST.delete(NaN)).to.throw(Error);
+    });
+  });
+
   describe('#min', () => {
     it('should return the minimum value from the tree', () => {
       BST.add(5);
