@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Iron sharpens iron; scholar, the scholar.",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/*"
   },
   "repository": {
     "type": "git",
