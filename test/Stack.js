@@ -22,7 +22,63 @@ describe('Stack', () => {
   });
 
   it('should have properties granted from constructor call', () => {
-    expect(stack).to.have.all.keys('storage', 'capacity');
+    expect(stack).to.have.all.keys('maxes', 'storage', 'capacity');
+  });
+ 
+  describe('#getMax()', () => {
+    it('should return single value in stack', () => {
+      stack.push(2);
+
+      expect(stack.getMax()).to.equal(2);
+    });
+
+    it('should return max for ascending order pushes', () => {
+      stack.push(2);
+      stack.push(3);
+
+      expect(stack.getMax()).to.equal(3);
+    });
+
+    it('should return max for descending order pushes', () => {
+      stack.push(3);
+      stack.push(2);
+
+      expect(stack.getMax()).to.equal(3);
+    });
+
+    it('should return previous max after current max pops', () => {
+      stack.push(2);
+      stack.push(3);
+      stack.pop();
+
+      expect(stack.getMax()).to.equal(2);
+    });
+
+    it('should return max after multiple maxes pop', () => {
+      stack.push(1);
+      stack.push(3);
+      stack.push(2);
+      stack.push(10);
+      stack.pop();
+      stack.pop()
+      stack.pop()
+
+      expect(stack.getMax()).to.equal(1);
+    });
+
+    it('should return max after interweaved push and pop', () => {
+      stack.push(3);
+      stack.push(2);
+      stack.pop();
+      stack.push(10);
+      stack.push(5);
+      stack.pop();
+      stack.push(6);
+      stack.pop();
+      stack.pop();
+
+      expect(stack.getMax()).to.equal(3);
+    });
   });
 
   describe('#isEmpty()', () => {
