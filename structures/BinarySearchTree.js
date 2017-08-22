@@ -90,6 +90,24 @@ function deleteNode(node) {
   }
 }
 
+// /**
+//  * @description: Track how many nodes this tree holds.
+//  *
+//  * Strategy: Use count property. Allow null input to deliver 0.
+//  *
+//  * Edge case(s): null input
+//  *
+//  * Time complexity: O(1)
+//  * Space complexity: O(1)
+//  *
+//  * @param {Object} node - node whose size is being checked
+//  * @return {Number} - number of nodes in subtree rooted at this node
+//  */
+// function size(node) {
+//   if (node === null) { return 0; }
+//   return node.count;
+// }
+
 /** Class representing our tree */
 class BinarySearchTree {
   /**
