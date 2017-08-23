@@ -60,6 +60,47 @@ describe('BinarySearchTree', () => {
     });
   });
 
+  describe('#breadthFirstSearch()', () => {
+    it('should apply callback to all node values in level order', () => {
+      BST.add(10);
+      BST.add(5);
+      BST.add(3);
+      BST.add(1);
+      BST.add(4);
+      BST.add(7);
+      BST.add(6);
+      BST.add(8);
+      BST.add(15);
+      BST.add(18);
+      BST.add(20);
+      BST.add(16);
+      BST.add(14);
+      BST.add(25);
+      BST.add(9);
+      const called = [];
+
+      /*
+                  10
+                /    \
+              5      15
+            /   \    /  \
+          3      7  14  18
+        / \     / \    /  \
+       1   4   6   8  16  20
+                   \       \
+                    9      25
+      */
+
+      BST.breadthFirstSearch(value => called.push(value));
+
+      expect(called).to.deep.equal([10, 5, 15, 3, 7, 14, 18, 1, 4, 6, 8, 16, 20, 9, 25]);
+    });
+
+    it('should throw an error for empty trees', () => {
+      expect(() => BST.breadthFirstSearch(console.log)).to.throw(Error);
+    });
+  });
+
   describe('#contains()', () => {
     it('should return true if value is in the root', () => {
       BST.add(5);
@@ -415,6 +456,87 @@ describe('BinarySearchTree', () => {
     });
   });
 
+  describe('#depthInOrder', () => {
+    it('should apply callback to all node values depth-first in-order', () => {
+      BST.add(5);
+      BST.add(3);
+      BST.add(1);
+      BST.add(4);
+      BST.add(7);
+      BST.add(6);
+      const called = [];
+      /*
+             5
+          /    \
+         3      7
+       /  \   /
+      1    4 6
+      */
+
+      BST.depthInOrder(value => called.push(value));
+
+      expect(called).to.deep.equal([1, 3, 4, 5, 6, 7]);
+    });
+
+    it('should throw an error for empty trees', () => {
+      expect(() => BST.depthInOrder(console.log)).to.throw(Error);
+    });
+  });
+
+  describe('#depthPostOrder', () => {
+    it('should apply callback to all node values depth-first post-order', () => {
+      BST.add(5);
+      BST.add(3);
+      BST.add(1);
+      BST.add(4);
+      BST.add(7);
+      BST.add(6);
+      const called = [];
+      /*
+             5
+          /    \
+         3      7
+       /  \   /
+      1    4 6
+      */
+
+      BST.depthPostOrder(value => called.push(value));
+
+      expect(called).to.deep.equal([1, 4, 3, 6, 7, 5]);
+    });
+
+    it('should throw an error for empty trees', () => {
+      expect(() => BST.depthPostOrder(console.log)).to.throw(Error);
+    });
+  });
+
+  describe('#depthPreOrder', () => {
+    it('should apply callback to all node values depth-first pre-order', () => {
+      BST.add(5);
+      BST.add(3);
+      BST.add(1);
+      BST.add(4);
+      BST.add(7);
+      BST.add(6);
+      const called = [];
+      /*
+             5
+          /    \
+         3      7
+       /  \   /
+      1    4 6
+      */
+
+      BST.depthPreOrder(value => called.push(value));
+
+      expect(called).to.deep.equal([5, 3, 1, 4, 7, 6]);
+    });
+
+    it('should throw an error for empty trees', () => {
+      expect(() => BST.depthPreOrder(console.log)).to.throw(Error);
+    });
+  });
+
   describe('#min', () => {
     it('should return the minimum value from the tree', () => {
       BST.add(5);
@@ -458,87 +580,6 @@ describe('BinarySearchTree', () => {
 
     it('should throw an error for empty trees', () => {
       expect(() => BST.max()).to.throw(Error);
-    });
-  });
-
-  describe('#traverseInOrder', () => {
-    it('should apply callback to all node values depth-first in-order', () => {
-      BST.add(5);
-      BST.add(3);
-      BST.add(1);
-      BST.add(4);
-      BST.add(7);
-      BST.add(6);
-      const called = [];
-      /*
-             5
-          /    \
-         3      7
-       /  \   /
-      1    4 6
-      */
-
-      BST.traverseInOrder(value => called.push(value));
-
-      expect(called).to.deep.equal([1, 3, 4, 5, 6, 7]);
-    });
-
-    it('should throw an error for empty trees', () => {
-      expect(() => BST.traverseInOrder(console.log)).to.throw(Error);
-    });
-  });
-
-  describe('#traversePreOrder', () => {
-    it('should apply callback to all node values depth-first pre-order', () => {
-      BST.add(5);
-      BST.add(3);
-      BST.add(1);
-      BST.add(4);
-      BST.add(7);
-      BST.add(6);
-      const called = [];
-      /*
-             5
-          /    \
-         3      7
-       /  \   /
-      1    4 6
-      */
-
-      BST.traversePreOrder(value => called.push(value));
-
-      expect(called).to.deep.equal([5, 3, 1, 4, 7, 6]);
-    });
-
-    it('should throw an error for empty trees', () => {
-      expect(() => BST.traversePreOrder(console.log)).to.throw(Error);
-    });
-  });
-
-  describe('#traversePostOrder', () => {
-    it('should apply callback to all node values depth-first post-order', () => {
-      BST.add(5);
-      BST.add(3);
-      BST.add(1);
-      BST.add(4);
-      BST.add(7);
-      BST.add(6);
-      const called = [];
-      /*
-             5
-          /    \
-         3      7
-       /  \   /
-      1    4 6
-      */
-
-      BST.traversePostOrder(value => called.push(value));
-
-      expect(called).to.deep.equal([1, 4, 3, 6, 7, 5]);
-    });
-
-    it('should throw an error for empty trees', () => {
-      expect(() => BST.traversePostOrder(console.log)).to.throw(Error);
     });
   });
 });
