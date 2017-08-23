@@ -79,6 +79,14 @@ describe('Stack', () => {
 
       expect(stack.getMax()).to.equal(3);
     });
+
+    it('should work with multiple sequential copies of maximum values', () => {
+      stack.push(3);
+      stack.push(3);
+      stack.pop();
+
+      expect(stack.getMax()).to.equal(3);
+    });
   });
 
   describe('#isEmpty()', () => {
