@@ -81,7 +81,7 @@ class Stack {
   push(val) {
     if (this.storage.length < this.capacity) {
       this.storage.push(val);
-      if (val > this.maxes[this.maxes.length - 1]) { this.maxes.push(val); }
+      if (val >= this.maxes[this.maxes.length - 1]) { this.maxes.push(val); }
     }
 
     return this.storage.length;
