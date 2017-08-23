@@ -160,6 +160,39 @@ class BinarySearchTree {
   }
 
   /**
+   * @description Apply a callback to the entire tree in level order.
+   *
+   * Strategy: Initialize queue with root. Repeatedly use queue to access
+   * children and store in new queue. End loop when no children are added.
+   *
+   * Time complexity: O(N)
+   * Space complexity: O(N)
+   *
+   * @param {Function} callback - calls all values in breadth-first order
+   */
+  breadthFirstSearch(callback) {
+    if (this.root === null) { throw new Error('Empty tree, my friend!'); }
+    let queue = [this.root];
+    while (true) {
+      // use another queue to avoid expensive shifting costs
+      let newQueue = [];
+
+      // key idea is to use nodes in queue to set up next queue
+      queue.forEach(node => {
+        callback(node.value);
+        if (node.left !== null) { newQueue.push(node.left); }
+        if (node.right !== null) { newQueue.push(node.right); }
+      });
+
+      // nothing added to new queue means everything has been searched
+      if (newQueue.length === 0) { return; }
+
+      // reassign queue to list of nodes in next level of tree
+      queue = newQueue;
+    }
+  }
+
+  /**
    * @description Check if node with given value exists in tree.
    *
    * Strategy: Start at root node. Loop to traverse tree until null pointer.
@@ -169,7 +202,7 @@ class BinarySearchTree {
    * Space complexity: O(1)
    *
    * @param {*} value - searching for this value in the tree
-   * @return {Boolean|String} - whether or not value exists in tree
+   * @return {Boolean} - whether or not value exists in tree
    */
   contains(value) {
     let node = this.root;
@@ -248,6 +281,78 @@ class BinarySearchTree {
   }
 
   /**
+   * @description Depth-first in-order traversal that applies callback to
+   * all node values in ascending order.
+   *
+   * Strategy: Callback is applied between recursive calls to left and right
+   * subtrees. End traversal in either direction when pointer in that direction
+   * is null.
+   *
+   * Edge case(s): Empty tree
+   *
+   * Time complexity: O(N)
+   * Space complexity: O(1)
+   *
+   * @param {Function} callback - invoked on every node's value in-order
+   * @param {Object=} node - current node being traversed and called
+   */
+  depthInOrder(callback, node = this.root) {
+    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
+    
+    if (node.left !== null) { this.depthInOrder(callback, node.left); }
+    callback(node.value);
+    if (node.right !== null) { this.depthInOrder(callback, node.right); }
+  }
+
+  /**
+   * @description Depth-first post-order traversal that applies callback to
+   * all node values in this order: left leaf, right leaf, root
+   *
+   * Strategy: Callback is applied after recursive calls to left and right
+   * subtrees. End traversal in either direction when pointer in that direction
+   * is null.
+   *
+   * Edge case(s): Empty tree
+   *
+   * Time complexity: O(N)
+   * Space complexity: O(1)
+   *
+   * @param {Function} callback - invoked on every node's value post-order
+   * @param {Object=} node - current node being traversed and called
+   */
+  depthPostOrder(callback, node = this.root) {
+    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
+    
+    if (node.left !== null) { this.depthPostOrder(callback, node.left); }
+    if (node.right !== null) { this.depthPostOrder(callback, node.right); }
+    callback(node.value);
+  }
+
+  /**
+   * @description Depth-first pre-order traversal that applies callback to
+   * all node values in this order: root, left leaf, right leaf
+   *
+   * Strategy: Callback is applied before recursive calls to left and right
+   * subtrees. End traversal in either direction when pointer in that direction
+   * is null.
+   *
+   * Edge case(s): Empty tree
+   *
+   * Time complexity: O(N)
+   * Space complexity: O(1)
+   *
+   * @param {Function} callback - invoked on every node's value pre-order
+   * @param {Object=} node - current node being traversed and called
+   */
+  depthPreOrder(callback, node = this.root) {
+    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
+
+    callback(node.value);
+    if (node.left !== null) { this.depthPreOrder(callback, node.left); }
+    if (node.right !== null) { this.depthPreOrder(callback, node.right); }
+  }
+
+  /**
    * @description Find maximum value in tree.
    *
    * Strategy: Maximum is right-most node. Traverse tree by starting at root node
@@ -287,78 +392,6 @@ class BinarySearchTree {
     if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
     while (node.left !== null) { node = node.left; }
     return node.value;
-  }
-
-  /**
-   * @description Depth-first in-order traversal that applies callback to
-   * all node values in this order: left leaf, root, right leaf.
-   *
-   * Strategy: Callback is applied between recursive calls to left and right
-   * subtrees. End traversal in either direction when pointer in that direction
-   * is null.
-   *
-   * Edge case(s): Empty tree
-   *
-   * Time complexity: O(N)
-   * Space complexity: O(1)
-   *
-   * @param {Function} callback - invoked on every node's value in-order
-   * @param {Object=} node - defaults to root and used to traverse recursively
-   */
-  traverseInOrder(callback, node = this.root) {
-    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
-    
-    if (node.left !== null) { this.traverseInOrder(callback, node.left); }
-    callback(node.value);
-    if (node.right !== null) { this.traverseInOrder(callback, node.right); }
-  }
-
-  /**
-   * @description Depth-first post-order traversal that applies callback to
-   * all node values in this order: left leaf, right leaf, root
-   *
-   * Strategy: Callback is applied after recursive calls to left and right
-   * subtrees. End traversal in either direction when pointer in that direction
-   * is null.
-   *
-   * Edge case(s): Empty tree
-   *
-   * Time complexity: O(N)
-   * Space complexity: O(1)
-   *
-   * @param {Function} callback - invoked on every node's value post-order
-   * @param {Object=} node - defaults to root and used to traverse recursively
-   */
-  traversePostOrder(callback, node = this.root) {
-    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
-    
-    if (node.left !== null) { this.traversePostOrder(callback, node.left); }
-    if (node.right !== null) { this.traversePostOrder(callback, node.right); }
-    callback(node.value);
-  }
-
-  /**
-   * @description Depth-first pre-order traversal that applies callback to
-   * all node values in this order: root, left leaf, right leaf
-   *
-   * Strategy: Callback is applied before recursive calls to left and right
-   * subtrees. End traversal in either direction when pointer in that direction
-   * is null.
-   *
-   * Edge case(s): Empty tree
-   *
-   * Time complexity: O(N)
-   * Space complexity: O(1)
-   *
-   * @param {Function} callback - invoked on every node's value pre-order
-   * @param {Object=} node - defaults to root and used to traverse recursively
-   */
-  traversePreOrder(callback, node = this.root) {
-    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
-
-    callback(node.value);
-    if (node.left !== null) { this.traversePreOrder(callback, node.left); }
-    if (node.right !== null) { this.traversePreOrder(callback, node.right); }
   }
 }
 
