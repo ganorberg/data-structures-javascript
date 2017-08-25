@@ -1,1 +1,3 @@
-JavaScript data structures library with 100% test coverage. WIP
+Data structures in JavaScript: fully tested, mother approved.
+
+Documentation coming soon once I decide to play with jsdoc converter.
