@@ -65,12 +65,12 @@ describe('RedBlackTree', () => {
       RBT.insert('L');
 
       /*
-                    M
-                  /    \
-                E       R
+                     M
+                  /     \
+                E        R
               /   \    /   \
             C      L  P     X
-          (/) \  (/)      (/)
+          (/)    (/)      (/)
          A       H        S
       */
 
@@ -109,12 +109,12 @@ describe('RedBlackTree', () => {
       const called = [];
 
       /*
-                    M
-                  /    \
-                E       R
+                     M
+                  /     \
+                E        R
               /   \    /   \
             C      L  P     X
-          (/) \  (/)      (/)
+          (/)    (/)      (/)
          A       H        S
       */
 
@@ -255,12 +255,12 @@ describe('RedBlackTree', () => {
       const called = [];
 
       /*
-                    M
-                  /    \
-                E       R
+                     M
+                  /     \
+                E        R
               /   \    /   \
             C      L  P     X
-          (/) \  (/)      (/)
+          (/)    (/)      (/)
          A       H        S
       */
 
@@ -289,12 +289,12 @@ describe('RedBlackTree', () => {
       const called = [];
 
       /*
-                    M
-                  /    \
-                E       R
+                     M
+                  /     \
+                E        R
               /   \    /   \
             C      L  P     X
-          (/) \  (/)      (/)
+          (/)    (/)      (/)
          A       H        S
       */
 
@@ -323,12 +323,12 @@ describe('RedBlackTree', () => {
       const called = [];
 
       /*
-                    M
-                  /    \
-                E      R
+                     M
+                  /     \
+                E        R
               /   \    /   \
             C      L  P     X
-          (/) \  (/)      (/)
+          (/)    (/)      (/)
          A       H        S
       */
 
