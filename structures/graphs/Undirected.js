@@ -97,13 +97,10 @@ class UndirectedGraph {
   /**
    * @description Get the average degree of the graph.
    *
-   * Strategy: Since each edge adds 2 adjacent vertices in adjacency list per
-   * 1 increment to totalEdges (including self-loops), doubling totalEdges
-   * represents total number of adjacent vertices in the adjacency list. Divide
-   * this by the totalVertices to get the average number of adjacent vertices
-   * per vertex, a.k.a. average degree of the graph.
-   *
-   * Edge case: empty graph
+   * Strategy: Since each edge adds 2 degrees in adjacency list (including
+   * self-loops), doubling the number of edges represents total number of
+   * degrees in the adjacency list. Divide this by the number of vertices to get
+   * the average degree.
    *
    * Time complexity: O(1)
    * Space complexity: O(1)
@@ -111,6 +108,7 @@ class UndirectedGraph {
    * @return {Number} - average degree of graph
    */
   averageDegree() {
+    // Cannot divide by 0
     return this.totalVertices === 0
       ? 0
       : 2 * this.totalEdges / this.totalVertices;
