@@ -16,6 +16,8 @@ try {
     'the processor or graph files.');
 }
 
+// TODO: test other data types
+
 // AAA (Arrange -> Act -> Assert) test pattern
 describe('DepthFirstPaths', () => {
   beforeEach(() => {
@@ -80,19 +82,19 @@ describe('DepthFirstPaths', () => {
     it('should process only vertices connected to the source vertex', () => {
       paths.initialize();
 
-      expect(paths.visited.has(0)).to.be.true;
-      expect(paths.visited.has(5)).to.be.true;
-      expect(paths.visited.has(4)).to.be.true;
-      expect(paths.visited.has(3)).to.be.true;
-      expect(paths.visited.has(6)).to.be.true;
-      expect(paths.visited.has(1)).to.be.true;
-      expect(paths.visited.has(2)).to.be.true;
-      expect(paths.visited.has(7)).to.be.false;
-      expect(paths.visited.has(8)).to.be.false;
-      expect(paths.visited.has(9)).to.be.false;
-      expect(paths.visited.has(11)).to.be.false;
-      expect(paths.visited.has(12)).to.be.false;
-      expect(paths.visited.has(14)).to.be.false;
+      expect(paths.visited.has('0')).to.be.true;
+      expect(paths.visited.has('5')).to.be.true;
+      expect(paths.visited.has('4')).to.be.true;
+      expect(paths.visited.has('3')).to.be.true;
+      expect(paths.visited.has('6')).to.be.true;
+      expect(paths.visited.has('1')).to.be.true;
+      expect(paths.visited.has('2')).to.be.true;
+      expect(paths.visited.has('7')).to.be.false;
+      expect(paths.visited.has('8')).to.be.false;
+      expect(paths.visited.has('9')).to.be.false;
+      expect(paths.visited.has('11')).to.be.false;
+      expect(paths.visited.has('12')).to.be.false;
+      expect(paths.visited.has('14')).to.be.false;
     });
 
     it('should throw an error if the input vertex is not in the graph', () => {
@@ -104,13 +106,13 @@ describe('DepthFirstPaths', () => {
     it('should return true if the input vertex is connected to the source vertex', () => {
       paths.initialize();
       
-      expect(paths.hasPathTo(6)).to.be.true;
+      expect(paths.hasPathTo('6')).to.be.true;
     });
  
     it('should return false if the input vertex is not connected to the source vertex', () => {
       paths.initialize();
       
-      expect(paths.hasPathTo(11)).to.be.false;
+      expect(paths.hasPathTo('11')).to.be.false;
     });
  
     it('should throw an error if the processor has not been initialized', () => {
@@ -138,7 +140,7 @@ describe('DepthFirstPaths', () => {
     it('should return the path to the source vertex if it exists', () => {
       paths.initialize();
       
-      expect(paths.pathTo(6)).to.deep.equal([6, 4, 5, 0]);
+      expect(paths.pathTo(6)).to.deep.equal(['6', '4', '5', '0']);
     });
   });
 });

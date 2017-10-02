@@ -102,8 +102,8 @@ class ConnectedComponents {
    *
    * Edge case(s): User forgets to load a graph when calling the constructor
    *
-   * Time complexity: O(N)
-   * Space complexity: O(N)
+   * Time complexity: O(number of vertices)
+   * Space complexity: O(number of vertices)
    */
   initialize() {
     if (!this.graph) { throw new Error('The graph is not loaded, my friend!'); }

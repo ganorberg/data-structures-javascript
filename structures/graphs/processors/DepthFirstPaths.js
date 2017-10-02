@@ -14,7 +14,7 @@ class DepthFirstPaths {
     this.graph = graph;
     this.initialized = false;
     this.parent = {};
-    this.sourceVertex = sourceVertex;
+    this.sourceVertex = String(sourceVertex);
     this.visited = new Set();
   }
 
@@ -65,7 +65,8 @@ class DepthFirstPaths {
       throw new Error('The input vertex is not in the graph, my friend!');
     }
 
-    return this.visited.has(vertex);
+    // Stringify to allow the user to call this method with numbers
+    return this.visited.has(String(vertex));
   }
 
   /**
@@ -85,7 +86,8 @@ class DepthFirstPaths {
     
     const path = [];
     for (
-      let vertex = destinationVertex;
+      // Stringify to allow the user to call this method with numbers
+      let vertex = String(destinationVertex);
       vertex !== this.sourceVertex;
       vertex = this.parent[vertex]
     ) {

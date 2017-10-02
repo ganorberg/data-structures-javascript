@@ -24,12 +24,13 @@ class UndirectedGraph {
    * exist prior.
    *
    * Strategy: Add vertices if they don't exist. Then push vertices to each
-   * other's adjacency lists.
+   * other's adjacency lists. Stringify second input vertex to avoid equality
+   * comparison issues against stringified keys in other methods.
    *
    * Edge case: if vertices are the same (i.e. self-loop), add both to same
    * adjacency list. This maintains mathematical consistency whereby each edge
    * represents two values in adjacency list, providing convenient calculations
-   * for methods like averageDegree.
+   * for methods like averageDegree. 
    *
    * Time complexity: O(1)
    * Space complexity: O(1)
@@ -40,8 +41,8 @@ class UndirectedGraph {
   addEdge([v1, v2]) {
     if (!this.adjacencyList.hasOwnProperty(v1)) { this.addVertex(v1); }
     if (!this.adjacencyList.hasOwnProperty(v2)) { this.addVertex(v2); }
-    this.adjacencyList[v1].push(v2);
-    this.adjacencyList[v2].push(v1);
+    this.adjacencyList[v1].push(String(v2));
+    this.adjacencyList[v2].push(String(v1));
     this.totalEdges++;
     return true;
   }
@@ -192,8 +193,7 @@ class UndirectedGraph {
     let count = 0;
     for (let vertex in this.adjacencyList) {
       this.adjacencyList[vertex].forEach(adjacentVertex => {
-        // Use loose equality because vertex keys are stringified
-        if (vertex == adjacentVertex) { count++; }
+        if (vertex === adjacentVertex) { count++; }
       });
     }
 

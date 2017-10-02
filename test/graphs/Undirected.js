@@ -11,6 +11,8 @@ try {
   'from an incorrect file path or exporting a non-constructor from the file.');
 }
 
+// TODO: test other data types
+
 // AAA (Arrange -> Act -> Assert) test pattern
 describe('UndirectedGraph', () => {
   beforeEach(() => {
@@ -41,22 +43,22 @@ describe('UndirectedGraph', () => {
     it('should add edges for new vertices', () => {
       graph.addEdge([0, 5]);
 
-      expect(graph.adjacencyList[0]).to.deep.equal([5]);
-      expect(graph.adjacencyList[5]).to.deep.equal([0]);
+      expect(graph.adjacencyList[0]).to.deep.equal(['5']);
+      expect(graph.adjacencyList[5]).to.deep.equal(['0']);
     });
 
     it('should allow parallel edges', () => {
       graph.addEdge([0, 5]);
       graph.addEdge([0, 5]);
 
-      expect(graph.adjacencyList[0]).to.deep.equal([5, 5]);
-      expect(graph.adjacencyList[5]).to.deep.equal([0, 0]);
+      expect(graph.adjacencyList[0]).to.deep.equal(['5', '5']);
+      expect(graph.adjacencyList[5]).to.deep.equal(['0', '0']);
     });
 
     it('should allow self-loops and store value in adjacency list twice', () => {
       graph.addEdge([5, 5]);
 
-      expect(graph.adjacencyList[5]).to.deep.equal([5, 5]);
+      expect(graph.adjacencyList[5]).to.deep.equal(['5', '5']);
     });
     
     it('should increment the total number of edges in the graph by 1', () => {
@@ -100,7 +102,7 @@ describe('UndirectedGraph', () => {
       graph.addEdge([0, 1]);
       graph.addEdge([6, 0]);
 
-      expect(graph.adjacentVertices(0)).to.deep.equal([5, 1, 6]);
+      expect(graph.adjacentVertices(0)).to.deep.equal(['5', '1', '6']);
     });
 
     it('should throw an error if the vertex does not exist in the graph', () => {
