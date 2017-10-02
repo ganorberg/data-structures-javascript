@@ -95,40 +95,44 @@ class DirectedGraph {
   }
 
   /**
-   * @description Get the average outdegree of the graph.
+   * @description Get the average degree of the graph.
    *
-   * Strategy: Since each edge adds 2 adjacent vertices in adjacency list per
-   * 1 increment to totalEdges (including self-loops), doubling totalEdges
-   * represents total number of adjacent vertices in the adjacency list. Divide
-   * this by the totalVertices to get the average number of adjacent vertices
-   * per vertex, a.k.a. average degree of the graph.
+   * Strategy: Since each edge adds one degree to a vertex, use total edges as a
+   * substitute for total degrees. Divide by total vertices to get the average.
    *
-   * Edge case: empty graph
+   * NOTE: The average is the same for indegree and outdegree because every
+   * directed edge increases both by 1. Since total indegree and total outdegree
+   * will always be the same, either total can represent total degrees.
+   *
    *
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Number} - average outdegree of graph
+   * @return {Number} - average degree of graph
    */
-  averageOutDegree() {
+  averageDegree() {
+    // Cannot divide by 0
     return this.totalVertices === 0 ? 0 : this.totalEdges / this.totalVertices;
   }
 
   /**
    * @description Get number of vertices directing to input vertex.
    *
+   * IF REVERSED GRAPH EXISTS
+   * Strategy: Vertices pointing to the input vertex are stored in an array in
+   * the reversed graph, so use its length property.
+   *
+   * Time complexity: O(1)
+   * Space complexity: O(1)
+   *
+   * IF REVERSED GRAPH DOES NOT EXIST
    * Strategy: Loop through all vertices, then loop through all their adjacent
    * vertices. Increment counter when input vertex equals any adjacent vertices.
    *
-   * ALTERNATE STRATEGY: Because the time complexity for this operation is so
-   * slow (see below), linear space complexity should be considered for instant
-   * lookup. This may not be desirable for large graphs, however, if indegree is
-   * not an important metric, so this will be the default implementation.
+   * Time complexity: O(V + E), where V is total vertices and E is total edges
+   * Space complexity: O(1)
    *
    * Edge case: vertex does not exist in graph
-   *
-   * Time complexity: O(VE), where V is total vertices and E is total edges
-   * Space complexity: O(1)
    *
    * @param {*} vertex - vertex whose degree is sought
    * @return {Number} - degree of vertex
@@ -136,6 +140,11 @@ class DirectedGraph {
   inDegree(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
       throw new Error('That vertex does not exist in the graph, my friend!');
+    }
+
+    // If user has called reverse method, we can get indegree in constant time!
+    if (this.reversedGraph && this.reversedGraph.hasOwnProperty(vertex)) {
+      return this.reversedGraph[vertex].length;
     }
 
     let degree = 0;
@@ -171,21 +180,43 @@ class DirectedGraph {
   }
 
   /**
+   * @description Get the highest indegree in the graph. Be careful calling this
+   * if your graph is large or dense without reversing the graph first (see time
+   * complexity below).
+   *
+   * Strategy: Loop through each vertex with a for in loop. Calculate each
+   * vertex's indegree, then update max if it's the highest indegree so far.
+   *
+   * IF REVERSED GRAPH EXISTS
+   * Time complexity: O(total vertices)
+   * Space complexity: O(1)
+   *
+   * IF REVERSED GRAPH DOES NOT EXIST
+   * Time complexity: O(E + V^2), where V is total vertices and E is total edges
+   * Space complexity: O(1)
+   *
+   * Edge case: vertex does not exist in graph
+   *
+   * @param {*} vertex - vertex whose degree is sought
+   * @return {Number} - degree of vertex
+   */
+  maxInDegree(vertex) {
+    let max = 0;
+    for (let vertex in this.adjacencyList) {
+      const degree = this.inDegree(vertex);
+      if (degree > max) { max = degree; }
+    }
+
+    return max;
+  }
+
+  /**
    * @description Get the highest outdegree in the graph.
    *
    * Strategy: Loop through each vertex with a for in loop. Calculate each
-   * vertex's outdegree, then update max if its the highest outdegree so far.
+   * vertex's outdegree, then update max if it's the highest outdegree so far.
    *
-   * NOTE: Normally I would avoid for in loops as they access the prototype
-   * chain. However, I believe this is better than the alternatives:
-   * 1) Object.keys converts the adjacency list to an array, which introduces
-   * linear space complexity and is unacceptable for large graphs.
-   * 2) A normal for loop strictly requires numerical indices and vertices in
-   * sequential natural order from 0 to n. This leads to poor user experience as
-   * users have to worry about the next vertex sticking to the sequence. By
-   * using for in, users can add any vertex value, including non-numbers.
-   *
-   * Time complexity: O(number of vertices)
+   * Time complexity: O(total vertices)
    * Space complexity: O(1)
    *
    * @return {Number} - largest outdegree in graph
@@ -206,16 +237,7 @@ class DirectedGraph {
    * Strategy: Loop through each vertex's adjacent vertices and increment a
    * counter for all duplicates.
    *
-   * NOTE: Normally I would avoid for in loops as they access the prototype
-   * chain. However, I believe this is better than the alternatives:
-   * 1) Object.keys converts the adjacency list to an array, which introduces
-   * linear space complexity and is unacceptable for large graphs.
-   * 2) A normal for loop strictly requires numerical indices and vertices in
-   * sequential natural order from 0 to n. This leads to poor user experience as
-   * users have to worry about the next vertex sticking to the sequence. By
-   * using for in, users can add any vertex value, including non-numbers.
-   *
-   * Time complexity: O(V * d) where V is totalVertices and d is max degree
+   * Time complexity: O(V + E) where V is total vertices and E is total edges
    * Space complexity: O(1)
    *
    * @return {Number} - number of self loops, as you might have guessed!
@@ -248,7 +270,7 @@ class DirectedGraph {
    * allows users to reverse the graph by their choice later on, although the
    * time taken will be untenable for large, dense graphs.
    *
-   * Time complexity: O(V * d), where V is total vertices and d is average degree
+   * Time complexity: O(V + E), where V is total vertices and E is total edges
    * Space complexity: O(V + E), where V is total vertices and E is total edges
    *
    * @return {Object} - reversed directed graph
@@ -272,28 +294,3 @@ class DirectedGraph {
 }
 
 module.exports = DirectedGraph;
-
-const graph = new DirectedGraph();
-
-const edges = [
-  [0, 5],
-  [4, 3],
-  [0, 1],
-  [9, 12],
-  [6, 4],
-  [5, 4],
-  [0, 2],
-  [11, 12],
-  [9, 10],
-  [0, 6],
-  [7, 8],
-  [9, 11],
-  [5, 3],
-  [5, 5],
-  [14, 14],
-];
-
-edges.forEach(edge => graph.addEdge(edge));
-
-console.log(graph);
-console.log(graph.reverse());
