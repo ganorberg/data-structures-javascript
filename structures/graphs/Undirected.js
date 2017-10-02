@@ -1,8 +1,11 @@
-/** Class representing graph */
+/** Class representing a graph with undirected edges */
 class UndirectedGraph {
   /**
-   * This graph allows self-loops, parallel edges and any primitive value for
-   * vertices.
+   * Edges are represented in an object-oriented adjacency list where keys are
+   * the vertices and values are arrays of adjacent vertices.
+   *
+   * This graph allows self-loops, parallel edges and any primitive data type
+   * for vertices.
    *
    * To build the graph, call addEdge with all edge pairs. The addEdge method
    * will dynamically add vertices to the adjacency list if they did not exist
