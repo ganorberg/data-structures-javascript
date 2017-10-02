@@ -1,9 +1,9 @@
 {
   "name": "data-structures-javascript",
-  "version": "1.0.0",
-  "description": "Fully tested JavaScript data structures library.",
+  "version": "0.1.0",
+  "description": "Fully tested JavaScript data structures library",
   "scripts": {
-    "test": "mocha test/*"
+    "test": "mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -12,17 +12,22 @@
   "keywords": [
     "data structures",
     "javascript",
+    "graph",
+    "undirected graph",
+    "directed graph",
+    "breadth first search",
+    "depth first search",
     "red black tree",
     "binary heap",
     "max binary heap",
     "priority queue",
-    "binary search tree", 
-    "bst", 
-    "circular queue", 
-    "circular buffer", 
-    "ring buffer", 
-    "queue", 
-    "stack", 
+    "binary search tree",
+    "bst",
+    "circular queue",
+    "circular buffer",
+    "ring buffer",
+    "queue",
+    "stack",
     "hash table",
     "hash map",
     "linked list"
