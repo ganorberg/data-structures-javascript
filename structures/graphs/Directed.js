@@ -26,8 +26,6 @@ class DirectedGraph {
    * Strategy: Add vertices if they don't exist. Then push second input vertex
    * into first input vertex's adjacency list. Stringify second input vertex to
    * avoid equality comparison issues against stringified keys in other methods.
-   * Take this opportunity to increment the edge count and indegree for the
-   * second input vertex.
    *
    * Time complexity: O(1)
    * Space complexity: O(1)
@@ -40,9 +38,6 @@ class DirectedGraph {
     if (!this.adjacencyList.hasOwnProperty(v2)) { this.addVertex(v2); }
     this.adjacencyList[v1].push(String(v2));
     this.totalEdges++;
-    this.inDegree.hasOwnProperty(v2)
-      ? this.inDegree[v2]++
-      : this.inDegree[v2] = 1;
 
     return true;
   }
@@ -142,7 +137,7 @@ class DirectedGraph {
       throw new Error('That vertex does not exist in the graph, my friend!');
     }
 
-    // If user has called reverse method, we can get indegree in constant time!
+    // If user has called reverse method, they can get indegree in constant time!
     if (this.reversedGraph && this.reversedGraph.hasOwnProperty(vertex)) {
       return this.reversedGraph[vertex].length;
     }
