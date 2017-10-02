@@ -139,7 +139,7 @@ class UndirectedGraph {
    * @description Get the highest degree in the graph.
    *
    * Strategy: Loop through each vertex with a for in loop. Calculate each
-   * vertex's degree, then update max if its the highest degree so far.
+   * vertex's degree, then update max if it's the highest degree so far.
    *
    * NOTE: Normally I would avoid for in loops as they access the prototype
    * chain. However, I believe this is better than the alternatives:
@@ -150,7 +150,7 @@ class UndirectedGraph {
    * users have to worry about the next vertex sticking to the sequence. By
    * using for in, users can add any vertex value, including non-numbers.
    *
-   * Time complexity: O(number of vertices)
+   * Time complexity: O(total vertices)
    * Space complexity: O(1)
    *
    * @return {Number} - largest degree in graph
@@ -182,7 +182,7 @@ class UndirectedGraph {
    * users have to worry about the next vertex sticking to the sequence. By
    * using for in, users can add any vertex value, including non-numbers.
    *
-   * Time complexity: O(V * d) where V is totalVertices and d is max degree
+   * Time complexity: O(V + E) where V is total vertices and E is total edges
    * Space complexity: O(1)
    *
    * @return {Number} - number of self loops, as you might have guessed!
