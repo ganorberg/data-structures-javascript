@@ -1,3 +1,4 @@
+/** Class representing stack */
 class Stack {
   /**
    * Represents a stack for numbers

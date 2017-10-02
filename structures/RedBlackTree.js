@@ -156,7 +156,7 @@ function put(node, key, value) {
   return node;
 }
 
-/** Class representing our left-leaning red black tree */
+/** Class representing left-leaning red black tree */
 class RedBlackTree {
   /**
    * Track root of tree.

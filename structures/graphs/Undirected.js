@@ -1,4 +1,4 @@
-/** Class representing our graph */
+/** Class representing graph */
 class UndirectedGraph {
   /**
    * This graph allows self-loops, parallel edges and any primitive value for
