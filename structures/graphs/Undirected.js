@@ -118,15 +118,14 @@ class UndirectedGraph {
   /**
    * @description Get number of vertices adjacent to input vertex.
    *
-   * Strategy: Directly access adjacency list, then increment degree by 1 for
-   * every adjacent vertex.
+   * Strategy: Adjacent vertices are stored in an array, so use length property.
    *
    * Edge case: vertex does not exist in graph
    *
-   * Time complexity: O(d), where d represents degree
+   * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {*} vertex - vertex whose degree is being calculated
+   * @param {*} vertex - vertex whose degree is sought
    * @return {Number} - degree of vertex
    */
   degree(vertex) {
@@ -134,7 +133,7 @@ class UndirectedGraph {
       throw new Error('That vertex does not exist in the graph, my friend!');
     }
 
-    return this.adjacencyList[vertex].reduce((degree, edge) => degree + 1, 0);
+    return this.adjacencyList[vertex].length;
   }
 
   /**
@@ -152,7 +151,7 @@ class UndirectedGraph {
    * users have to worry about the next vertex sticking to the sequence. By
    * using for in, users can add any vertex value, including non-numbers.
    *
-   * Time complexity: O(V * d), where V is totalVertices and d is max degree
+   * Time complexity: O(number of vertices)
    * Space complexity: O(1)
    *
    * @return {Number} - largest degree in graph
@@ -160,7 +159,7 @@ class UndirectedGraph {
   maxDegree() {
     let max = 0;
     for (let vertex in this.adjacencyList) {
-      const degree = this.degree(Number(vertex));
+      const degree = this.degree(vertex);
       if (degree > max) { max = degree; }
     }
 
@@ -172,8 +171,8 @@ class UndirectedGraph {
    *
    * Strategy: Loop through each vertex's adjacent vertices and increment a
    * counter for all duplicates. Then divide that counter by 2 because the
-   * addEdge implementation allows the duplicate to maintain consistency and
-   * simplify mathematical operations with totalEdges.
+   * addEdge implementation pushes 2 copies of the vertex to its own adjacency
+   * list.
    *
    * NOTE: Normally I would avoid for in loops as they access the prototype
    * chain. However, I believe this is better than the alternatives:
@@ -193,7 +192,8 @@ class UndirectedGraph {
     let count = 0;
     for (let vertex in this.adjacencyList) {
       this.adjacencyList[vertex].forEach(adjacentVertex => {
-        if (Number(vertex) === adjacentVertex) { count++; }
+        // Use loose equality because vertex keys are stringified
+        if (vertex == adjacentVertex) { count++; }
       });
     }
 
