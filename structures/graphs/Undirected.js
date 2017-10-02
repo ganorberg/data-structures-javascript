@@ -1,18 +1,3 @@
-/** Class representing a node in the graph */
-class Node {
-  /**
-   * For quick node creation in graph
-   *
-   * @constructor
-   * @param {*} value - held by node
-   * @param {Number} weight - for weighted graphs
-   */
-  constructor(value, weight = 0) {
-    this.value = value;
-    this.weight = weight;
-  }
-}
-
 /** Class representing our graph */
 class UndirectedGraph {
   /**
@@ -38,10 +23,10 @@ class UndirectedGraph {
    * Strategy: Add vertices if they don't exist. Then push vertices to each
    * other's adjacency lists.
    *
-   * Edge case: if vertices are the same (i.e. self-loop), duplicate will be
-   * added. This maintains mathematical representation of each edge as 2
-   * counted edges, providing convenient calculations for methods like
-   * averageDegree.
+   * Edge case: if vertices are the same (i.e. self-loop), add both to same
+   * adjacency list. This maintains mathematical consistency whereby each edge
+   * represents two values in adjacency list, providing convenient calculations
+   * for methods like averageDegree.
    *
    * Time complexity: O(1)
    * Space complexity: O(1)
@@ -95,14 +80,10 @@ class UndirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {Number} vertex - vertex with potential adjacent vertices
+   * @param {*} vertex - vertex with potential adjacent vertices
    * @return {Array} - list of vertices adjacent to input vertex
    */
   adjacentVertices(vertex) {
-    if (!Number.isSafeInteger(vertex) || vertex < 0) {
-      throw new Error('Please insert safe nonnegative integer');
-    }
-
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
       throw new Error('That vertex does not exist in the graph, my friend!');
     }
@@ -119,7 +100,7 @@ class UndirectedGraph {
    * this by the totalVertices to get the average number of adjacent vertices
    * per vertex, a.k.a. average degree of the graph.
    *
-   * Edge case: vertex does not exist in graph
+   * Edge case: empty graph
    *
    * Time complexity: O(1)
    * Space complexity: O(1)
@@ -127,7 +108,9 @@ class UndirectedGraph {
    * @return {Number} - average degree of graph
    */
   averageDegree() {
-    return 2 * this.totalEdges / this.totalVertices;
+    return this.totalVertices === 0
+      ? 0
+      : 2 * this.totalEdges / this.totalVertices;
   }
 
   /**
@@ -142,14 +125,10 @@ class UndirectedGraph {
    * Time complexity: O(d), where d represents degree
    * Space complexity: O(1)
    *
-   * @param {Number} vertex - vertex whose degree is being calculated
+   * @param {*} vertex - vertex whose degree is being calculated
    * @return {Number} - degree of vertex
    */
   degree(vertex) {
-    if (!Number.isSafeInteger(vertex) || vertex < 0) {
-      throw new Error('Please insert safe nonnegative integer');
-    }
-
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
       throw new Error('That vertex does not exist in the graph, my friend!');
     }
