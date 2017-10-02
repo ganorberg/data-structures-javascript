@@ -47,8 +47,7 @@ class UndirectedGraph {
   }
 
   /**
-   * @description Add a new vertex to the graph. Used in public and private
-   * methods.
+   * @description Add a new vertex to the graph.
    *
    * Strategy: If vertex is not already in adjacency list, then store with
    * key as vertex and value as empty array. Array data type allows multiple
@@ -117,8 +116,7 @@ class UndirectedGraph {
   }
 
   /**
-   * @description Get number of vertices adjacent to input vertex. Used in
-   * public and private methods.
+   * @description Get number of vertices adjacent to input vertex.
    *
    * Strategy: Directly access adjacency list, then increment degree by 1 for
    * every adjacent vertex.
