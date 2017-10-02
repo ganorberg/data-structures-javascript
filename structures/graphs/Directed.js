@@ -159,27 +159,6 @@ class DirectedGraph {
   }
 
   /**
-   * @description Get number of vertices adjacent to input vertex.
-   *
-   * Strategy: Adjacent vertices are stored in an array, so use length property.
-   *
-   * Edge case: vertex does not exist in graph
-   *
-   * Time complexity: O(1)
-   * Space complexity: O(1)
-   *
-   * @param {*} vertex - vertex whose outdegree is sought
-   * @return {Number} - outdegree of vertex
-   */
-  outDegree(vertex) {
-    if (!this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That vertex does not exist in the graph, my friend!');
-    }
-
-    return this.adjacencyList[vertex].length;
-  }
-
-  /**
    * @description Get the highest indegree in the graph. Be careful calling this
    * if your graph is large or dense without reversing the graph first (see time
    * complexity below).
@@ -251,6 +230,27 @@ class DirectedGraph {
     }
 
     return count;
+  }
+
+  /**
+   * @description Get number of vertices adjacent to input vertex.
+   *
+   * Strategy: Adjacent vertices are stored in an array, so use length property.
+   *
+   * Edge case: vertex does not exist in graph
+   *
+   * Time complexity: O(1)
+   * Space complexity: O(1)
+   *
+   * @param {*} vertex - vertex whose outdegree is sought
+   * @return {Number} - outdegree of vertex
+   */
+  outDegree(vertex) {
+    if (!this.adjacencyList.hasOwnProperty(vertex)) {
+      throw new Error('That vertex does not exist in the graph, my friend!');
+    }
+
+    return this.adjacencyList[vertex].length;
   }
 
   /**
