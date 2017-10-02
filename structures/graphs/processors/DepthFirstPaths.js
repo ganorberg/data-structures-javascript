@@ -11,9 +11,9 @@ class DepthFirstPaths {
    * @param {*} sourceVertex - source vertex for processing... gotta start somewhere!
    */
   constructor(graph, sourceVertex) {
-    this.parent = {};
     this.graph = graph;
     this.initialized = false;
+    this.parent = {};
     this.sourceVertex = sourceVertex;
     this.visited = new Set();
   }
@@ -35,7 +35,7 @@ class DepthFirstPaths {
    */
   initialize(vertex = this.sourceVertex) {
     if (!this.graph.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('The input vertex is not in the graph, my dear friend!');
+      throw new Error('The input vertex is not in the graph, my friend!');
     }
 
     this.initialized = true;
@@ -61,6 +61,9 @@ class DepthFirstPaths {
    */
   hasPathTo(vertex) {
     if (!this.initialized) { throw new Error('Please initialize, my friend!'); }
+    if (!this.graph.adjacencyList.hasOwnProperty(vertex)) {
+      throw new Error('The input vertex is not in the graph, my friend!');
+    }
 
     return this.visited.has(vertex);
   }
