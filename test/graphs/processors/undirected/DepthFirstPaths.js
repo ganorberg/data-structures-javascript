@@ -6,9 +6,9 @@ let DepthFirstPaths;
 let paths;
 
 try {
-  UndirectedGraph = require('../../../structures/graphs/Undirected');
+  UndirectedGraph = require('../../../../structures/graphs/Undirected');
   graph = new UndirectedGraph();
-  DepthFirstPaths = require('../../../structures/graphs/processors/DepthFirstPaths');
+  DepthFirstPaths = require('../../../../structures/graphs/processors/any/DepthFirstPaths');
   paths = new DepthFirstPaths();
 } catch (e) {
   throw new Error('DepthFirstPaths could not be tested due to faulty import, ' +
@@ -16,9 +16,8 @@ try {
     'the processor or graph files.');
 }
 
-// TODO: test other data types
+const SOURCE_VERTEX = 0;
 
-// AAA (Arrange -> Act -> Assert) test pattern
 describe('DepthFirstPaths', () => {
   beforeEach(() => {
     graph = new UndirectedGraph();
@@ -43,7 +42,7 @@ describe('DepthFirstPaths', () => {
     
     edges.forEach(edge => graph.addEdge(edge));
 
-    paths = new DepthFirstPaths(graph, 0);
+    paths = new DepthFirstPaths(graph, SOURCE_VERTEX);
   });
 
   it('should be extensible', () => {
@@ -61,7 +60,7 @@ describe('DepthFirstPaths', () => {
   });
   
   it('should not be initialized before its initialize method is called', () => {
-    expect(paths.initialized).to.equal(false);
+    expect(paths.initialized).to.be.false;
   });
 
   it('should initially have an empty parent object', () => {
@@ -72,11 +71,15 @@ describe('DepthFirstPaths', () => {
     expect(paths.visited).to.deep.equal(new Set());
   });
 
+  it('should set a string data type for source vertex', () => {
+    expect(paths.sourceVertex).to.equal('0');
+  });
+
   describe('#initialize', () => {
     it('should set the initialize property to true', () => {
       paths.initialize();
 
-      expect(paths.initialized).to.equal(true);
+      expect(paths.initialized).to.be.true;
     });
 
     it('should process only vertices connected to the source vertex', () => {
@@ -97,8 +100,42 @@ describe('DepthFirstPaths', () => {
       expect(paths.visited.has('14')).to.be.false;
     });
 
-    it('should throw an error if the input vertex is not in the graph', () => {
-      expect(() => paths.initialize('not in graph')).to.throw(Error);
+    it('should throw an error if the source vertex is not in the graph', () => {
+      graph = new UndirectedGraph();
+      paths = new DepthFirstPaths(graph, 0);
+      
+      expect(() => paths.initialize()).to.throw(Error);
+    });
+
+    it('should throw an error if called twice', () => {
+      paths.initialize();
+
+      expect(() => paths.initialize()).to.throw(Error);
+    });
+
+    it('should work for number and string data types', () => {
+      graph = new UndirectedGraph();
+      
+        const edges = [
+          ['dog', 'woof'],
+          ['dog', 'bark'],
+          ['cat', 'meow'],
+          [0, 'meow'],
+          [14, 'dog'],
+        ];
+        
+        edges.forEach(edge => graph.addEdge(edge));
+        paths = new DepthFirstPaths(graph, 0);
+      
+        paths.initialize();
+      
+        expect(paths.visited.has('0')).to.be.true;
+        expect(paths.visited.has('meow')).to.be.true;
+        expect(paths.visited.has('cat')).to.be.true;
+        expect(paths.visited.has('14')).to.be.false;
+        expect(paths.visited.has('dog')).to.be.false;
+        expect(paths.visited.has('woof')).to.be.false;
+        expect(paths.visited.has('bark')).to.be.false;
     });
   });
 

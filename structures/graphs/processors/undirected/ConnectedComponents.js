@@ -106,13 +106,13 @@ class ConnectedComponents {
    * Space complexity: O(number of vertices)
    */
   initialize() {
+    if (this.initialized) { throw new Error('Already initialized, my friend!'); }
     if (!this.graph) { throw new Error('The graph is not loaded, my friend!'); }
 
     this.initialized = true;
 
     const visited = new Set();
-    for (let vertex in this.graph.adjacencyList) {
-      vertex = Number(vertex);
+    for (const vertex in this.graph.adjacencyList) {
       if (visited.has(vertex)) { continue; }
       depthFirstSearch(
         vertex,

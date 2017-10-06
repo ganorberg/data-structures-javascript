@@ -1,3 +1,37 @@
+/**
+ * @description Private method that initializes DepthFirstPaths constructor
+ * values by using depth-first search. It is called in the initialize method on
+ * the source vertex, which means it only searches through connected vertices.
+ *
+ * Strategy: Loop through adjacent vertices. Only visit unvisited vertices.
+ * Upon visit, add to visited Set, store parent information, and continue DFS.
+ *
+ * Time complexity: O(visited)
+ * Space complexity: O(visited)
+ *
+ * @param {Graph} graph - graph being processed
+ * @param {*} vertex - current vertex being traversed
+ * @param {Set} visited - track which vertices have already been visited
+ * @param {Object} parent - stores path information
+ */
+function depthFirstSearch(
+  graph,
+  vertex,
+  visited,
+  parent
+) {
+  if (!graph.adjacencyList.hasOwnProperty(vertex)) {
+    throw new Error('The input vertex is not in the graph, my friend!');
+  }
+
+  graph.adjacencyList[vertex].forEach(adjacentVertex => {
+    if (visited.has(adjacentVertex)) { return; }
+    visited.add(adjacentVertex);
+    parent[adjacentVertex] = vertex;
+    depthFirstSearch(graph, adjacentVertex, visited, parent);
+  });
+}
+
 /** Class representing depth-first path processor */
 class DepthFirstPaths {
   /**
@@ -33,19 +67,21 @@ class DepthFirstPaths {
    *
    * @param {*=} vertex - source vertex
    */
-  initialize(vertex = this.sourceVertex) {
-    if (!this.graph.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('The input vertex is not in the graph, my friend!');
+  initialize() {
+    if (this.initialized) { throw new Error('Already initialized, my friend!'); }    
+    if (!this.graph.adjacencyList.hasOwnProperty(this.sourceVertex)) {
+      throw new Error('The source vertex is not in the graph, my friend!');
     }
 
     this.initialized = true;
-    this.visited.add(vertex);
+    this.visited.add(this.sourceVertex);
 
-    this.graph.adjacencyList[vertex].forEach(adjacentVertex => {
-      if (this.visited.has(adjacentVertex)) { return; }
-      this.parent[adjacentVertex] = vertex;
-      this.initialize(adjacentVertex);
-    });
+    depthFirstSearch(
+      this.graph,
+      this.sourceVertex,
+      this.visited,
+      this.parent
+    );
   }
 
   /**
