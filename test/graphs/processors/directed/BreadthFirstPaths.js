@@ -155,7 +155,7 @@ describe('BreadthFirstPaths', () => {
 
     it('should throw an error if the source vertex is not in the graph', () => {
       graph = new DirectedGraph();
-      paths = new BreadthFirstPaths(graph, 0);
+      paths = new BreadthFirstPaths(graph, SOURCE_VERTEX);
       
       expect(() => paths.initialize()).to.throw(Error);
     });
@@ -178,7 +178,7 @@ describe('BreadthFirstPaths', () => {
         ];
         
         edges.forEach(edge => graph.addEdge(edge));
-        paths = new BreadthFirstPaths(graph, 0);
+        paths = new BreadthFirstPaths(graph, SOURCE_VERTEX);
       
         paths.initialize();
       

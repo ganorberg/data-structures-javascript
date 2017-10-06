@@ -102,7 +102,7 @@ describe('DepthFirstPaths', () => {
 
     it('should throw an error if the source vertex is not in the graph', () => {
       graph = new UndirectedGraph();
-      paths = new DepthFirstPaths(graph, 0);
+      paths = new DepthFirstPaths(graph, SOURCE_VERTEX);
       
       expect(() => paths.initialize()).to.throw(Error);
     });
@@ -125,7 +125,7 @@ describe('DepthFirstPaths', () => {
         ];
         
         edges.forEach(edge => graph.addEdge(edge));
-        paths = new DepthFirstPaths(graph, 0);
+        paths = new DepthFirstPaths(graph, SOURCE_VERTEX);
       
         paths.initialize();
       
