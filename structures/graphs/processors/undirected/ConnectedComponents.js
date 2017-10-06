@@ -13,15 +13,15 @@
  * Time complexity: O(visited)
  * Space complexity: O(visited)
  *
- * @param {*} vertex - current vertex being traversed
  * @param {Graph} graph - graph being processed
+ * @param {*} vertex - current vertex being traversed
  * @param {Set} visited - track which vertices have already been visited
  * @param {Number} id - connected components share the same id
  * @param {Number} componentCount - track how many components have been created
  */
 function depthFirstSearch(
-  vertex,
   graph,
+  vertex,
   visited,
   id,
   componentCount,
@@ -36,8 +36,8 @@ function depthFirstSearch(
   graph.adjacencyList[vertex].forEach(adjacentVertex => {
     if (visited.has(adjacentVertex)) { return; }
     depthFirstSearch(
-      adjacentVertex,
       graph,
+      adjacentVertex,
       visited,
       id,
       componentCount,
@@ -69,28 +69,16 @@ class ConnectedComponents {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {*} vertex - vertex whose component id is being sought
-   * @return {Number} - component that vertex belongs to
+   * @param {*} vertex - vertex whose component id is sought
+   * @return {Number} - id of component that vertex belongs to
    */
   componentId(vertex) {
+    if (!this.graph.adjacencyList.hasOwnProperty(vertex)) {
+      throw new Error('The input vertex is not in the graph, my friend!');
+    }
+
     return this.id[vertex];
   }
-  /**
-   * @description Depth-first search to initialize constructor values.
-   *
-   * Strategy: Mark visited vertices so they won't be visited again. Then loop
-   * through their adjacent vertices and recurse only unvisited vertices. Before
-   * recursing, store the parent-link.
-   *
-   * Edge case(s): Input vertex does not exist in graph
-   *
-   * Time complexity: O(visited)
-   * Space complexity: O(visited)
-   *
-   * @param {*=} vertex - source vertex
-   */
-
-  
   
   /**
    * @description Initialize constructor values. Must be called before other
@@ -115,8 +103,8 @@ class ConnectedComponents {
     for (const vertex in this.graph.adjacencyList) {
       if (visited.has(vertex)) { continue; }
       depthFirstSearch(
-        vertex,
         this.graph,
+        vertex,
         visited,
         this.id,
         this.componentCount,
