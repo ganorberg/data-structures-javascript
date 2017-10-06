@@ -75,6 +75,10 @@ describe('ConnectedComponents', () => {
       expect(connected.componentId(6)).to.equal(0);
     });
 
+    it('should throw an error if the processor has not been initialized', () => {
+      expect(() => connected.componentId(0)).to.throw(Error);
+    });
+
     it('should throw an error if the vertex is not in the graph', () => {
       connected.initialize();
 

@@ -73,6 +73,7 @@ class ConnectedComponents {
    * @return {Number} - id of component that vertex belongs to
    */
   componentId(vertex) {
+    if (!this.initialized) { throw new Error('Please initialize, my friend!'); }
     if (!this.graph.adjacencyList.hasOwnProperty(vertex)) {
       throw new Error('The input vertex is not in the graph, my friend!');
     }
