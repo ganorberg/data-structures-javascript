@@ -30,7 +30,7 @@ class DirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {Array<Integer>} v1, v2 - directed edge created where v1 -> v2
+   * @param {Array<String>} v1, v2 - directed edge created where v1 -> v2
    * @return {Boolean} true - represents successful insertion
    */
   addEdge([v1, v2]) {
@@ -55,7 +55,7 @@ class DirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {Number} vertex - vertex added to graph
+   * @param {String} vertex - vertex added to graph
    * @return {Boolean} true - represents successful insertion
    */
   addVertex(vertex) {
@@ -78,7 +78,7 @@ class DirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {*} vertex - vertex with potential adjacent vertices
+   * @param {String} vertex - vertex with potential adjacent vertices
    * @return {Array} - list of vertices adjacent to input vertex
    */
   adjacentVertices(vertex) {
@@ -129,7 +129,7 @@ class DirectedGraph {
    *
    * Edge case: vertex does not exist in graph
    *
-   * @param {*} vertex - vertex whose degree is sought
+   * @param {String} vertex - vertex whose degree is sought
    * @return {Number} - degree of vertex
    */
   inDegree(vertex) {
@@ -143,7 +143,10 @@ class DirectedGraph {
     }
 
     let degree = 0;
-    for (let vertexKeys in this.adjacencyList) {
+    for (const vertexKeys in this.adjacencyList) {
+      // Ignore prototype chain
+      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+
       this.adjacencyList[vertexKeys].forEach(adjacentVertex => {
         // Loose equality allows user to input numbers
         if (vertex == adjacentVertex) { degree++; }
@@ -171,12 +174,15 @@ class DirectedGraph {
    *
    * Edge case: vertex does not exist in graph
    *
-   * @param {*} vertex - vertex whose degree is sought
+   * @param {String} vertex - vertex whose degree is sought
    * @return {Number} - degree of vertex
    */
   maxInDegree(vertex) {
     let max = 0;
-    for (let vertex in this.adjacencyList) {
+    for (const vertex in this.adjacencyList) {
+      // Ignore prototype chain
+      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+      
       const degree = this.inDegree(vertex);
       if (degree > max) { max = degree; }
     }
@@ -197,7 +203,10 @@ class DirectedGraph {
    */
   maxOutDegree() {
     let max = 0;
-    for (let vertex in this.adjacencyList) {
+    for (const vertex in this.adjacencyList) {
+      // Ignore prototype chain
+      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+
       const degree = this.outDegree(vertex);
       if (degree > max) { max = degree; }
     }
@@ -218,7 +227,10 @@ class DirectedGraph {
    */
   numberOfSelfLoops() {
     let count = 0;
-    for (let vertex in this.adjacencyList) {
+    for (const vertex in this.adjacencyList) {
+      // Ignore prototype chain
+      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+
       this.adjacencyList[vertex].forEach(adjacentVertex => {
         if (vertex === adjacentVertex) { count++; }
       });
@@ -237,7 +249,7 @@ class DirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {*} vertex - vertex whose outdegree is sought
+   * @param {String} vertex - vertex whose outdegree is sought
    * @return {Number} - outdegree of vertex
    */
   outDegree(vertex) {
@@ -274,11 +286,17 @@ class DirectedGraph {
     this.reversedGraph = {};
 
     // Logic much simpler if two loops are used: first to initialize, second to push
-    for (let vertex in this.adjacencyList) {
+    for (const vertex in this.adjacencyList) {
+      // Ignore prototype chain
+      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+
       this.reversedGraph[vertex] = [];
     }
 
-    for (let vertex in this.adjacencyList) {
+    for (const vertex in this.adjacencyList) {
+      // Ignore prototype chain
+      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+      
       this.adjacencyList[vertex].forEach(adjacentVertex => {
         this.reversedGraph[adjacentVertex].push(vertex);
       });
