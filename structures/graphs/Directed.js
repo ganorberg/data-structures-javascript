@@ -30,7 +30,7 @@ class DirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {Array<String>} v1, v2 - directed edge created where v1 -> v2
+   * @param {Array<String | Number>} v1, v2 - directed edge created where v1 -> v2
    * @return {Boolean} true - represents successful insertion
    */
   addEdge([v1, v2]) {
@@ -55,7 +55,7 @@ class DirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String} vertex - vertex added to graph
+   * @param {String | Number} vertex - vertex added to graph
    * @return {Boolean} true - represents successful insertion
    */
   addVertex(vertex) {
@@ -78,7 +78,7 @@ class DirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String} vertex - vertex with potential adjacent vertices
+   * @param {String | Number} vertex - vertex with potential adjacent vertices
    * @return {Array} - list of vertices adjacent to input vertex
    */
   adjacentVertices(vertex) {
@@ -129,7 +129,7 @@ class DirectedGraph {
    *
    * Edge case: vertex does not exist in graph
    *
-   * @param {String} vertex - vertex whose degree is sought
+   * @param {String | Number} vertex - vertex whose degree is sought
    * @return {Number} - degree of vertex
    */
   inDegree(vertex) {
@@ -174,7 +174,7 @@ class DirectedGraph {
    *
    * Edge case: vertex does not exist in graph
    *
-   * @param {String} vertex - vertex whose degree is sought
+   * @param {String | Number} vertex - vertex whose degree is sought
    * @return {Number} - degree of vertex
    */
   maxInDegree(vertex) {
@@ -249,7 +249,7 @@ class DirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String} vertex - vertex whose outdegree is sought
+   * @param {String | Number} vertex - vertex whose outdegree is sought
    * @return {Number} - outdegree of vertex
    */
   outDegree(vertex) {

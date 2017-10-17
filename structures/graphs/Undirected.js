@@ -35,7 +35,7 @@ class UndirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {Array<Integer>} v1, v2 - vertices sharing new edge
+   * @param {Array<String | Number>} v1, v2 - vertices sharing new edge
    * @return {Boolean} true - represents successful insertion
    */
   addEdge([v1, v2]) {
@@ -60,7 +60,7 @@ class UndirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {Number} vertex - vertex added to graph
+   * @param {String | Number} vertex - vertex added to graph
    * @return {Boolean} true - represents successful insertion
    */
   addVertex(vertex) {
@@ -83,7 +83,7 @@ class UndirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {*} vertex - vertex with potential adjacent vertices
+   * @param {String | Number} vertex - vertex with potential adjacent vertices
    * @return {Array} - list of vertices adjacent to input vertex
    */
   adjacentVertices(vertex) {
@@ -124,7 +124,7 @@ class UndirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {*} vertex - vertex whose degree is sought
+   * @param {String | Number} vertex - vertex whose degree is sought
    * @return {Number} - degree of vertex
    */
   degree(vertex) {
