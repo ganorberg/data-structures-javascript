@@ -6,14 +6,14 @@ let DepthFirstPaths;
 let paths;
 
 try {
-  UndirectedGraph = require('../../../../structures/graphs/Undirected');
+  UndirectedGraph = require('../../../../../structures/graphs/unweighted/undirected/Graph');
   graph = new UndirectedGraph();
-  DepthFirstPaths = require('../../../../structures/graphs/processors/any/DepthFirstPaths');
+  DepthFirstPaths = require('../../../../../structures/graphs/unweighted/general-processors/DepthFirstPaths');
   paths = new DepthFirstPaths();
 } catch (e) {
-  throw new Error('DepthFirstPaths could not be tested due to faulty import, ' +
-    'likely from an incorrect file path or exporting a non-constructor from ' +
-    'the processor or graph files.');
+  throw new Error('Undirected DepthFirstPaths could not be tested due to ' +
+    'faulty import, likely from an incorrect file path or exporting a ' + 
+    'non-constructor from the processor or graph files.');
 }
 
 const SOURCE_VERTEX = 0;

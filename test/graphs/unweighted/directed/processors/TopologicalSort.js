@@ -6,9 +6,9 @@ let TopologicalSort;
 let topologicalProcessor;
 
 try {
-  DirectedGraph = require('../../../../structures/graphs/Directed');
+  DirectedGraph = require('../../../../../structures/graphs/unweighted/directed/Graph');
   graph = new DirectedGraph();
-  TopologicalSort = require('../../../../structures/graphs/processors/directed/TopologicalSort');
+  TopologicalSort = require('../../../../../structures/graphs/unweighted/directed/processors/TopologicalSort');
   topologicalProcessor = new TopologicalSort();
 } catch (e) {
   throw new Error('TopologicalSort could not be tested due to faulty import, ' +

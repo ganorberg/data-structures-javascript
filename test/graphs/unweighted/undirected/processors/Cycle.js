@@ -1,24 +1,24 @@
 const expect = require('chai').expect;
 
-let DirectedGraph;
+let UndirectedGraph;
 let graph;
-let DirectedCycle;
+let UndirectedCycle;
 let cycleProcessor;
 
 try {
-  DirectedGraph = require('../../../../structures/graphs/Directed');
-  graph = new DirectedGraph();
-  DirectedCycle = require('../../../../structures/graphs/processors/directed/Cycle');
-  cycleProcessor = new DirectedCycle();
+  UndirectedGraph = require('../../../../../structures/graphs/unweighted/undirected/Graph');
+  graph = new UndirectedGraph();
+  UndirectedCycle = require('../../../../../structures/graphs/unweighted/undirected/processors/Cycle');
+  cycleProcessor = new UndirectedCycle();
 } catch (e) {
-  throw new Error('DirectedCycle could not be tested due to faulty import, ' +
+  throw new Error('UndirectedCycle could not be tested due to faulty import, ' +
     'likely from an incorrect file path or exporting a non-constructor from ' +
     'the processor or graph files.');
 }
 
-describe('DirectedCycle', () => {
+describe('UndirectedCycle', () => {
   beforeEach(() => {
-    graph = new DirectedGraph();
+    graph = new UndirectedGraph();
     const edges = [
       [0, 7],
       [0, 1],
@@ -31,14 +31,14 @@ describe('DirectedCycle', () => {
     /*
       No cycles initially:
       
-      0 -> 7
-        -> 1 -> 2 -> 4
-             -> 3 -> 5
+      0 <-> 7
+        <-> 1 <-> 2 <-> 4
+              <-> 3 <-> 5
     */
     
     edges.forEach(edge => graph.addEdge(edge));
 
-    cycleProcessor = new DirectedCycle(graph);
+    cycleProcessor = new UndirectedCycle(graph);
   });
 
   it('should be extensible', () => {
@@ -66,6 +66,26 @@ describe('DirectedCycle', () => {
   });
 
   describe('#initialize', () => {
+    it('should detect a self-loop cycle', () => {
+      graph = new UndirectedGraph();
+      graph.addEdge([5, 5]);
+      cycleProcessor = new UndirectedCycle(graph);
+    
+      cycleProcessor.initialize();
+      
+      expect(cycleProcessor.hasCycle).to.be.true;
+    });
+    
+    it('should detect a parallel edge cycle', () => {
+      graph = new UndirectedGraph();
+      graph.addEdge([0, 5]);
+      graph.addEdge([0, 5]);
+      cycleProcessor = new UndirectedCycle(graph);
+    
+      cycleProcessor.initialize();
+      
+      expect(cycleProcessor.hasCycle).to.be.true;
+    });
     it('should return false if the graph does not contain a cycle', () => {
       expect(cycleProcessor.initialize()).to.be.false;
     });
@@ -78,32 +98,32 @@ describe('DirectedCycle', () => {
     
     it('should return true if the graph contains a cycle', () => {
       graph.addEdge([5, 0]);
-  
+      
       /*
-        Now a cycle where 5 points to 0
+        Now the graph has a cycle at the edge shared by 5 and 0
       
-        0 -> 7
-          -> 1 -> 2 -> 4
-               -> 3 -> 5 -> cycle 0
+        0 <-> 7
+          <-> 1 <-> 2 <-> 4
+                <-> 3 <-> 5 <-> cycle 0
       */
-      
-      cycleProcessor = new DirectedCycle(graph);
+
+      cycleProcessor = new UndirectedCycle(graph);
       
       expect(cycleProcessor.initialize()).to.be.true;
     });
     
     it('should set hasCycle to true if the graph contains a cycle', () => {
       graph.addEdge([5, 0]);
-  
+
       /*
-        Now a cycle where 5 points to 0
+        Now the graph has a cycle at the edge shared by 5 and 0
       
-        0 -> 7
-          -> 1 -> 2 -> 4
-               -> 3 -> 5 -> cycle 0
+        0 <-> 7
+          <-> 1 <-> 2 <-> 4
+                <-> 3 <-> 5 <-> cycle 0
       */
       
-      cycleProcessor = new DirectedCycle(graph);
+      cycleProcessor = new UndirectedCycle(graph);
 
       cycleProcessor.initialize()
 

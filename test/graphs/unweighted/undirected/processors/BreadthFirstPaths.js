@@ -1,26 +1,26 @@
 const expect = require('chai').expect;
 
-let DirectedGraph;
+let UndirectedGraph;
 let graph;
-let DepthFirstPaths;
+let BreadthFirstPaths;
 let paths;
 
 try {
-  DirectedGraph = require('../../../../structures/graphs/Directed');
-  graph = new DirectedGraph();
-  DepthFirstPaths = require('../../../../structures/graphs/processors/any/DepthFirstPaths');
-  paths = new DepthFirstPaths();
+  UndirectedGraph = require('../../../../../structures/graphs/unweighted/undirected/Graph');
+  graph = new UndirectedGraph();
+  BreadthFirstPaths = require('../../../../../structures/graphs/unweighted/general-processors/BreadthFirstPaths');
+  paths = new BreadthFirstPaths();
 } catch (e) {
-  throw new Error('DepthFirstPaths could not be tested due to faulty import, ' +
-    'likely from an incorrect file path or exporting a non-constructor from ' +
-    'the processor or graph files.');
+  throw new Error('Undirected BreadthFirstPaths could not be tested due to ' +
+  'faulty import, likely from an incorrect file path or exporting a ' + 
+  'non- constructor from the processor or graph files.');
 }
 
 const SOURCE_VERTEX = 0;
 
-describe('DepthFirstPaths', () => {
+describe('BreadthFirstPaths', () => {
   beforeEach(() => {
-    graph = new DirectedGraph();
+    graph = new UndirectedGraph();
 
     const edges = [
       [0, 5],
@@ -42,7 +42,7 @@ describe('DepthFirstPaths', () => {
     
     edges.forEach(edge => graph.addEdge(edge));
 
-    paths = new DepthFirstPaths(graph, SOURCE_VERTEX);
+    paths = new BreadthFirstPaths(graph, SOURCE_VERTEX);
   });
 
   it('should be extensible', () => {
@@ -51,6 +51,7 @@ describe('DepthFirstPaths', () => {
 
   it('should have properties granted from constructor call', () => {
     expect(paths).to.have.all.keys(
+      'distanceFromSource',
       'graph',
       'initialized',
       'parent',
@@ -63,6 +64,10 @@ describe('DepthFirstPaths', () => {
     expect(paths.initialized).to.be.false;
   });
 
+  it('should initially have an empty distanceFromSource object', () => {
+    expect(paths.distanceFromSource).to.deep.equal({});
+  });
+
   it('should initially have an empty parent object', () => {
     expect(paths.parent).to.deep.equal({});
   });
@@ -73,6 +78,54 @@ describe('DepthFirstPaths', () => {
 
   it('should set a string data type for source vertex', () => {
     expect(paths.sourceVertex).to.equal('0');
+  });
+
+  describe('#distanceTo', () => {
+    it('should return the distance if one level from the source vertex', () => {
+      paths.initialize();
+      
+      expect(paths.distanceTo(6)).to.equal(1);
+    });
+
+    it('should return the distance if two levels from the source vertex', () => {
+      paths.initialize();
+      
+      expect(paths.distanceTo(4)).to.equal(2);
+    });
+
+    it('should return null if the input vertex is not connected to the source', () => {
+      paths.initialize();
+      
+      expect(paths.distanceTo(14)).to.equal(null);
+    });
+ 
+    it('should throw an error if the processor has not been initialized', () => {
+      expect(() => paths.distanceTo(0)).to.throw(Error);
+    });
+  });
+
+  describe('#hasPathTo', () => {
+    it('should return true if the input vertex is connected to the source vertex', () => {
+      paths.initialize();
+      
+      expect(paths.hasPathTo('6')).to.be.true;
+    });
+ 
+    it('should return false if the input vertex is not connected to the source vertex', () => {
+      paths.initialize();
+      
+      expect(paths.hasPathTo('11')).to.be.false;
+    });
+ 
+    it('should throw an error if the processor has not been initialized', () => {
+      expect(() => paths.hasPathTo(0)).to.throw(Error);
+    });
+ 
+    it('should throw an error if the input vertex is not in the graph', () => {
+      paths.initialize();
+      
+      expect(() => paths.hasPathTo('not in graph')).to.throw(Error);
+    });
   });
 
   describe('#initialize', () => {
@@ -101,8 +154,8 @@ describe('DepthFirstPaths', () => {
     });
 
     it('should throw an error if the source vertex is not in the graph', () => {
-      graph = new DirectedGraph();
-      paths = new DepthFirstPaths(graph, SOURCE_VERTEX);
+      graph = new UndirectedGraph();
+      paths = new BreadthFirstPaths(graph, SOURCE_VERTEX);
       
       expect(() => paths.initialize()).to.throw(Error);
     });
@@ -114,7 +167,7 @@ describe('DepthFirstPaths', () => {
     });
 
     it('should work for number and string data types', () => {
-      graph = new DirectedGraph();
+      graph = new UndirectedGraph();
       
         const edges = [
           ['dog', 'woof'],
@@ -125,7 +178,7 @@ describe('DepthFirstPaths', () => {
         ];
         
         edges.forEach(edge => graph.addEdge(edge));
-        paths = new DepthFirstPaths(graph, SOURCE_VERTEX);
+        paths = new BreadthFirstPaths(graph, SOURCE_VERTEX);
       
         paths.initialize();
       
@@ -139,45 +192,21 @@ describe('DepthFirstPaths', () => {
     });
   });
 
-  describe('#hasPathTo', () => {
-    it('should return true if the input vertex is connected to the source vertex', () => {
-      paths.initialize();
-      
-      expect(paths.hasPathTo('6')).to.be.true;
-    });
- 
-    it('should return false if the input vertex is not connected to the source vertex', () => {
-      paths.initialize();
-      
-      expect(paths.hasPathTo('11')).to.be.false;
-    });
- 
+  describe('#shortestPathTo', () => {
     it('should throw an error if the processor has not been initialized', () => {
-      expect(() => paths.hasPathTo(0)).to.throw(Error);
-    });
- 
-    it('should throw an error if the input vertex is not in the graph', () => {
-      paths.initialize();
-      
-      expect(() => paths.hasPathTo('not in graph')).to.throw(Error);
-    });
-  });
-
-  describe('#pathTo', () => {
-    it('should throw an error if the processor has not been initialized', () => {
-      expect(() => paths.pathTo(0)).to.throw(Error);
+      expect(() => paths.shortestPathTo(0)).to.throw(Error);
     });
  
     it('should return null if a path to the source vertex does not exist', () => {
       paths.initialize();
 
-      expect(paths.pathTo(11)).to.equal(null);
+      expect(paths.shortestPathTo(11)).to.equal(null);
     });
  
-    it('should return the path to the source vertex if it exists', () => {
+    it('should return the shortest path to the source vertex if a path exists', () => {
       paths.initialize();
       
-      expect(paths.pathTo(6)).to.deep.equal(['6', '0']);
+      expect(paths.shortestPathTo(6)).to.deep.equal(['6', '0']);
     });
   });
 });

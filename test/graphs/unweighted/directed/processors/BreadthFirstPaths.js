@@ -1,26 +1,26 @@
 const expect = require('chai').expect;
 
-let UndirectedGraph;
+let DirectedGraph;
 let graph;
 let BreadthFirstPaths;
 let paths;
 
 try {
-  UndirectedGraph = require('../../../../structures/graphs/Undirected');
-  graph = new UndirectedGraph();
-  BreadthFirstPaths = require('../../../../structures/graphs/processors/any/BreadthFirstPaths');
+  DirectedGraph = require('../../../../../structures/graphs/unweighted/directed/Graph');
+  graph = new DirectedGraph();
+  BreadthFirstPaths = require('../../../../../structures/graphs/unweighted/general-processors/BreadthFirstPaths');
   paths = new BreadthFirstPaths();
 } catch (e) {
-  throw new Error('BreadthFirstPaths could not be tested due to faulty import, ' +
-    'likely from an incorrect file path or exporting a non-constructor from ' +
-    'the processor or graph files.');
+  throw new Error('Directed BreadthFirstPaths could not be tested due to ' +
+  'faulty import, likely from an incorrect file path or exporting a ' + 
+  'non-constructor from the processor or graph files.');
 }
 
 const SOURCE_VERTEX = 0;
 
 describe('BreadthFirstPaths', () => {
   beforeEach(() => {
-    graph = new UndirectedGraph();
+    graph = new DirectedGraph();
 
     const edges = [
       [0, 5],
@@ -154,7 +154,7 @@ describe('BreadthFirstPaths', () => {
     });
 
     it('should throw an error if the source vertex is not in the graph', () => {
-      graph = new UndirectedGraph();
+      graph = new DirectedGraph();
       paths = new BreadthFirstPaths(graph, SOURCE_VERTEX);
       
       expect(() => paths.initialize()).to.throw(Error);
@@ -167,7 +167,7 @@ describe('BreadthFirstPaths', () => {
     });
 
     it('should work for number and string data types', () => {
-      graph = new UndirectedGraph();
+      graph = new DirectedGraph();
       
         const edges = [
           ['dog', 'woof'],

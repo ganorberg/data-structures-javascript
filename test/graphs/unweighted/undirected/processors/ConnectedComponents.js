@@ -6,9 +6,9 @@ let ConnectedComponents;
 let connected;
 
 try {
-  UndirectedGraph = require('../../../../structures/graphs/Undirected');
+  UndirectedGraph = require('../../../../../structures/graphs/unweighted/undirected/Graph');
   graph = new UndirectedGraph();
-  ConnectedComponents = require('../../../../structures/graphs/processors/undirected/ConnectedComponents');
+  ConnectedComponents = require('../../../../../structures/graphs/unweighted/undirected/processors/ConnectedComponents');
   connected = new ConnectedComponents();
 } catch (e) {
   throw new Error('ConnectedComponents could not be tested due to faulty import, ' +
