@@ -143,7 +143,7 @@ class UndirectedGraph {
    * vertex's degree, then update max if it's the highest degree so far.
    *
    * NOTE: Normally I would avoid for in loops as they access the prototype
-   * chain. However, I believe this is better than the alternatives:
+   * chain. However, I believe this is more scalable than the alternatives:
    * 1) Object.keys converts the adjacency list to an array, which introduces
    * linear space complexity and is unacceptable for large graphs.
    * 2) A normal for loop strictly requires numerical indices and vertices in
@@ -158,7 +158,10 @@ class UndirectedGraph {
    */
   maxDegree() {
     let max = 0;
-    for (let vertex in this.adjacencyList) {
+    for (const vertex in this.adjacencyList) {
+      // Ignore prototype chain
+      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+
       const degree = this.degree(vertex);
       if (degree > max) { max = degree; }
     }
@@ -175,7 +178,7 @@ class UndirectedGraph {
    * list.
    *
    * NOTE: Normally I would avoid for in loops as they access the prototype
-   * chain. However, I believe this is better than the alternatives:
+   * chain. However, I believe this is more scalable than the alternatives:
    * 1) Object.keys converts the adjacency list to an array, which introduces
    * linear space complexity and is unacceptable for large graphs.
    * 2) A normal for loop strictly requires numerical indices and vertices in
@@ -190,7 +193,10 @@ class UndirectedGraph {
    */
   numberOfSelfLoops() {
     let count = 0;
-    for (let vertex in this.adjacencyList) {
+    for (const vertex in this.adjacencyList) {
+      // Ignore prototype chain
+      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+
       this.adjacencyList[vertex].forEach(adjacentVertex => {
         if (vertex === adjacentVertex) { count++; }
       });
