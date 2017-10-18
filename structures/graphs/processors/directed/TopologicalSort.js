@@ -42,8 +42,8 @@ class TopologicalSort {
    */
   constructor(graph) {
     this.graph = graph;
-    this.sorted = [];
     this.initialized = false;
+    this.sorted = [];
   }
 
   /**
