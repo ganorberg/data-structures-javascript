@@ -1,20 +1,20 @@
 const expect = require('chai').expect;
 
-let MaxBinaryHeap;
+let PriorityQueue;
 let maxHeap;
 
 try {
-  MaxBinaryHeap = require('../structures/MaxBinaryHeap');
-  maxHeap = new MaxBinaryHeap();
+  PriorityQueue = require('../structures/PriorityQueue');
+  maxHeap = new PriorityQueue();
 } catch (e) {
-  throw new Error('MaxBinaryHeap could not be tested due to faulty import, likely ' +
+  throw new Error('PriorityQueue could not be tested due to faulty import, likely ' +
   'from an incorrect file path or exporting a non-constructor from the file.');
 }
 
 // Follows AAA (Arrange -> Act -> Assert) unit testing pattern
-describe('MaxBinaryHeap', () => {
+describe('PriorityQueue', () => {
   beforeEach(() => {
-    maxHeap = new MaxBinaryHeap();
+    maxHeap = new PriorityQueue();
   });
 
   it('should be extensible', () => {
