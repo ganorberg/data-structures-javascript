@@ -45,12 +45,12 @@ class CircularQueue {
    * @return {*} - dequeued item
    */
   dequeue() {
-    if (this.ring[this.oldest] !== undefined) {
-      const removed = this.ring[this.oldest];
-      delete this.ring[this.oldest];
-      this.oldest = incrementIndex(this.oldest, this.size);
-      return removed;
-    }
+    if (this.ring[this.oldest] === undefined) { return; }
+    
+    const removed = this.ring[this.oldest];
+    delete this.ring[this.oldest];
+    this.oldest = incrementIndex(this.oldest, this.size);
+    return removed;
   }
 
   /**
