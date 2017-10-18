@@ -97,52 +97,32 @@ describe('UndirectedCycle', () => {
     });
     
     it('should return true if the graph contains a cycle', () => {
-      graph = new UndirectedGraph();
-      const edges = [
-        [0, 7],
-        [0, 1],
-        [1, 2],
-        [2, 4],
-        [1, 3],
-        [3, 5],
-        [5, 0],
-      ];
-  
+      graph.addEdge([5, 0]);
+      
       /*
-        Cycle at edge shared by 5 and 0
+        Now the graph has a cycle at the edge shared by 5 and 0
       
         0 <-> 7
           <-> 1 <-> 2 <-> 4
                 <-> 3 <-> 5 <-> cycle 0
       */
-      
-      edges.forEach(edge => graph.addEdge(edge));
-  
+
       cycleProcessor = new UndirectedCycle(graph);
+      
       expect(cycleProcessor.initialize()).to.be.true;
     });
     
     it('should set hasCycle to true if the graph contains a cycle', () => {
-      graph = new UndirectedGraph();
-      const edges = [
-        [0, 7],
-        [0, 1],
-        [1, 2],
-        [2, 4],
-        [1, 3],
-        [3, 5],
-        [5, 0],
-      ];
-  
+      graph.addEdge([5, 0]);
+
       /*
-        Cycle at edge shared by 5 and 0
+        Now the graph has a cycle at the edge shared by 5 and 0
       
         0 <-> 7
           <-> 1 <-> 2 <-> 4
                 <-> 3 <-> 5 <-> cycle 0
       */
       
-      edges.forEach(edge => graph.addEdge(edge));
       cycleProcessor = new UndirectedCycle(graph);
 
       cycleProcessor.initialize()

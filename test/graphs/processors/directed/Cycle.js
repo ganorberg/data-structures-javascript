@@ -77,52 +77,32 @@ describe('DirectedCycle', () => {
     });
     
     it('should return true if the graph contains a cycle', () => {
-      graph = new DirectedGraph();
-      const edges = [
-        [0, 7],
-        [0, 1],
-        [1, 2],
-        [2, 4],
-        [1, 3],
-        [3, 5],
-        [5, 0],
-      ];
+      graph.addEdge([5, 0]);
   
       /*
-        Cycle where 5 points to 0
+        Now a cycle where 5 points to 0
       
         0 -> 7
           -> 1 -> 2 -> 4
                -> 3 -> 5 -> cycle 0
       */
       
-      edges.forEach(edge => graph.addEdge(edge));
-  
       cycleProcessor = new DirectedCycle(graph);
+      
       expect(cycleProcessor.initialize()).to.be.true;
     });
     
     it('should set hasCycle to true if the graph contains a cycle', () => {
-      graph = new DirectedGraph();
-      const edges = [
-        [0, 7],
-        [0, 1],
-        [1, 2],
-        [2, 4],
-        [1, 3],
-        [3, 5],
-        [5, 0],
-      ];
+      graph.addEdge([5, 0]);
   
       /*
-        Cycle where 5 points to 0
+        Now a cycle where 5 points to 0
       
         0 -> 7
           -> 1 -> 2 -> 4
                -> 3 -> 5 -> cycle 0
       */
       
-      edges.forEach(edge => graph.addEdge(edge));
       cycleProcessor = new DirectedCycle(graph);
 
       cycleProcessor.initialize()
