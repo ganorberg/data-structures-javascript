@@ -14,7 +14,7 @@
  * Space complexity: O(visited)
  *
  * @param {Graph} graph - graph being processed
- * @param {*} vertex - current vertex being traversed
+ * @param {String | Number} vertex - current vertex being traversed
  * @param {Set} visited - track which vertices have already been visited
  * @param {Number} id - connected components share the same id
  * @param {Number} componentCount - track how many components have been created
@@ -102,6 +102,8 @@ class ConnectedComponents {
 
     const visited = new Set();
     for (const vertex in this.graph.adjacencyList) {
+      // Ignore prototype chain
+      if (!this.graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
       if (visited.has(vertex)) { continue; }
       depthFirstSearch(
         this.graph,
