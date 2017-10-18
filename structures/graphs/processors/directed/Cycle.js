@@ -14,13 +14,14 @@
  * @param {String | Number} vertex - current vertex being traversed
  * @param {Set} visited - vertices already visited
  * @param {Object} visitedThisPass - vertices visited from initialize DFS call
- * @return {Boolean | Undefined} - true if cycle found
+ * @param {Object} cycleProcessor - DirectedCycle class instance
  */
 function depthFirstSearch(
   graph,
   vertex,
   visited,
   visitedThisPass,
+  cycleProcessor,
 ) {
   if (!graph.adjacencyList.hasOwnProperty(vertex)) {
     throw new Error('The input vertex is not in the graph, my friend!');
@@ -28,14 +29,19 @@ function depthFirstSearch(
 
   // for of loop used instead of forEach to allow early return that breaks loop
   for (const adjacentVertex of graph.adjacencyList[vertex]) {
-    if (visitedThisPass.has(adjacentVertex)) { return true; }
+    if (visitedThisPass.has(adjacentVertex)) {
+      cycleProcessor.hasCycle = true;
+      return;
+    }
+
     if (visited.has(adjacentVertex)) { continue; }
     visitedThisPass.add(adjacentVertex);
-    return depthFirstSearch(
+    depthFirstSearch(
       graph,
       adjacentVertex,
       visited,
       visitedThisPass,
+      cycleProcessor,
     );
   }
 }
@@ -107,11 +113,13 @@ class DirectedCycle {
       const visitedThisPass = new Set();
       visitedThisPass.add(vertex);
 
-      this.hasCycle = depthFirstSearch(
+      // Side effect: mutates this.hasCycle to true if cycle is found
+      depthFirstSearch(
         this.graph,
         vertex,
         visited,
         visitedThisPass,
+        this,
       );
 
       if (this.hasCycle) { return true; }

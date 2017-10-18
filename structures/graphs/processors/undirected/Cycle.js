@@ -13,13 +13,14 @@
  * @param {String | Number} vertex - current vertex being traversed
  * @param {String} parent - parent of the vertex whose adjacency list is looped
  * @param {Set} visited - vertices already visited
- * @return {Boolean | Undefined} - true if cycle found
+ * @param {Object} cycleProcessor - UndirectedCycle class instance
  */
 function depthFirstSearch(
   graph,
   vertex,
   parent,
   visited,
+  cycleProcessor,
 ) {
   if (!graph.adjacencyList.hasOwnProperty(vertex)) {
     throw new Error('The input vertex is not in the graph, my friend!');
@@ -31,15 +32,17 @@ function depthFirstSearch(
       if (adjacentVertex === parent) { continue; }
 
       // If already visited and NOT the parent, the graph has a cycle!
-      return true;
+      cycleProcessor.hasCycle = true;
+      return;
     }
 
     visited.add(adjacentVertex);
-    return depthFirstSearch(
+    depthFirstSearch(
       graph,
       adjacentVertex,
       vertex,
       visited,
+      cycleProcessor,
     );
   }
 }
@@ -134,7 +137,16 @@ class UndirectedCycle {
       if (!this.graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
       if (visited.has(vertex)) { continue; }
       visited.add(vertex);
-      this.hasCycle = depthFirstSearch(this.graph, vertex, null, visited);
+      
+      // Side effect: mutates this.hasCycle to true if cycle is found
+      depthFirstSearch(
+        this.graph,
+        vertex,
+        null,
+        visited,
+        this,
+      );
+      
       if (this.hasCycle) { return true; }
     }
 
