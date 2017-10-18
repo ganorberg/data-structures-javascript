@@ -129,7 +129,7 @@ describe('BreadthFirstPaths', () => {
   });
 
   describe('#initialize', () => {
-    it('should set the initialize property to true', () => {
+    it('should set the initialized property to true', () => {
       paths.initialize();
 
       expect(paths.initialized).to.be.true;
