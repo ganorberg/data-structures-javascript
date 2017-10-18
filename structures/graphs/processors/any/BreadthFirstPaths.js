@@ -8,7 +8,7 @@ class BreadthFirstPaths {
    *
    * @constructor
    * @param {Graph} graph - graph being processed
-   * @param {*} sourceVertex - source vertex for processing... gotta start somewhere!
+   * @param {String | Number} sourceVertex - source vertex for processing... gotta start somewhere!
    */
   constructor(graph, sourceVertex) {
     this.distanceFromSource = {};
@@ -27,7 +27,7 @@ class BreadthFirstPaths {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {*} vertex - vertex whose distance from source vertex is sought
+   * @param {String | Number} vertex - vertex whose distance from source vertex is sought
    * @return {Number} - distance from source vertex to input vertex
    */
   distanceTo(vertex) {
@@ -44,7 +44,7 @@ class BreadthFirstPaths {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {*} vertex - vertex that may be connected to source vertex
+   * @param {String | Number} vertex - vertex that may be connected to source vertex
    * @return {Boolean} - true if vertex is connected to source vertex
    */
   hasPathTo(vertex) {

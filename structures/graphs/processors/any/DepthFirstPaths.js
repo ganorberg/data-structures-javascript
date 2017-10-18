@@ -10,7 +10,7 @@
  * Space complexity: O(visited)
  *
  * @param {Graph} graph - graph being processed
- * @param {*} vertex - current vertex being traversed
+ * @param {String | Number} vertex - current vertex being traversed
  * @param {Set} visited - track which vertices have already been visited
  * @param {Object} parent - stores path information
  */
@@ -42,7 +42,7 @@ class DepthFirstPaths {
    *
    * @constructor
    * @param {Graph} graph - graph being processed
-   * @param {*} sourceVertex - source vertex for processing... gotta start somewhere!
+   * @param {String | Number} sourceVertex - source vertex for processing... gotta start somewhere!
    */
   constructor(graph, sourceVertex) {
     this.graph = graph;
@@ -56,16 +56,10 @@ class DepthFirstPaths {
    * @description Depth-first search to initialize constructor values. Must be 
    * called before other methods can be used.
    *
-   * Strategy: Mark visited vertices so they won't be visited again. Then loop
-   * through their adjacent vertices and recurse only unvisited vertices. Before
-   * recursing, store the parent-link.
+   * Strategy: Mark the source as visited then begin depth-first search.
    *
-   * Edge case(s): Input vertex does not exist in graph
-   *
-   * Time complexity: O(visited)
-   * Space complexity: O(visited)
-   *
-   * @param {*=} vertex - source vertex
+   * Time complexity: O(V + E) where V is total vertices and E is total edges
+   * Space complexity: O(V)
    */
   initialize() {
     if (this.initialized) { throw new Error('Already initialized, my friend!'); }    
@@ -92,7 +86,7 @@ class DepthFirstPaths {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {*} vertex - vertex that may be connected to source vertex
+   * @param {String | Number} vertex - vertex that may be connected to source vertex
    * @return {Boolean} - true if vertex is connected to source vertex
    */
   hasPathTo(vertex) {
@@ -113,7 +107,7 @@ class DepthFirstPaths {
    * Time complexity: O(path length)
    * Space complexity: O(path length)
    *
-   * @param {*} destinationVertex - vertex whose path is sought from source vertex
+   * @param {String | Number} destinationVertex - vertex whose path is sought from source vertex
    * @return {Array} - path from destination to source
    */
   pathTo(destinationVertex) {
