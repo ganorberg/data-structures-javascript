@@ -2,10 +2,11 @@
 class DirectedGraph {
   /**
    * Edges are represented in an object-oriented adjacency list where keys are
-   * the vertices and values are arrays of adjacent vertices (outgoing).
+   * the vertices and values are arrays of adjacent vertices (outgoing). Vertex
+   * inputs are stringified in all methods, so numbers (or any primitive data
+   * type) can be used as vertices and will be represented as strings.
    *
-   * This graph allows self-loops, parallel edges and any primitive data type
-   * for vertices.
+   * This graph allows self-loops and parallel edges.
    *
    * To build the graph, call addEdge with all edge pairs. The addEdge method
    * will dynamically add vertices to the adjacency list if they did not exist
