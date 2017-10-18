@@ -123,7 +123,7 @@ class BreadthFirstPaths {
    * Time complexity: O(path length)
    * Space complexity: O(path length)
    *
-   * @param {*} destinationVertex - vertex whose path is sought from source vertex
+   * @param {String | Number} destinationVertex - vertex whose path is sought from source vertex
    * @return {Array} - shortest path from destination to source
    */
   shortestPathTo(destinationVertex) {
