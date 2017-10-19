@@ -1,11 +1,12 @@
-300+ tests and growing.
+350+ tests and growing.
 
-Technical decisions (some exceptions where appropriate):
-- prefer descriptive variable names
-- prefer trading space to improve time complexity
-- prefer iterative solutions over simple recursion
-- prefer multiple recursion if algorithm naturally branches
-- prefer throwing errors over silently failing on incorrect inputs and edge cases
-- prefer giving users access to class properties
-- prefer ES6 features
-- prefer AAA (Arrange -> Act -> Assert) testing pattern
+Technical decisions:
+- descriptive variable names
+- using space to improve time complexity
+- iterative solutions over simple recursion
+- multiple recursion if algorithm naturally branches
+- throwing errors over silently failing on incorrect inputs and edge cases
+- using conditional statements to avoid code rather than to wrap code
+- giving users access to class properties
+- ES6+ features
+- AAA testing pattern (Arrange -> Act -> Assert)
