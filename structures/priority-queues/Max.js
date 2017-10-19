@@ -12,12 +12,17 @@
  * Time complexity: O(log N)
  * Space complexity: O(1)
  * 
+ * @param {Object} heap - the MaxPriorityQueue instance's heap array
  * @param {Number} parentIndex - array index representing sinking element
- * @param {Object} heap - the PriorityQueue instance's heap array
  */
-function sink(parentIndex, heap) {
-  if (!Number.isInteger(parentIndex) || parentIndex < 0) {
-    throw new Error('Please input positive integer for parent index, my friend!');
+function sink(heap, parentIndex) {
+  if (
+    !Array.isArray(heap)
+    || !Number.isSafeInteger(parentIndex)
+    || parentIndex < 0
+    || parentIndex > heap.length
+  ) {
+    throw new Error('Please input valid inputs, my friend!');
   }
 
   // Repeat if any children exist
@@ -55,6 +60,16 @@ function sink(parentIndex, heap) {
  * @param {Number} indexB - index of second element to be swapped
  */
 function swap(arr, indexA, indexB) {
+  if (
+    !Array.isArray(arr)
+    || !Number.isSafeInteger(indexA)
+    || !Number.isSafeInteger(indexB)
+    || indexA < 0
+    || indexB < 0
+    || indexA > arr.length
+    || indexB > arr.length
+  ) { throw new Error('Please insert valid inputs, my friend!'); }
+
   [arr[indexA], arr[indexB]] = [arr[indexB], arr[indexA]];
 }
 
@@ -68,19 +83,24 @@ function swap(arr, indexA, indexB) {
  * Time complexity: O(log N)
  * Space complexity: O(1)
  * 
+ * @param {Object} heap - the MaxPriorityQueue instance's heap array
  * @param {Number} childsIndex - array index representing the element swimming up
- * @param {Object} heap - the PriorityQueue instance's heap array
  */
-function swim(childsIndex, heap) {
-  if (!Number.isInteger(childsIndex) || childsIndex < 0) {
-    throw new Error('Please input positive integer for child index, thanks!');
+function swim(heap, childsIndex) {
+  if (
+    !Array.isArray(heap)
+    || !Number.isSafeInteger(childsIndex)
+    || childsIndex < 0
+    || childsIndex > heap.length
+  ) {
+    throw new Error('Please input valid inputs, my friend!');
   }
 
   // Avoid reassinging input parameters
   let childIndex = childsIndex;
   let parentIndex = Math.floor(childIndex / 2);
 
-  // Child swims up while greater than its parent AND index is in the heap
+  // Child swims up until it's the root or not larger than its parent
   while (childIndex > 1 && heap[childIndex] > heap[parentIndex]) {
     swap(heap, childIndex, parentIndex);
     childIndex = parentIndex;
@@ -89,7 +109,7 @@ function swim(childsIndex, heap) {
 }
 
 /** Class representing our priority queue */
-class PriorityQueue {
+class MaxPriorityQueue {
   /**
    * This priority queue is a max binary heap.
    *
@@ -104,7 +124,7 @@ class PriorityQueue {
 
   /**
    * @description Remove largest value in heap and readjust heap to maintain
-   * invariant that all parents are larger than their children.
+   * invariant that all parents are larger than (or equal to) their children.
    *
    * Strategy: Swap max (root of tree) with last element in heap. Pop max out
    * and store in variable to eventually return. Sink swapped element sitting
@@ -115,16 +135,13 @@ class PriorityQueue {
    * Time complexity: O(log N)
    * Space complexity: O(1)
    * 
-   * @return {Number|String} - old max
+   * @return {Number|String} - max removed from heap
    */
   deleteMax() {
-    if (this.heap[1] === undefined) {
-      throw new Error('Cannot delete from an empty heap, my friend!');
-    }
-
+    if (this.isEmpty()) { throw new Error('Heap is empty, my friend!'); }
     swap(this.heap, 1, this.heap.length - 1);
     const max = this.heap.pop();
-    sink(1, this.heap);
+    sink(this.heap, 1);
     return max;
   }
 
@@ -144,7 +161,7 @@ class PriorityQueue {
     }
 
     this.heap.push(key);
-    swim(this.heap.length - 1, this.heap);
+    swim(this.heap, this.heap.length - 1);
   }
 
   /**
@@ -172,8 +189,9 @@ class PriorityQueue {
    * @return {Number|String} - maximum value
    */
   peekMax() {
+    if (this.isEmpty()) { throw new Error('Heap is empty, my friend!'); }
     return this.heap[1];
   }
 }
 
-module.exports = PriorityQueue;
+module.exports = MaxPriorityQueue;
