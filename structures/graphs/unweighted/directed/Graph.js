@@ -100,7 +100,6 @@ class DirectedGraph {
    * directed edge increases both by 1. Since total indegree and total outdegree
    * will always be the same, either total can represent total degrees.
    *
-   *
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
