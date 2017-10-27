@@ -18,8 +18,8 @@ class Edge {
   }
 
   /**
-   * @description Return first vertex.
-   * @return {Number|String} - first vertex
+   * @description Return the first vertex.
+   * @return {String} - first vertex
    */
   either() {
     return this.v1;
