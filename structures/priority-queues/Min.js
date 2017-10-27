@@ -28,7 +28,7 @@ function sink(heap, parentIndex) {
   const childIndexA = 2 * parentIndex;
   const childIndexB = 2 * parentIndex + 1;
 
-  if (childIndexA > heap.length) { return; }
+  if (childIndexA >= heap.length) { return; }
 
   // Child B may be undefined, in which case select childA. Tie also prefers A.
   const smallestChildIndex = heap[childIndexA] > heap[childIndexB]
@@ -110,6 +110,9 @@ class MinPriorityQueue {
    *
    * Heap is tracked using a dynamic array. Element at index N has children at
    * indices 2N and 2N+1. Begin with null at index 0 for easier math.
+   *
+   * Recursion is used in private methods as an alternative implementation to
+   * iterative solutions in max priority queue.
    *
    * @constructor
    */
