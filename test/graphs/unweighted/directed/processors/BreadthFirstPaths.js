@@ -77,7 +77,7 @@ describe('BreadthFirstPaths', () => {
   });
 
   it('should set a string data type for source vertex', () => {
-    expect(paths.sourceVertex).to.equal('0');
+    expect(paths.sourceVertex).to.equal(String(SOURCE_VERTEX));
   });
 
   describe('#distanceTo', () => {
