@@ -14,6 +14,8 @@ For anyone looking for efficient, commented, fully tested data structures built 
 
 ## Testing
 
-This library is fully black box tested, covering the public API and ignoring implementation details that would lead to brittle tests over time. 
+This library is fully black box tested with 400+ unit tests, covering the public API and ignoring implementation details that would lead to brittle tests over time. 
 
 Tests use AAA testing pattern (Arrange -> Act -> Assert).
+
+If you have cloned this repo, you can call `npm test` to run the test suite.
