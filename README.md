@@ -1,6 +1,8 @@
-400+ tests.
+# JavaScript Data Structures
 
-Technical decisions:
+For anyone looking for efficient, commented, fully tested data structures built with JavaScript.
+
+## Technical decisions:
 - prefer descriptive, verbose identifiers
 - prefer extra space to improve time complexity
 - prefer iterative solutions over simple recursion
@@ -10,4 +12,8 @@ Technical decisions:
 - prefer ES6+ features
 - give users access to class properties
 
-Tests use AAA testing pattern (Arrange -> Act -> Assert). This library has full coverage for all structures and their public methods.
+## Testing
+
+This library is fully black box tested, covering the public API and ignoring implementation details that would lead to brittle tests over time. 
+
+Tests use AAA testing pattern (Arrange -> Act -> Assert).
