@@ -1,6 +1,14 @@
 # JavaScript Data Structures
 
-For anyone looking for efficient, commented, fully tested data structures built with JavaScript.
+Fast, well-commented, fully tested data structures built with JavaScript.
+
+## Testing
+
+This library is 100% black box tested with 400+ unit tests. This means the test suite covers the public API and ignores implementation details (like private methods), which would lead to brittle tests and unnecessary re-work over time.
+
+Unit tests follow AAA testing pattern (Arrange -> Act -> Assert).
+
+If you would like to run the test suite, simply clone this repo, run `npm install` then run `npm test`.
 
 ## Technical decisions:
 - prefer descriptive, verbose identifiers
@@ -12,10 +20,14 @@ For anyone looking for efficient, commented, fully tested data structures built 
 - prefer ES6+ features
 - give users access to class properties
 
-## Testing
+## General notes
 
-This library is fully black box tested with 400+ unit tests, covering the public API and ignoring implementation details that would lead to brittle tests over time. 
+### Object key iteration: for in loops vs Object.keys
 
-Tests use AAA testing pattern (Arrange -> Act -> Assert).
+Although I generally avoid for in loops in my code and prefer the Airbnb style guide way of accessing object properties through Object.keys, this is untenable for large data set performance. All data structures in this library are built to scale with time efficiency as the primary goal, and the linear time operation of Object.keys is simply too costly to use at scale.
 
-If you have cloned this repo, you can call `npm test` to run the test suite.
+### Library structure: ES6 classes vs OLOO pattern
+
+I chose to use class syntax for its familiarity compared to classic object-oriented approaches to data structures. Users transitioning from object-oriented languages like Java or Python should understand the JavaScript implementations immediately.
+
+If I were to build these structures without "classes", I would use Kyle Simpson's OLOO pattern (objects linked to other objects). The performance would be nearly the same, yet the code would be cleaner and more flexible. Without extraneous constructors and the new keyword, we could directly and explicitly embrace the prototype chain without the middle man.
