@@ -4,7 +4,7 @@ Fast, well-commented, fully tested data structures built with JavaScript.
 
 ## Testing
 
-This library is 100% black box tested with 500+ unit tests. This means the test suite covers the public API and ignores implementation details (like private methods), which would lead to brittle tests and unnecessary re-work over time.
+This library is 100% black box tested with 500+ unit tests. This means the test suite covers the public API and ignores implementation details (like private methods), thereby avoiding brittle tests and unnecessary re-work over time.
 
 Unit tests follow AAA testing pattern (Arrange -> Act -> Assert).
 
