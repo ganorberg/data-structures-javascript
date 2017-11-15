@@ -176,8 +176,8 @@ class PrefixTrie {
    * @return {Boolean} - true if word exists, or false otherwise
    */
   hasWord(word) {
-    if (typeof word !== 'string') {
-      throw new Error('This trie only stores strings, my friend!');
+    if (typeof word !== 'string' || word.length === 0) {
+      throw new Error('This trie only stores non-empty strings, my friend!');
     }
 
     return this.get(word) !== null;
