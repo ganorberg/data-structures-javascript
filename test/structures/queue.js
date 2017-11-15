@@ -1,11 +1,11 @@
 const expect = require('chai').expect;
 
-let Queue;
+let Q;
 let queue;
 
 try {
-  Queue = require('../../structures/queue');
-  queue = new Queue();
+  Q = require('../../structures/queue');
+  queue = new Q();
 } catch (e) {
   throw new Error('Queue could not be tested due to faulty import, likely ' +
   'from an incorrect file path or exporting a non-constructor from the file.');
@@ -14,7 +14,7 @@ try {
 // Follows AAA (Arrange -> Act -> Assert) unit testing pattern
 describe('Queue', () => {
   beforeEach(() => {
-    queue = new Queue();
+    queue = new Q();
   });
 
   it('should be extensible', () => {
@@ -39,13 +39,13 @@ describe('Queue', () => {
 
   describe('#isFull()', () => {
     it('should return false if queue has not reached capacity', () => {
-      const cappedQueue = new Queue(1);
+      const cappedQueue = new Q(1);
 
       expect(cappedQueue.isFull()).to.equal(false);
     });
 
     it('should return true if queue has reached capacity', () => {
-      const cappedQueue = new Queue(1);
+      const cappedQueue = new Q(1);
 
       cappedQueue.enqueue(0);
 
@@ -84,7 +84,7 @@ describe('Queue', () => {
     });
 
     it('should not insert item if queue is at capacity', () => {
-      const cappedQueue = new Queue(0);
+      const cappedQueue = new Q(0);
 
       queue.enqueue('never enqueues');
 
