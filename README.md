@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ganorberg/data-structures-javascript.svg?branch=master)](https://travis-ci.org/ganorberg/data-structures-javascript)
+
 # JavaScript Data Structures
 
 Fast, well-commented, fully tested data structures built with JavaScript.
