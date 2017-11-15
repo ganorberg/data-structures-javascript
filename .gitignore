@@ -2,6 +2,9 @@
 ###################
 node_modules
 
+# Text Editor #
+*.vscode
+
 # Compiled source #
 ###################
 *.com
