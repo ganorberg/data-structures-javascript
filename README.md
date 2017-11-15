@@ -4,15 +4,15 @@ Fast, well-commented, fully tested data structures built with JavaScript.
 
 ## Testing
 
-This library is 100% black box tested with 400+ unit tests. This means the test suite covers the public API and ignores implementation details (like private methods), which would lead to brittle tests and unnecessary re-work over time.
+This library is 100% black box tested with 500+ unit tests. This means the test suite covers the public API and ignores implementation details (like private methods), which would lead to brittle tests and unnecessary re-work over time.
 
 Unit tests follow AAA testing pattern (Arrange -> Act -> Assert).
 
-If you would like to run the test suite, simply clone this repo, run `npm install` then run `npm test`.
+If you would like to run the test suite after cloning the repo, run `npm install` then `npm test`.
 
 ## Technical decisions:
 - prefer descriptive, verbose identifiers
-- prefer extra space to improve time complexity
+- prefer using extra space to improve time complexity
 - prefer iterative solutions over simple recursion
 - prefer multiple recursion if algorithm naturally branches
 - prefer throwing errors over silently failing on incorrect inputs and edge cases
