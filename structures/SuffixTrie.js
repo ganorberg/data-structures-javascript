@@ -8,6 +8,7 @@
  *
  * @param {String} suffix - suffix inserted into trie
  * @param {Object} trie - suffix trie where suffix is being inserted
+ * @param {Number} index - index where suffix begins in original string 
  * @return {Object} - root of trie
  */
 function insert(suffix, trie, index) {
