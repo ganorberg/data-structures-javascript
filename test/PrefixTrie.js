@@ -144,23 +144,23 @@ describe('PrefixTrie', () => {
     });
 
     it('should throw an error for number input', () => {
-      expect(() => trie.get(1)).to.throw(Error);
+      expect(() => trie.delete(1)).to.throw(Error);
     });
 
     it('should throw an error for undefined input', () => {
-      expect(() => trie.get()).to.throw(Error);
+      expect(() => trie.delete()).to.throw(Error);
     });
     
     it('should throw an error for object input', () => {
-      expect(() => trie.get({'objects': 'not allowed'})).to.throw(Error);
+      expect(() => trie.delete({'objects': 'not allowed'})).to.throw(Error);
     });
 
     it('should throw an error for null input', () => {
-      expect(() => trie.get(null)).to.throw(Error);
+      expect(() => trie.delete(null)).to.throw(Error);
     });
 
     it('should throw an error for NaN input', () => {
-      expect(() => trie.get(NaN)).to.throw(Error);
+      expect(() => trie.delete(NaN)).to.throw(Error);
     });
   });
   
@@ -289,28 +289,28 @@ describe('PrefixTrie', () => {
       expect(trie.hasWord('cat')).to.be.false;
     });
 
-    it('should throw an error for empty trees', () => {
-      expect(() => trie.delete('cat')).to.throw(Error);
+    it('should return false if the trie is empty', () => {
+      expect(trie.hasWord('cat')).to.be.false;
     });
 
     it('should throw an error for number input', () => {
-      expect(() => trie.get(1)).to.throw(Error);
+      expect(() => trie.hasWord(1)).to.throw(Error);
     });
 
     it('should throw an error for undefined input', () => {
-      expect(() => trie.get()).to.throw(Error);
+      expect(() => trie.hasWord()).to.throw(Error);
     });
     
     it('should throw an error for object input', () => {
-      expect(() => trie.get({'objects': 'not allowed'})).to.throw(Error);
+      expect(() => trie.hasWord({'objects': 'not allowed'})).to.throw(Error);
     });
 
     it('should throw an error for null input', () => {
-      expect(() => trie.get(null)).to.throw(Error);
+      expect(() => trie.hasWord(null)).to.throw(Error);
     });
 
     it('should throw an error for NaN input', () => {
-      expect(() => trie.get(NaN)).to.throw(Error);
+      expect(() => trie.hasWord(NaN)).to.throw(Error);
     });
   });
   
