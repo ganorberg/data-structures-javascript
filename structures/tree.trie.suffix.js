@@ -8,8 +8,11 @@
  *
  * @param {String} suffix - suffix inserted into trie
  * @param {Object} trie - suffix trie where suffix is being inserted
- * @param {Number} index - index where suffix begins in original string 
- * @return {Object} - root of trie
+ * @param {Number} index - index where suffix begins in original string
+ *
+ * @returns {Object} - root of trie
+ *
+ * @private
  */
 function insert(suffix, trie, index) {
   let currentNode = trie;
@@ -39,7 +42,10 @@ function insert(suffix, trie, index) {
  * word. For example, BANANA inserts A, NA, ANA, NANA, ANANA, BANANA.
  *
  * @param {String} string - string that suffix trie represents
- * @return {Object} - root of trie
+ *
+ * @returns {Object} - root of trie
+ *
+ * @private
  */
 function buildTrie(string) {
   if (string === '' || typeof string !== 'string') {
@@ -66,6 +72,8 @@ class SuffixTrie {
    * Trie can store any non-empty string. Case insensitive. Ignores whitespace.
    *
    * @constructor
+   *
+   * @property {Object} root - top level node that points to rest of trie
    */
   constructor(string) {
     this.root = buildTrie(string);
@@ -81,7 +89,8 @@ class SuffixTrie {
    * Space complexity: O(1)
    *
    * @param {String} suffix - suffix to be searched
-   * @return {Boolean} - true if suffix exists, or false otherwise
+   *
+   * @returns {Boolean} - true if suffix exists, or false otherwise
    */
   hasSuffix(suffix) {
     if (typeof suffix !== 'string') {
@@ -111,7 +120,8 @@ class SuffixTrie {
    * Space complexity: O(1)
    *
    * @param {String} pattern - pattern to be searched
-   * @return {Boolean} - true if pattern exists, or false otherwise
+   *
+   * @returns {Boolean} - true if pattern exists, or false otherwise
    */
   matchesPattern(pattern) {
     if (typeof pattern !== 'string') {

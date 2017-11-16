@@ -1,15 +1,28 @@
+/** @constant @private */
 const RED = true;
+
+/** @constant @private */
 const BLACK = false;
 
-/** Class representing a node in the red black tree */
+/** 
+ * Class representing a node in the red black tree
+ * @private
+ */
 class Node {
   /**
    * For quick node creation in tree
    *
    * @constructor
-   * @param {Number|String} key - held by node
-   * @param {*} value - held by node
+   *
+   * @param {Number|String} key - key held by node
+   * @param {*} value - value held by node
    * @param {Boolean} color - RED is true, BLACK is false
+   *
+   * @property {Boolean} color - red is true, black is false
+   * @property {Number|String} key - key held by node
+   * @property {*} value - value held by node
+   * @property {Object|Null} left - left child node
+   * @property {Object|Null} right - right child node
    */
   constructor(key, value, color) {
     this.color = color;
@@ -29,7 +42,10 @@ class Node {
  * Space complexity: O(1)
  *
  * @param {Object} node - node whose color is being checked
- * @return {Boolean} - true for red, false for black
+ *
+ * @returns {Boolean} - true for red, false for black
+ *
+ * @private
  */
 function isRed(node) {
   if (node === null) { return BLACK; }
@@ -47,7 +63,10 @@ function isRed(node) {
  * Space complexity: O(1)
  *
  * @param {Object} node - node that rotates left and becomes red
- * @return {Object} - new root after rotation
+ *
+ * @returns {Object} - new root after rotation
+ *
+ * @private
  */
 function rotateLeft(node) {
   const newRoot = node.right;
@@ -82,7 +101,10 @@ function rotateLeft(node) {
  * Space complexity: O(1)
  *
  * @param {Object} node - node that rotates right and becomes red
- * @return {Object} - new root after rotation
+ *
+ * @returns {Object} - new root after rotation
+ *
+ * @private
  */
 function rotateRight(node) {
   let newRoot = node.left;
@@ -116,6 +138,8 @@ function rotateRight(node) {
  * Space complexity: O(1)
  *
  * @param {Object} node - node whose color and children's colors will be flipped
+ *
+ * @private
  */
 function flipColors(node) {
   if (isRed(node) || !isRed(node.left) || !isRed(node.right)) { return; }
@@ -139,7 +163,10 @@ function flipColors(node) {
  * @param {Object} node - node for traversal, key comparison and color-checking
  * @param {Number|String} key - key that identifies node
  * @param {*} value - updated value, or value of new node
- * @return {Object=} - newly created node or node currently being traversed
+ *
+ * @returns {Object=} - newly created node or node currently being traversed
+ *
+ * @private
  */
 function put(node, key, value) {
   if (node === null) { return new Node(key, value, RED); }
@@ -162,6 +189,8 @@ class RedBlackTree {
    * Track root of tree.
    *
    * @constructor
+   *
+   * @property {Object|Null} root - top level node in tree
    */
   constructor() {
     this.root = null;
@@ -281,7 +310,7 @@ class RedBlackTree {
    * Space complexity: O(1)
    *
    * @param {Number|String} key - searching for this key in the tree
-   * @return {String|Number|Null} - null if key is not found
+   * @returns {String|Number|Null} - null if key is not found
    */
   get(key) {
     let node = this.root;
@@ -302,7 +331,7 @@ class RedBlackTree {
    *
    * @param {Number|String} key - determines location to be inserted in tree
    * @param {*} value - value associated with given key
-   * @return {Boolean} - true represents successful insertion
+   * @returns {Boolean} - true represents successful insertion
    */
   insert(key, value) {
     this.root = put(this.root, key, value);

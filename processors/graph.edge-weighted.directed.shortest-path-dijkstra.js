@@ -85,6 +85,7 @@ class ShortestPath {
    * to access information.
    *
    * @constructor
+   *
    * @param {Graph} graph - graph being processed
    * @param {String|Number} sourceVertex - source vertex for all paths
    */
@@ -107,7 +108,8 @@ class ShortestPath {
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex whose distance from source is sought
-   * @return {Number} - distance from source vertex to input vertex
+   *
+   * @returns {Number} - distance from source vertex to input vertex
    */
   distanceTo(vertex) {
     if (!this.initialized) { throw new Error('Please initialize, my friend!'); }
@@ -124,7 +126,8 @@ class ShortestPath {
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex that may be connected to source vertex
-   * @return {Boolean} - true if vertex is connected to source vertex
+   *
+   * @returns {Boolean} - true if vertex is connected to source vertex
    */
   hasPathTo(vertex) {
     if (!this.initialized) { throw new Error('Please initialize, my friend!'); }
@@ -169,7 +172,8 @@ class ShortestPath {
    * Space complexity: O(path length)
    *
    * @param {String|Number} destinationVertex - vertex whose path is sought
-   * @return {Array} - shortest path from destination to source
+   *
+   * @returns {Array} - shortest path from destination to source
    */
   shortestPathTo(destinationVertex) {
     if (!this.initialized) { throw new Error('Please initialize, my friend!'); }

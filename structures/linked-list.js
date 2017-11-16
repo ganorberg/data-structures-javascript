@@ -1,10 +1,17 @@
-/** Class representing a node */
+/** 
+ * Class representing a node
+ * @private
+ */
 class Node {
   /**
    * Quickly create nodes for linked lists
    *
    * @constructor
+   *
    * @param {*} value - value held by node
+   *
+   * @property {*} value - value held by node
+   * @property {Object|Null} next - point to next node in list
    */
   constructor(value) {
     this.value = value;
@@ -20,6 +27,10 @@ class LinkedList {
    * constant time access.
    *
    * @constructor
+   *
+   * @property {Object|Null} head - first node in linked list
+   * @property {Object|Null} tail - last node in linked list
+   * @property {Number} size - length of linked list
    */
   constructor() {
     this.head = null;
@@ -39,7 +50,8 @@ class LinkedList {
    * Space complexity: O(1)
    *
    * @param {*} value - value to be inserted into new node
-   * @return {Boolean} - true means push was successful
+   *
+   * @returns {Boolean} - true means push was successful
    */
   push(value) {
     if (value === null || value === undefined) {
@@ -70,7 +82,8 @@ class LinkedList {
    * Space complexity: O(1)
    *
    * @param {*} value - checked if exists in list
-   * @return {Boolean} - whether or not value exists in list
+   *
+   * @returns {Boolean} - whether or not value exists in list
    */  
   contains(value) {
     let curr = this.head;
@@ -94,7 +107,8 @@ class LinkedList {
    * Space complexity: O(1)
    *
    * @param {*} value - value to be removed from list
-   * @return {Object} - node removed
+   *
+   * @returns {Object} - node removed
    */
   remove(value) {
     // Edge case: empty list

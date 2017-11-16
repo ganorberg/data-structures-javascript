@@ -1,4 +1,7 @@
-/** Class representing a weighted edge */
+/** 
+ * Class representing a weighted edge
+ * @private
+ */
 class Edge {
   /**
    * Helper class to create weighted edges for Graph methods.
@@ -7,9 +10,14 @@ class Edge {
    * keys in adjacency list.
    *
    * @constructor
-   * @param {String | Number} v1 - vertex sharing an edge with v2
-   * @param {String | Number} v2 - vertex sharing an edge with v1
+   *
+   * @param {String|Number} v1 - vertex sharing an edge with v2
+   * @param {String|Number} v2 - vertex sharing an edge with v1
    * @param {Number} weight - weight of edge between v1 and v2
+   *
+   * @property {String} v1 - vertex sharing an edge with v2
+   * @property {String} v2 - vertex sharing an edge with v1
+   * @property {Number} weight - weight of edge between v1 and v2
    */
   constructor(v1, v2, weight) {
     this.v1 = String(v1);
@@ -19,7 +27,8 @@ class Edge {
 
   /**
    * @description Return the first vertex.
-   * @return {String} - first vertex
+   *
+   * @returns {String} - first vertex
    */
   either() {
     return this.v1;
@@ -28,7 +37,7 @@ class Edge {
   /**
    * @description Return the vertex that is not input.
    * @param {Number|String} vertex - looking for its partner in crime
-   * @return {String} - other vertex
+   * @returns {String} - other vertex
    */
   other(vertex) {
     // Use loose equality to allow users to input numbers
@@ -55,6 +64,10 @@ class Graph {
    * keys to the adjacency list if they did not exist prior.
    *
    * @constructor
+   *
+   * @property {Object} adjacencyList - the graph itself
+   * @property {Number} totalVertices - incremented when a vertex is added
+   * @property {Number} totalEdges - incremented when an edge is added
    */
   constructor() {
     this.adjacencyList = {};
@@ -78,8 +91,8 @@ class Graph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {Array<String | Number>} v1, v2, weight - edge vertices and weight
-   * @return {Boolean} true - represents successful insertion
+   * @param {Array<String|Number>} v1, v2, weight - edge vertices and weight
+   * @returns {Boolean} true - represents successful insertion
    */
   addEdge([v1, v2, weight]) {
     if (!this.adjacencyList.hasOwnProperty(v1)) { this.addVertex(v1); }
@@ -104,8 +117,8 @@ class Graph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String | Number} vertex - vertex added to graph
-   * @return {Boolean} true - represents successful insertion
+   * @param {String|Number} vertex - vertex added to graph
+   * @returns {Boolean} true - represents successful insertion
    */
   addVertex(vertex) {
     if (this.adjacencyList.hasOwnProperty(vertex)) {
@@ -127,8 +140,8 @@ class Graph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String | Number} vertex - vertex with potential adjacent vertices
-   * @return {Array} - list of vertices adjacent to input vertex
+   * @param {String|Number} vertex - vertex with potential adjacent vertices
+   * @returns {Array} - list of vertices adjacent to input vertex
    */
   adjacentVertices(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
@@ -149,7 +162,7 @@ class Graph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Number} - average degree of graph
+   * @returns {Number} - average degree of graph
    */
   averageDegree() {
     // Cannot divide by 0
@@ -168,8 +181,8 @@ class Graph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String | Number} vertex - vertex whose degree is sought
-   * @return {Number} - degree of vertex
+   * @param {String|Number} vertex - vertex whose degree is sought
+   * @returns {Number} - degree of vertex
    */
   degree(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
@@ -197,7 +210,7 @@ class Graph {
    * Time complexity: O(total vertices)
    * Space complexity: O(1)
    *
-   * @return {Number} - largest degree in graph
+   * @returns {Number} - largest degree in graph
    */
   maxDegree() {
     let max = 0;
@@ -220,19 +233,10 @@ class Graph {
    * addEdge implementation pushes 2 copies of the vertex to its own adjacency
    * list.
    *
-   * NOTE: Normally I would avoid for in loops as they access the prototype
-   * chain. However, I believe this is more scalable than the alternatives:
-   * 1) Object.keys converts the adjacency list to an array, which introduces
-   * linear space complexity and is unacceptable for large graphs.
-   * 2) A normal for loop strictly requires numerical indices and vertices in
-   * sequential natural order from 0 to n. This leads to poor user experience as
-   * users have to worry about the next vertex sticking to the sequence. By
-   * using for in, users can add any vertex value, including non-numbers.
-   *
    * Time complexity: O(V + E) where V is total vertices and E is total edges
    * Space complexity: O(1)
    *
-   * @return {Number} - number of self loops, as you might have guessed!
+   * @returns {Number} - number of self loops, as you might have guessed!
    */
   numberOfSelfLoops() {
     let count = 0;

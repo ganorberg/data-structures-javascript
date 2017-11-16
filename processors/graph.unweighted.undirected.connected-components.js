@@ -52,6 +52,7 @@ class ConnectedComponents {
    * other methods to analyze processed data.
    *
    * @constructor
+   *
    * @param {Graph} graph - graph being processed
    */
   constructor(graph) {
@@ -70,6 +71,7 @@ class ConnectedComponents {
    * Space complexity: O(1)
    *
    * @param {*} vertex - vertex whose component id is sought
+   *
    * @return {Number} - id of component that vertex belongs to
    */
   componentId(vertex) {

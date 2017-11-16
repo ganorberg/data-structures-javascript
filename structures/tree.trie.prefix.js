@@ -9,7 +9,10 @@
  *
  * @param {Object} currentNode - node visited
  * @param {Boolean} isFinalLetter - true if looping on final letter
- * @return {Boolean} - true if cutoff found, false otherwise
+ *
+ * @returns {Boolean} - true if cutoff found, false otherwise
+ *
+ * @private
  */
 function isCutOffNode(currentNode, isFinalLetter) {
    return (
@@ -29,6 +32,8 @@ class PrefixTrie {
    * Trie can store any non-empty string. Is case sensitive.
    *
    * @constructor
+   *
+   * @property {Object} root - top level node in trie
    */
   constructor() {
     this.root = {};
@@ -44,7 +49,8 @@ class PrefixTrie {
    * Space complexity: O(N)
    *
    * @param {String} prefix - prefix to be matched
-   * @return {Array} - all keys matching input prefix
+   *
+   * @returns {Array} - all keys matching input prefix
    */
   autoComplete(prefix) {
     if (typeof prefix !== 'string') {
@@ -118,7 +124,8 @@ class PrefixTrie {
    * Space complexity: O(1)
    *
    * @param {String} word - key to access value
-   * @return {*} - value if key found, or null otherwise
+   *
+   * @returns {*} - value if key found, or null otherwise
    */
   get(word) {
     if (typeof word !== 'string') {
@@ -146,7 +153,8 @@ class PrefixTrie {
    * Space complexity: O(1)
    *
    * @param {String} prefix - prefix to be searched
-   * @return {Boolean} - true if prefix exists, or false otherwise
+   *
+   * @returns {Boolean} - true if prefix exists, or false otherwise
    */
   hasPrefix(prefix) {
     if (typeof prefix !== 'string' || prefix.length === 0) {
@@ -173,7 +181,8 @@ class PrefixTrie {
    * Space complexity: O(1)
    *
    * @param {String} word - key to be searched
-   * @return {Boolean} - true if word exists, or false otherwise
+   *
+   * @returns {Boolean} - true if word exists, or false otherwise
    */
   hasWord(word) {
     if (typeof word !== 'string' || word.length === 0) {
@@ -196,7 +205,8 @@ class PrefixTrie {
    * @param {Object=} node - node being traversed
    * @param {Array=} words - alphabetical list of words to be returned
    * @param {String=} word - word built up while traversing
-   * @return {Array} - alphabetical list of all words in trie
+   *
+   * @returns {Array} - alphabetical list of all words in trie
    */
   orderWords(node = this.root, words = [], word = '') {
     if (node.hasOwnProperty('value')) { words.push(word); }

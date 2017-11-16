@@ -1,10 +1,17 @@
-/** Class representing each node in queue */
+/** 
+ * Class representing each node in queue
+ * @private
+ */
 class Node {
   /**
    * Quickly create nodes for queue
    *
    * @constructor
+   *
    * @param {*} value - value held by node
+   *
+   * @property {*} value - value held by node
+   * @property {Object|Null} next - point to next node in list
    */
   constructor(value) {
     this.value = value;
@@ -17,8 +24,15 @@ class Queue {
   /**
    * Use Linked List structure to trade space from extra pointers
    * for constant time complexity on all operations.
+   *
    * @constructor
+   *
    * @param {Number=} capacity - limits Queue size
+   *
+   * @property {Object|Null} front - start of queue
+   * @property {Object|Null} rear - back of queue
+   * @property {Number} size - length of queue
+   * @property {Number} capacity - if size reaches capacity, queue stops enqueuing
    */
   constructor(capacity = Infinity) {
     this.front = null;
@@ -35,7 +49,7 @@ class Queue {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {*} - value removed from queue, or undefined if empty
+   * @returns {*} - value removed from queue, or undefined if empty
    */
   dequeue() {
     if (this.size === 0) { return; }
@@ -55,7 +69,8 @@ class Queue {
    * Space complexity: O(1)
    *
    * @param {*} val - value added to queue
-   * @return {Number} - size of queue after value inserted
+   *
+   * @returns {Number} - size of queue after value inserted
    */
   enqueue(val) {
     if (this.size >= this.capacity) { return; }
@@ -82,7 +97,7 @@ class Queue {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Boolean} - true if empty, or false otherwise
+   * @returns {Boolean} - true if empty, or false otherwise
    */
   isEmpty() {
     return this.size === 0;
@@ -96,7 +111,7 @@ class Queue {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Boolean} - true if full, or false otherwise
+   * @returns {Boolean} - true if full, or false otherwise
    */
   isFull() {
     return this.size === this.capacity;
@@ -110,7 +125,7 @@ class Queue {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {*} - value at front of queue
+   * @returns {*} - value at front of queue
    */
   peek() {
     if (this.front !== null) { return this.front.value; };
@@ -124,7 +139,7 @@ class Queue {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Number} - total amount of items in queue
+   * @returns {Number} - total amount of items in queue
    */
   getSize() {
     return this.size;

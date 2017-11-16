@@ -56,7 +56,8 @@ function depthFirstSearch(
  * Space complexity: O(longest adjacent list)
  *
  * @param {Graph} graph - graph being processed
- * @return {Boolean} - true if parallel edges found, otherwise false
+ *
+ * @returns {Boolean} - true if parallel edges found, otherwise false
  */
 function hasParallelEdges(graph) {
   for (const vertex in graph.adjacencyList) {
@@ -85,7 +86,8 @@ function hasParallelEdges(graph) {
  * Space complexity: O(1)
  *
  * @param {Graph} graph - graph being processed
- * @return {Boolean} - true if self loop found, otherwise false
+ *
+ * @returns {Boolean} - true if self loop found, otherwise false
  */
 function hasSelfLoop(graph) {
   for (const vertex in graph.adjacencyList) {
@@ -119,7 +121,7 @@ class UndirectedCycle {
    * Time complexity: O(V + E), where V is total vertices and E is total edges
    * Space complexity: O(V)
    *
-   * @return {Boolean} - true if cycle found, otherwise false
+   * @returns {Boolean} - true if cycle found, otherwise false
    */
   initialize() {
     if (this.initialized) { throw new Error('Already initialized, my friend!'); }

@@ -41,6 +41,7 @@ class DepthFirstPaths {
    * Works for both directed and undirected graphs.
    *
    * @constructor
+   *
    * @param {Graph} graph - graph being processed
    * @param {String | Number} sourceVertex - source vertex for processing... gotta start somewhere!
    */
@@ -87,7 +88,8 @@ class DepthFirstPaths {
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex that may be connected to source vertex
-   * @return {Boolean} - true if vertex is connected to source vertex
+   *
+   * @returns {Boolean} - true if vertex is connected to source vertex
    */
   hasPathTo(vertex) {
     if (!this.initialized) { throw new Error('Please initialize, my friend!'); }
@@ -108,7 +110,8 @@ class DepthFirstPaths {
    * Space complexity: O(path length)
    *
    * @param {String | Number} destinationVertex - vertex whose path is sought from source vertex
-   * @return {Array} - path from destination to source
+   *
+   * @returns {Array} - path from destination to source
    */
   pathTo(destinationVertex) {
     if (!this.initialized) { throw new Error('Please initialize, my friend!'); }

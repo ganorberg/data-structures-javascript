@@ -9,7 +9,10 @@
  *
  * @param {Number} index - pointer for oldest or newest element in queue
  * @param {Number} length - size of queue
- * @return {Number} - index increased by 1, or 0 if reached end of ring
+ *
+ * @returns {Number} - index increased by 1, or 0 if reached end of ring
+ *
+ * @private
  */
 function incrementIndex(index, length) {
   return index === length - 1 ? 0 : index + 1;
@@ -22,7 +25,13 @@ class CircularQueue {
    * tracking the oldest and newest insertions.
    *
    * @constructor
+   *
    * @param {Number} size - length of queue
+   *
+   * @property {Array} ring - circular queue itself
+   * @property {Number} size - length of queue
+   * @property {Number} oldest - index that points to location for deletion
+   * @property {Number} newest - index that points to location for insertion
    */
   constructor(size) {
     this.ring = [];
@@ -42,7 +51,7 @@ class CircularQueue {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {*} - dequeued item
+   * @returns {*} - dequeued item
    */
   dequeue() {
     if (this.ring[this.oldest] === undefined) { return; }
@@ -64,12 +73,13 @@ class CircularQueue {
    * Space complexity: O(1)
    *
    * @param {*} value - item inserted into queue
-   * @return {Boolean} - true to represent successful insertion
+   *
+   * @returns {Boolean} - true to represent successful insertion
    */
   enqueue(value) {
     this.newest = incrementIndex(this.newest, this.size);
 
-    // if overwriting oldest value, move pointer to track next oldest value
+    // If overwriting oldest value, move pointer to track next oldest value
     if (this.ring[this.newest] !== undefined) {
       this.oldest = incrementIndex(this.oldest, this.size);
     }

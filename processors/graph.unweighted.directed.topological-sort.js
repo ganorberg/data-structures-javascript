@@ -38,6 +38,7 @@ class TopologicalSort {
    * the sorted property to see the vertices topologically sorted.
    *
    * @constructor
+   *
    * @param {Graph} graph - graph being processed
    */
   constructor(graph) {

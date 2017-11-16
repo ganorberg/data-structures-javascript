@@ -13,6 +13,10 @@ class UndirectedGraph {
    * prior.
    *
    * @constructor
+   *
+   * @property {Object} adjacencyList - the graph itself
+   * @property {Number} totalVertices - incremented when a vertex is added
+   * @property {Number} totalEdges - incremented when an edge is added
    */
   constructor() {
     this.adjacencyList = {};
@@ -37,7 +41,7 @@ class UndirectedGraph {
    * Space complexity: O(1)
    *
    * @param {Array<String | Number>} v1, v2 - vertices sharing new edge
-   * @return {Boolean} true - represents successful insertion
+   * @returns {Boolean} true - represents successful insertion
    */
   addEdge([v1, v2]) {
     if (!this.adjacencyList.hasOwnProperty(v1)) { this.addVertex(v1); }
@@ -62,7 +66,7 @@ class UndirectedGraph {
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex added to graph
-   * @return {Boolean} true - represents successful insertion
+   * @returns {Boolean} true - represents successful insertion
    */
   addVertex(vertex) {
     if (this.adjacencyList.hasOwnProperty(vertex)) {
@@ -85,7 +89,7 @@ class UndirectedGraph {
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex with potential adjacent vertices
-   * @return {Array} - list of vertices adjacent to input vertex
+   * @returns {Array} - list of vertices adjacent to input vertex
    */
   adjacentVertices(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
@@ -106,7 +110,7 @@ class UndirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Number} - average degree of graph
+   * @returns {Number} - average degree of graph
    */
   averageDegree() {
     // Cannot divide by 0
@@ -126,7 +130,7 @@ class UndirectedGraph {
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex whose degree is sought
-   * @return {Number} - degree of vertex
+   * @returns {Number} - degree of vertex
    */
   degree(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
@@ -154,7 +158,7 @@ class UndirectedGraph {
    * Time complexity: O(total vertices)
    * Space complexity: O(1)
    *
-   * @return {Number} - largest degree in graph
+   * @returns {Number} - largest degree in graph
    */
   maxDegree() {
     let max = 0;
@@ -189,7 +193,7 @@ class UndirectedGraph {
    * Time complexity: O(V + E) where V is total vertices and E is total edges
    * Space complexity: O(1)
    *
-   * @return {Number} - number of self loops, as you might have guessed!
+   * @returns {Number} - number of self loops, as you might have guessed!
    */
   numberOfSelfLoops() {
     let count = 0;

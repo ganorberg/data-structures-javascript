@@ -58,7 +58,8 @@ function depthFirstSearch(
  *
  * @param {Set} a - set receiving items from b
  * @param {Set} b - set adding items to a
- * @return {Set} - union set (memory reference: set a)
+ *
+ * @returns {Set} - union set (memory reference: set a)
  */
 function joinSets(a, b) {
   b.forEach(item => a.add(item));
@@ -96,7 +97,7 @@ class DirectedCycle {
    * Time complexity: O(number of vertices)
    * Space complexity: O(number of vertices)
    *
-   * @return {Boolean} - true if cycle found, otherwise false
+   * @returns {Boolean} - true if cycle found, otherwise false
    */
   initialize() {
     if (this.initialized) { throw new Error('Already initialized, my friend!'); }

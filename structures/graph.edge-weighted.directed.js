@@ -1,4 +1,7 @@
-/** Class representing a weighted edge */
+/** 
+ * Class representing a weighted edge
+ * @private
+ */
 class Edge {
   /**
    * Helper class to create weighted edges for Graph methods.
@@ -7,9 +10,14 @@ class Edge {
    * keys in adjacency list.
    *
    * @constructor
-   * @param {String | Number} v1 - vertex pointing to v2
-   * @param {String | Number} v2 - vertex pointed at from v1
+   *
+   * @param {String|Number} v1 - vertex pointing to v2
+   * @param {String|Number} v2 - vertex pointed at from v1
    * @param {Number} weight - weight of edge between v1 and v2
+   *
+   * @property {String} v1 - vertex pointing to v2
+   * @property {String} v2 - vertex pointed at from v1
+   * @property {Number} weight - weight of edge between v1 and v2
    */
   constructor(v1, v2, weight) {
     this.v1 = String(v1);
@@ -19,7 +27,8 @@ class Edge {
 
   /**
    * @description Return vertex where directed edge begins.
-   * @return {String} - first vertex
+   *
+   * @returns {String} - first vertex
    */
   from() {
     return this.v1;
@@ -27,7 +36,8 @@ class Edge {
 
   /**
    * @description Return vertex where directed edge ends.
-   * @return {String} - other vertex
+   *
+   * @returns {String} - other vertex
    */
   to() {
     return this.v2;
@@ -49,6 +59,10 @@ class Graph {
    * keys to the adjacency list if they did not exist prior.
    *
    * @constructor
+   *
+   * @property {Object} adjacencyList - the graph itself
+   * @property {Number} totalVertices - incremented when a vertex is added
+   * @property {Number} totalEdges - incremented when an edge is added
    */
   constructor() {
     this.adjacencyList = {};
@@ -66,8 +80,8 @@ class Graph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {Array<String | Number>} v1, v2, weight - directed edge created where v1 -> v2
-   * @return {Boolean} true - represents successful insertion
+   * @param {Array<String|Number>} v1, v2, weight - directed edge created where v1 -> v2
+   * @returns {Boolean} true - represents successful insertion
    */
   addEdge([v1, v2, weight]) {
     if (!this.adjacencyList.hasOwnProperty(v1)) { this.addVertex(v1); }
@@ -91,8 +105,9 @@ class Graph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String | Number} vertex - vertex added to graph
-   * @return {Boolean} true - represents successful insertion
+   * @param {String|Number} vertex - vertex added to graph
+   *
+   * @returns {Boolean} true - represents successful insertion
    */
   addVertex(vertex) {
     if (this.adjacencyList.hasOwnProperty(vertex)) {
@@ -114,8 +129,9 @@ class Graph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String | Number} vertex - vertex with potential adjacent vertices
-   * @return {Array} - list of vertices adjacent to input vertex
+   * @param {String|Number} vertex - vertex with potential adjacent vertices
+   *
+   * @returns {Array} - list of vertices adjacent to input vertex
    */
   adjacentVertices(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {

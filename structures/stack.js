@@ -2,8 +2,14 @@
 class Stack {
   /**
    * Represents a stack for numbers
+   *
    * @constructor
-   * @param {Number=} capacity 
+   *
+   * @param {Number=} capacity
+   *
+   * @property {Array} maxes - tracks largest value in queue for constant lookup
+   * @property {Array} storage - the stack itself
+   * @property {Number} capacity - queue stops enqueuing at capacity
    */
   constructor(capacity = Infinity) {
     this.maxes = [-Infinity];
@@ -19,7 +25,7 @@ class Stack {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Number} - maximum value in stack
+   * @returns {Number} - maximum value in stack
    */
   getMax() {
     return this.maxes[this.maxes.length - 1];
@@ -33,7 +39,7 @@ class Stack {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Boolean} - true if empty, or false otherwise
+   * @returns {Boolean} - true if empty, or false otherwise
    */
   isEmpty() {
     return this.storage.length === 0;
@@ -47,7 +53,7 @@ class Stack {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Boolean} - true if full, or false otherwise
+   * @returns {Boolean} - true if full, or false otherwise
    */
   isFull() {
     return this.storage.length === this.capacity;
@@ -61,7 +67,7 @@ class Stack {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {*} - value at top of stack
+   * @returns {*} - value at top of stack
    */
   peek() {
     return this.storage[this.storage.length - 1];
@@ -77,7 +83,8 @@ class Stack {
    * Space complexity: O(1)
    *
    * @param {*} val - value added to stack
-   * @return {Number} - size of stack after value inserted
+   *
+   * @returns {Number} - size of stack after value inserted
    */
   push(val) {
     if (this.storage.length < this.capacity) {
@@ -96,7 +103,7 @@ class Stack {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Number} - value removed from stack, or undefined if empty
+   * @returns {Number} - value removed from stack, or undefined if empty
    */
   pop() {
     const popped = this.storage[this.storage.length - 1];
@@ -113,7 +120,7 @@ class Stack {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Number} - total amount of items in stack
+   * @returns {Number} - total amount of items in stack
    */
   size() {
     return this.storage.length;

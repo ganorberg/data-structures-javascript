@@ -1,10 +1,18 @@
-/** Class representing a node in the tree */
+/** 
+ * Class representing a node in the tree
+ * @private
+ */
 class Node {
   /**
    * Allows us to quickly create nodes for our binary search tree
    *
    * @constructor
+   *
    * @param {Number|String} value - value held by node
+   *
+   * @property {Number|String} value - value held by node
+   * @property {Object|Null} left - left child node
+   * @property {Object|Null} right - right child node
    */
   constructor(value) {
     this.value = value;
@@ -28,7 +36,10 @@ class Node {
  * Space complexity: O(1)
  *
  * @param {Object} root - tree whose minimum will be removed
- * @return {Object} - node with minimum value in tree
+ *
+ * @returns {Object} - node with minimum value in tree
+ *
+ * @private
  */
 function deleteMin(root) {
   let parent = root;
@@ -67,7 +78,10 @@ function deleteMin(root) {
  * Space complexity: O(1)
  *
  * @param {Object} node - node to be removed
- * @return {Object} - null, node's only child, or right subtree minimum
+ *
+ * @returns {Object} - null, node's only child, or right subtree minimum
+ *
+ * @private
  */
 function deleteNode(node) {
   let numberOfChildren = 0;
@@ -96,6 +110,8 @@ class BinarySearchTree {
    * Track root of tree.
    *
    * @constructor
+   *
+   * @property {Object|Null} root - top level node in tree
    */
   constructor() {
     this.root = null;
@@ -115,7 +131,7 @@ class BinarySearchTree {
    * Space complexity: O(1)
    *
    * @param {Number|String} value - value to be inserted into new node
-   * @return {Boolean} - true means add was successful
+   * @returns {Boolean} - true means add was successful
    */
   add(value) {
     // Type checking
@@ -202,7 +218,7 @@ class BinarySearchTree {
    * Space complexity: O(1)
    *
    * @param {*} value - searching for this value in the tree
-   * @return {Boolean} - whether or not value exists in tree
+   * @returns {Boolean} - whether or not value exists in tree
    */
   contains(value) {
     let node = this.root;
@@ -231,7 +247,7 @@ class BinarySearchTree {
    * Space complexity: O(1)
    *
    * @param {Number|String} value - value of node to be removed
-   * @return {Object} - node removed
+   * @returns {Object} - node removed
    */
   delete(value) {
     if (this.root === null) { throw new Error('Tree is empty, my dear friend!'); }
@@ -364,7 +380,7 @@ class BinarySearchTree {
    * Time complexity: O(log N)
    * Space complexity: O(1)
    *
-   * @return {Number|String} - maximum value in tree
+   * @returns {Number|String} - maximum value in tree
    */
   max() {
     let node = this.root;
@@ -385,7 +401,7 @@ class BinarySearchTree {
    * Time complexity: O(log N)
    * Space complexity: O(1)
    *
-   * @return {Number|String} - minimum value in tree
+   * @returns {Number|String} - minimum value in tree
    */
   min() {
     let node = this.root;

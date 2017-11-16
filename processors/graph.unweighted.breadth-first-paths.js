@@ -7,6 +7,7 @@ class BreadthFirstPaths {
    * Works for both directed and undirected graphs.
    *
    * @constructor
+   *
    * @param {Graph} graph - graph being processed
    * @param {String | Number} sourceVertex - source vertex for processing... gotta start somewhere!
    */
@@ -28,7 +29,8 @@ class BreadthFirstPaths {
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex whose distance from source vertex is sought
-   * @return {Number} - distance from source vertex to input vertex
+   *
+   * @returns {Number} - distance from source vertex to input vertex
    */
   distanceTo(vertex) {
     if (!this.initialized) { throw new Error('Please initialize, my friend!'); }
@@ -45,7 +47,8 @@ class BreadthFirstPaths {
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex that may be connected to source vertex
-   * @return {Boolean} - true if vertex is connected to source vertex
+   *
+   * @returns {Boolean} - true if vertex is connected to source vertex
    */
   hasPathTo(vertex) {
     if (!this.initialized) { throw new Error('Please initialize, my friend!'); }
@@ -124,7 +127,8 @@ class BreadthFirstPaths {
    * Space complexity: O(path length)
    *
    * @param {String | Number} destinationVertex - vertex whose path is sought from source vertex
-   * @return {Array} - shortest path from destination to source
+   *
+   * @returns {Array} - shortest path from destination to source
    */
   shortestPathTo(destinationVertex) {
     if (!this.initialized) { throw new Error('Please initialize, my friend!'); }

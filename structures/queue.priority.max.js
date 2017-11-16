@@ -12,8 +12,10 @@
  * Time complexity: O(log N)
  * Space complexity: O(1)
  * 
- * @param {Object} heap - the MaxPriorityQueue instance's heap array
+ * @param {Object} heap - the PriorityQueueMax instance's heap array
  * @param {Number} parentIndex - array index representing sinking element
+ *
+ * @private
  */
 function sink(heap, parentIndex) {
   if (
@@ -58,6 +60,8 @@ function sink(heap, parentIndex) {
  * @param {Array} arr - array with elements to be swapped
  * @param {Number} indexA - index of first element to be swapped
  * @param {Number} indexB - index of second element to be swapped
+ *
+ * @private
  */
 function swap(arr, indexA, indexB) {
   if (
@@ -83,8 +87,10 @@ function swap(arr, indexA, indexB) {
  * Time complexity: O(log N)
  * Space complexity: O(1)
  * 
- * @param {Object} heap - the MaxPriorityQueue instance's heap array
+ * @param {Object} heap - the PriorityQueueMax instance's heap array
  * @param {Number} childsIndex - array index representing the element swimming up
+ *
+ * @private
  */
 function swim(heap, childsIndex) {
   if (
@@ -109,7 +115,7 @@ function swim(heap, childsIndex) {
 }
 
 /** Class representing our priority queue */
-class MaxPriorityQueue {
+class PriorityQueueMax {
   /**
    * This priority queue is a max binary heap.
    *
@@ -117,6 +123,8 @@ class MaxPriorityQueue {
    * indices 2N and 2N+1. Begin with null at index 0 for easier math.
    *
    * @constructor
+   *
+   * @property {Array} heap - priority queue represented as binary heap
    */
   constructor() {
     this.heap = [null];
@@ -135,7 +143,7 @@ class MaxPriorityQueue {
    * Time complexity: O(log N)
    * Space complexity: O(1)
    * 
-   * @return {Number|String} - max removed from heap
+   * @returns {Number|String} - max removed from heap
    */
   deleteMax() {
     if (this.isEmpty()) { throw new Error('Heap is empty, my friend!'); }
@@ -172,7 +180,7 @@ class MaxPriorityQueue {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @return {Boolean} - whether or not heap is empty
+   * @returns {Boolean} - whether or not heap is empty
    */
   isEmpty() {
     return this.heap[1] === undefined;
@@ -186,7 +194,7 @@ class MaxPriorityQueue {
    * Time complexity: O(1)
    * Space complexity: O(1)
    * 
-   * @return {Number|String} - maximum value
+   * @returns {Number|String} - maximum value
    */
   peekMax() {
     if (this.isEmpty()) { throw new Error('Heap is empty, my friend!'); }
@@ -194,4 +202,4 @@ class MaxPriorityQueue {
   }
 }
 
-module.exports = MaxPriorityQueue;
+module.exports = PriorityQueueMax;

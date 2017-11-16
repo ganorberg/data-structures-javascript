@@ -4,7 +4,10 @@
  * 
  * @param {String} string - input that will be hashed
  * @param {Number} size - size of hash table
- * @return {Number} - index that will be used as the address in the hash table
+ *
+ * @returns {Number} - index that will be used as the address in the hash table
+ *
+ * @private
  */
 function hashCode(string, size) {
   let hash = 0;
@@ -33,7 +36,10 @@ function hashCode(string, size) {
  * @param {Array} storage - old storage array that is being resized
  * @param {Number} multiplier - 2 to double or 0.5 to cut in half
  * @param {Function} insertMethod - give access to table's insert method
- * @return {Array} - resized hash table
+ *
+ * @returns {Array} - resized hash table
+ *
+ * @private
  */
 function resize(storage, multiplier, insertMethod) {
   const newSize = storage.length * multiplier;
@@ -57,7 +63,12 @@ class HashTable {
    * Entries property represents number of items currently stored.
    *
    * @constructor
+   *
    * @param {Number=} size - number of buckets available in array
+   *
+   * @property {Number} entries - how many entries have been added to hash table
+   * @property {Number} size - current length of storage array
+   * @property {Array} storage - the hash table itself
    */
   constructor(size = 16) {
     this.entries = 0;
@@ -81,7 +92,8 @@ class HashTable {
    * @param {*} value - value to be inserted with its key
    * @param {Number} size - size of storage where key-value pair is inserted
    * @param {Array} storage - storage where key-value pair is inserted
-   * @return {Boolean} - true means insertion was successful
+   *
+   * @returns {Boolean} - true means insertion was successful
    */
   insert(key, value, size = this.size, storage = this.storage) {
     /* Do not allow resize to reference 'this' keyword, which typically points
@@ -116,7 +128,8 @@ class HashTable {
    * Space complexity: O(1)
    * 
    * @param {String} key
-   * @return {*} - value found with key, or undefined if key not found
+   *
+   * @returns {*} - value found with key, or undefined if key not found
    */
   get(key) {
     const address = hashCode(key, this.size);
@@ -137,7 +150,8 @@ class HashTable {
    * Space complexity: O(1) amortized
    *
    * @param {String} key - key that will be hashed into an index and removed
-   * @return {*} - value removed, or undefined if key not found
+   *
+   * @returns {*} - value removed, or undefined if key not found
    */
   remove(key) {
     this.entries--;
