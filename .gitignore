@@ -8,7 +8,7 @@ node_modules
 
 # Compiled source #
 ###################
-out
+documentation
 *.com
 *.class
 *.dll
