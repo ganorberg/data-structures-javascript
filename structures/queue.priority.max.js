@@ -10,6 +10,7 @@
  * child to maintain invariant. 
  *
  * Time complexity: O(log N)
+ * 
  * Space complexity: O(1)
  * 
  * @param {Object} heap - the PriorityQueueMax instance's heap array
@@ -55,6 +56,7 @@ function sink(heap, parentIndex) {
  * Strategy: Use array destructuring.
  *
  * Time complexity: O(1)
+ * 
  * Space complexity: O(1)
  *
  * @param {Array} arr - array with elements to be swapped
@@ -85,6 +87,7 @@ function swap(arr, indexA, indexB) {
  * parent is smaller. Continue process until parent is greater.
  *
  * Time complexity: O(log N)
+ * 
  * Space complexity: O(1)
  * 
  * @param {Object} heap - the PriorityQueueMax instance's heap array
@@ -141,6 +144,7 @@ class PriorityQueueMax {
    * Edge case(s): empty heap
    *
    * Time complexity: O(log N)
+   * 
    * Space complexity: O(1)
    * 
    * @returns {Number|String} - max removed from heap
@@ -159,6 +163,7 @@ class PriorityQueueMax {
    * Strategy: Push to end of array, then swim up to proper location.
    *
    * Time complexity: O(log N)
+   * 
    * Space complexity: O(1)
    * 
    * @param {Number|String} key - value inserted into heap
@@ -178,6 +183,7 @@ class PriorityQueueMax {
    * Strategy: See if we have a value at the root.
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Boolean} - whether or not heap is empty
@@ -192,6 +198,7 @@ class PriorityQueueMax {
    * Strategy: Read from array at root.
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    * 
    * @returns {Number|String} - maximum value

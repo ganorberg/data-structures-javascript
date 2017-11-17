@@ -1,7 +1,4 @@
-/** @constant @private */
 const RED = true;
-
-/** @constant @private */
 const BLACK = false;
 
 /** 
@@ -39,6 +36,7 @@ class Node {
  * Strategy: Use color property. Null nodes are black.
  *
  * Time complexity: O(1)
+ * 
  * Space complexity: O(1)
  *
  * @param {Object} node - node whose color is being checked
@@ -60,6 +58,7 @@ function isRed(node) {
  * node. Input node always ends with red color.
  *
  * Time complexity: O(1)
+ * 
  * Space complexity: O(1)
  *
  * @param {Object} node - node that rotates left and becomes red
@@ -98,6 +97,7 @@ function rotateLeft(node) {
  * node. Input node always ends with red color.
  *
  * Time complexity: O(1)
+ * 
  * Space complexity: O(1)
  *
  * @param {Object} node - node that rotates right and becomes red
@@ -135,6 +135,7 @@ function rotateRight(node) {
  * colors. Modify own color with own color property.
  *
  * Time complexity: O(1)
+ * 
  * Space complexity: O(1)
  *
  * @param {Object} node - node whose color and children's colors will be flipped
@@ -158,6 +159,7 @@ function flipColors(node) {
  * are required to handle all color possibilities.
  *
  * Time complexity: O(log N)
+ * 
  * Space complexity: O(1)
  *
  * @param {Object} node - node for traversal, key comparison and color-checking
@@ -203,6 +205,7 @@ class RedBlackTree {
    * children and store in new queue. End loop when no children are added.
    *
    * Time complexity: O(N)
+   * 
    * Space complexity: O(N)
    *
    * @param {Function} callback - calls all nodes in breadth-first order
@@ -239,6 +242,7 @@ class RedBlackTree {
    * Edge case(s): Empty tree
    *
    * Time complexity: O(N)
+   * 
    * Space complexity: O(1)
    *
    * @param {Function} callback - invoked on every node
@@ -263,6 +267,7 @@ class RedBlackTree {
    * Edge case(s): Empty tree
    *
    * Time complexity: O(N)
+   * 
    * Space complexity: O(1)
    *
    * @param {Function} callback - invoked on every node in post-order
@@ -287,6 +292,7 @@ class RedBlackTree {
    * Edge case(s): Empty tree
    *
    * Time complexity: O(N)
+   * 
    * Space complexity: O(1)
    *
    * @param {Function} callback - invoked on every node in pre-order
@@ -307,6 +313,7 @@ class RedBlackTree {
    * On every iteration, check if node has key.
    *
    * Time complexity: O(log N)
+   * 
    * Space complexity: O(1)
    *
    * @param {Number|String} key - searching for this key in the tree

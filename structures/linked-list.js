@@ -47,6 +47,7 @@ class LinkedList {
    * Edge case(s): empty list, inappropriate inputs
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {*} value - value to be inserted into new node
@@ -79,6 +80,7 @@ class LinkedList {
    * value. End loop when we reach the last node.
    *
    * Time complexity: O(N)
+   * 
    * Space complexity: O(1)
    *
    * @param {*} value - checked if exists in list
@@ -104,6 +106,7 @@ class LinkedList {
    * Edge case(s): empty list, one node, remove head or tail, value not in list
    *
    * Time complexity: O(N)
+   * 
    * Space complexity: O(1)
    *
    * @param {*} value - value to be removed from list

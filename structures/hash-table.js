@@ -28,10 +28,11 @@ function hashCode(string, size) {
  * Strategy: Loop through old storage looking for buckets. Then loop through
  * keys to insert key-value pairs into new storage using public insert method.
  *
- * Where M is depth of bucket and N is size of array...
- * Time complexity: O(M * N)
- * Space complexity: O(M * N)
- * Average case with decent hash distributions is linear time/space.
+ * Time complexity: O(M * N), where M is depth of bucket and N is size of array.
+ * Average case with decent hash distributions is proportional to N.
+ * 
+ * Space complexity: O(M * N), where M is depth of bucket and N is size of array.
+ * Average case with decent hash distributions is proportional to N.
  *
  * @param {Array} storage - old storage array that is being resized
  * @param {Number} multiplier - 2 to double or 0.5 to cut in half
@@ -86,6 +87,7 @@ class HashTable {
    * object at that address.
    *
    * Time complexity: O(1) amortized
+   * 
    * Space complexity: O(1) amortized
    *
    * @param {String} key - key that will be hashed into an index
@@ -125,6 +127,7 @@ class HashTable {
    * Edge case(s): Check if bucket is undefined to avoid TypeError.
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    * 
    * @param {String} key
@@ -147,6 +150,7 @@ class HashTable {
    * Edge case(s): Key does not exist in hash table
    * 
    * Time complexity: O(1) amortized
+   * 
    * Space complexity: O(1) amortized
    *
    * @param {String} key - key that will be hashed into an index and removed

@@ -38,6 +38,7 @@ class UndirectedGraph {
    * for methods like averageDegree. 
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {Array<String | Number>} v1, v2 - vertices sharing new edge
@@ -63,6 +64,7 @@ class UndirectedGraph {
    * Edge case: throw error if vertex already exists
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex added to graph
@@ -86,6 +88,7 @@ class UndirectedGraph {
    * Edge case: vertex does not exist in graph
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex with potential adjacent vertices
@@ -108,6 +111,7 @@ class UndirectedGraph {
    * the average degree.
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - average degree of graph
@@ -127,6 +131,7 @@ class UndirectedGraph {
    * Edge case: vertex does not exist in graph
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex whose degree is sought
@@ -146,16 +151,8 @@ class UndirectedGraph {
    * Strategy: Loop through each vertex with a for in loop. Calculate each
    * vertex's degree, then update max if it's the highest degree so far.
    *
-   * NOTE: Normally I would avoid for in loops as they access the prototype
-   * chain. However, I believe this is more scalable than the alternatives:
-   * 1) Object.keys converts the adjacency list to an array, which introduces
-   * linear space complexity and is unacceptable for large graphs.
-   * 2) A normal for loop strictly requires numerical indices and vertices in
-   * sequential natural order from 0 to n. This leads to poor user experience as
-   * users have to worry about the next vertex sticking to the sequence. By
-   * using for in, users can add any vertex value, including non-numbers.
-   *
    * Time complexity: O(total vertices)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - largest degree in graph
@@ -181,16 +178,8 @@ class UndirectedGraph {
    * addEdge implementation pushes 2 copies of the vertex to its own adjacency
    * list.
    *
-   * NOTE: Normally I would avoid for in loops as they access the prototype
-   * chain. However, I believe this is more scalable than the alternatives:
-   * 1) Object.keys converts the adjacency list to an array, which introduces
-   * linear space complexity and is unacceptable for large graphs.
-   * 2) A normal for loop strictly requires numerical indices and vertices in
-   * sequential natural order from 0 to n. This leads to poor user experience as
-   * users have to worry about the next vertex sticking to the sequence. By
-   * using for in, users can add any vertex value, including non-numbers.
-   *
    * Time complexity: O(V + E) where V is total vertices and E is total edges
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - number of self loops, as you might have guessed!

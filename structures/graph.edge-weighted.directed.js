@@ -45,7 +45,7 @@ class Edge {
 }
 
 /** Class representing a weighted graph with directed edges */
-class Graph {
+class EdgeWeightedDirectedGraph {
   /**
    * The graph is represented as an object-oriented adjacency list. Keys are
    * vertices and values are arrays of Edge objects. Each edge contains both
@@ -78,6 +78,7 @@ class Graph {
    * edge into first input vertex's adjacency list and increment edge count.
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {Array<String|Number>} v1, v2, weight - directed edge created where v1 -> v2
@@ -103,6 +104,7 @@ class Graph {
    * Edge case: throw error if vertex already exists
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex added to graph
@@ -127,6 +129,7 @@ class Graph {
    * Edge case: vertex does not exist in graph
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex with potential adjacent vertices
@@ -142,4 +145,4 @@ class Graph {
   }
 }
 
-module.exports = Graph;
+module.exports = EdgeWeightedDirectedGraph;

@@ -33,6 +33,7 @@ class Node {
  * cannot remove it from the tree, but we can still return the node.
  *
  * Time complexity: O(log N)
+ *
  * Space complexity: O(1)
  *
  * @param {Object} root - tree whose minimum will be removed
@@ -75,6 +76,7 @@ function deleteMin(root) {
  * Edge case(s): right subtree contains only one node
  *
  * Time complexity: O(log N)
+ *
  * Space complexity: O(1)
  *
  * @param {Object} node - node to be removed
@@ -128,6 +130,7 @@ class BinarySearchTree {
    * Edge case(s): inappropriate inputs, duplicates
    *
    * Time complexity: O(log N)
+   *
    * Space complexity: O(1)
    *
    * @param {Number|String} value - value to be inserted into new node
@@ -182,6 +185,7 @@ class BinarySearchTree {
    * children and store in new queue. End loop when no children are added.
    *
    * Time complexity: O(N)
+   *
    * Space complexity: O(N)
    *
    * @param {Function} callback - calls all values in breadth-first order
@@ -215,6 +219,7 @@ class BinarySearchTree {
    * Check if input value ever equals a node's value.
    *
    * Time complexity: O(log N)
+   *
    * Space complexity: O(1)
    *
    * @param {*} value - searching for this value in the tree
@@ -244,6 +249,7 @@ class BinarySearchTree {
    * Edge case(s): delete root, input does not exist in tree, empty tree
    *
    * Time complexity: O(log N)
+   *
    * Space complexity: O(1)
    *
    * @param {Number|String} value - value of node to be removed
@@ -307,6 +313,7 @@ class BinarySearchTree {
    * Edge case(s): Empty tree
    *
    * Time complexity: O(N)
+   *
    * Space complexity: O(1)
    *
    * @param {Function} callback - invoked on every node's value in-order
@@ -331,6 +338,7 @@ class BinarySearchTree {
    * Edge case(s): Empty tree
    *
    * Time complexity: O(N)
+   *
    * Space complexity: O(1)
    *
    * @param {Function} callback - invoked on every node's value post-order
@@ -355,6 +363,7 @@ class BinarySearchTree {
    * Edge case(s): Empty tree
    *
    * Time complexity: O(N)
+   *
    * Space complexity: O(1)
    *
    * @param {Function} callback - invoked on every node's value pre-order
@@ -378,6 +387,7 @@ class BinarySearchTree {
    * Edge case(s): Empty tree
    *
    * Time complexity: O(log N)
+   *
    * Space complexity: O(1)
    *
    * @returns {Number|String} - maximum value in tree
@@ -399,6 +409,7 @@ class BinarySearchTree {
    * Edge case(s): Empty tree
    *
    * Time complexity: O(log N)
+   *
    * Space complexity: O(1)
    *
    * @returns {Number|String} - minimum value in tree

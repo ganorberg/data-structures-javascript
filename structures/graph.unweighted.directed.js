@@ -33,9 +33,11 @@ class DirectedGraph {
    * avoid equality comparison issues against stringified keys in other methods.
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {Array<String | Number>} v1, v2 - directed edge created where v1 -> v2
+   *
    * @returns {Boolean} true - represents successful insertion
    */
   addEdge([v1, v2]) {
@@ -58,9 +60,11 @@ class DirectedGraph {
    * Edge case: throw error if vertex already exists
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex added to graph
+   *
    * @returns {Boolean} true - represents successful insertion
    */
   addVertex(vertex) {
@@ -81,9 +85,11 @@ class DirectedGraph {
    * Edge case: vertex does not exist in graph
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex with potential adjacent vertices
+   *
    * @returns {Array} - list of vertices adjacent to input vertex
    */
   adjacentVertices(vertex) {
@@ -105,6 +111,7 @@ class DirectedGraph {
    * will always be the same, either total can represent total degrees.
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - average degree of graph
@@ -117,23 +124,28 @@ class DirectedGraph {
   /**
    * @description Get number of vertices directing to input vertex.
    *
+   * Edge case: vertex does not exist in graph
+   *
    * IF REVERSED GRAPH EXISTS
+   *
    * Strategy: Vertices pointing to the input vertex are stored in an array in
    * the reversed graph, so use its length property.
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * IF REVERSED GRAPH DOES NOT EXIST
+   *
    * Strategy: Loop through all vertices, then loop through all their adjacent
    * vertices. Increment counter when input vertex equals any adjacent vertices.
    *
    * Time complexity: O(V + E), where V is total vertices and E is total edges
+   * 
    * Space complexity: O(1)
    *
-   * Edge case: vertex does not exist in graph
-   *
    * @param {String | Number} vertex - vertex whose degree is sought
+   *
    * @returns {Number} - degree of vertex
    */
   inDegree(vertex) {
@@ -168,17 +180,22 @@ class DirectedGraph {
    * Strategy: Loop through each vertex with a for in loop. Calculate each
    * vertex's indegree, then update max if it's the highest indegree so far.
    *
+   * Edge case: vertex does not exist in graph
+   *
    * IF REVERSED GRAPH EXISTS
+   *
    * Time complexity: O(total vertices)
+   * 
    * Space complexity: O(1)
    *
    * IF REVERSED GRAPH DOES NOT EXIST
+   *
    * Time complexity: O(E + V^2), where V is total vertices and E is total edges
+   * 
    * Space complexity: O(1)
    *
-   * Edge case: vertex does not exist in graph
-   *
    * @param {String | Number} vertex - vertex whose degree is sought
+   *
    * @returns {Number} - degree of vertex
    */
   maxInDegree(vertex) {
@@ -201,6 +218,7 @@ class DirectedGraph {
    * vertex's outdegree, then update max if it's the highest outdegree so far.
    *
    * Time complexity: O(total vertices)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - largest outdegree in graph
@@ -225,6 +243,7 @@ class DirectedGraph {
    * counter for all duplicates.
    *
    * Time complexity: O(V + E) where V is total vertices and E is total edges
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - number of self loops, as you might have guessed!
@@ -251,9 +270,11 @@ class DirectedGraph {
    * Edge case: vertex does not exist in graph
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex whose outdegree is sought
+   *
    * @returns {Number} - outdegree of vertex
    */
   outDegree(vertex) {
@@ -282,6 +303,7 @@ class DirectedGraph {
    * time taken will be untenable for large, dense graphs.
    *
    * Time complexity: O(V + E), where V is total vertices and E is total edges
+   * 
    * Space complexity: O(V + E), where V is total vertices and E is total edges
    *
    * @returns {Object} - reversed directed graph

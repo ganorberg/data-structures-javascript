@@ -73,10 +73,12 @@ class SuffixTrie {
    *
    * @constructor
    *
+   * @param str - string used to build suffix trie
+   *
    * @property {Object} root - top level node that points to rest of trie
    */
-  constructor(string) {
-    this.root = buildTrie(string);
+  constructor(str) {
+    this.root = buildTrie(str);
   }
 
   /**
@@ -86,6 +88,7 @@ class SuffixTrie {
    * if traversal ends successfully and the final node has a terminating marker.
    *
    * Time complexity: O(c), where c is number of characters in suffix
+   *
    * Space complexity: O(1)
    *
    * @param {String} suffix - suffix to be searched
@@ -117,6 +120,7 @@ class SuffixTrie {
    * Edge case: empty string returns true
    *
    * Time complexity: O(c), where c is number of characters in suffix
+   *
    * Space complexity: O(1)
    *
    * @param {String} pattern - pattern to be searched

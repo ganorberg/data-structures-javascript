@@ -23,6 +23,7 @@ class Stack {
    * Strategy: Return last value added to maxes array
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - maximum value in stack
@@ -37,6 +38,7 @@ class Stack {
    * Strategy: Use storage array length
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Boolean} - true if empty, or false otherwise
@@ -51,6 +53,7 @@ class Stack {
    * Strategy: Check if storage array length matches capacity value
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Boolean} - true if full, or false otherwise
@@ -65,6 +68,7 @@ class Stack {
    * Strategy: Look at storage array's final element using index
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @returns {*} - value at top of stack
@@ -80,6 +84,7 @@ class Stack {
    * greater than previous max, make it the maximum.
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {*} val - value added to stack
@@ -101,6 +106,7 @@ class Stack {
    * Strategy: Use native Array pop method. Check if maximum for removal.
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - value removed from stack, or undefined if empty
@@ -118,6 +124,7 @@ class Stack {
    * Strategy: Use storage length
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - total amount of items in stack

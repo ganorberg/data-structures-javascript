@@ -36,7 +36,9 @@ class Edge {
 
   /**
    * @description Return the vertex that is not input.
+   *
    * @param {Number|String} vertex - looking for its partner in crime
+   *
    * @returns {String} - other vertex
    */
   other(vertex) {
@@ -50,7 +52,7 @@ class Edge {
 }
 
 /** Class representing a weighted graph with undirected edges */
-class Graph {
+class EdgeWeightedUndirectedGraph {
   /**
    * The graph is represented as an object-oriented adjacency list. Keys are
    * vertices and values are arrays of Edge objects. Each edge contains both
@@ -89,9 +91,11 @@ class Graph {
    * for methods like averageDegree. 
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {Array<String|Number>} v1, v2, weight - edge vertices and weight
+   *
    * @returns {Boolean} true - represents successful insertion
    */
   addEdge([v1, v2, weight]) {
@@ -115,9 +119,11 @@ class Graph {
    * Edge case: throw error if vertex already exists
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex added to graph
+   *
    * @returns {Boolean} true - represents successful insertion
    */
   addVertex(vertex) {
@@ -138,9 +144,11 @@ class Graph {
    * Edge case: vertex does not exist in graph
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex with potential adjacent vertices
+   *
    * @returns {Array} - list of vertices adjacent to input vertex
    */
   adjacentVertices(vertex) {
@@ -160,6 +168,7 @@ class Graph {
    * the average degree.
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - average degree of graph
@@ -179,9 +188,11 @@ class Graph {
    * Edge case: vertex does not exist in graph
    *
    * Time complexity: O(1)
+   * 
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex whose degree is sought
+   *
    * @returns {Number} - degree of vertex
    */
   degree(vertex) {
@@ -198,16 +209,8 @@ class Graph {
    * Strategy: Loop through each vertex with a for in loop. Calculate each
    * vertex's degree, then update max if it's the highest degree so far.
    *
-   * NOTE: Normally I would avoid for in loops as they access the prototype
-   * chain. However, I believe this is more scalable than the alternatives:
-   * 1) Object.keys converts the adjacency list to an array, which introduces
-   * linear space complexity and is unacceptable for large graphs.
-   * 2) A normal for loop strictly requires numerical indices and vertices in
-   * sequential natural order from 0 to n. This leads to poor user experience as
-   * users have to worry about the next vertex sticking to the sequence. By
-   * using for in, users can add any vertex value, including non-numbers.
-   *
    * Time complexity: O(total vertices)
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - largest degree in graph
@@ -234,6 +237,7 @@ class Graph {
    * list.
    *
    * Time complexity: O(V + E) where V is total vertices and E is total edges
+   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - number of self loops, as you might have guessed!
@@ -253,4 +257,4 @@ class Graph {
   }
 }
 
-module.exports = Graph;
+module.exports = EdgeWeightedUndirectedGraph;
