@@ -1,5 +1,9 @@
 {
   "plugins": ["plugins/markdown"],
+  "markdown": {
+    // Hard wrap text at line breaks
+    "hardwrap": true
+  },
   "recurseDepth": 10,
   "source": {
       // Only process files ending in .js, .jsdoc, and .jsx
