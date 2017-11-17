@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Fully tested JavaScript data structures library",
   "scripts": {
-    "doc": "jsdoc structures --readme README.md --recurse --configure jsdoc.json",
+    "doc": "jsdoc structures --readme README.md --recurse --configure jsdoc.json --destination documentation",
     "test": "mocha --recursive"
   },
   "repository": {
