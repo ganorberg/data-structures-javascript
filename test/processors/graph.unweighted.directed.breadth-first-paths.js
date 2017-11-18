@@ -84,8 +84,7 @@ describe('BreadthFirstPaths', () => {
   });
 
   it('should work for number and string data types', () => {
-    graph = new DirectedGraph();
-    
+    // Arrange
     const edges = [
       ['dog', 'woof'],
       ['dog', 'bark'],
@@ -93,10 +92,13 @@ describe('BreadthFirstPaths', () => {
       ['meow', 'cat'],
       [14, 'dog'],
     ];
-    
-    edges.forEach(edge => graph.addEdge(edge));
+
+    graph = new DirectedGraph(edges);
+
+    // Act
     paths = new BreadthFirstPaths(graph, SOURCE_VERTEX);
-        
+
+    // Assert
     expect(paths.visited.has('0')).to.be.true;
     expect(paths.visited.has('meow')).to.be.true;
     expect(paths.visited.has('cat')).to.be.true;

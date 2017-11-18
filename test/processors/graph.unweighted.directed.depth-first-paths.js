@@ -83,6 +83,7 @@ describe('Directed DepthFirstPaths', () => {
   });
 
   it('should work for number and string data types', () => {
+    // Arrange
     const edges = [
       ['dog', 'woof'],
       ['dog', 'bark'],
@@ -92,8 +93,11 @@ describe('Directed DepthFirstPaths', () => {
     ];
 
     graph = new DirectedGraph(edges);
+
+    // Act
     paths = new DepthFirstPaths(graph, SOURCE_VERTEX);
   
+    // Assert
     expect(paths.visited.has('0')).to.be.true;
     expect(paths.visited.has('meow')).to.be.true;
     expect(paths.visited.has('cat')).to.be.true;

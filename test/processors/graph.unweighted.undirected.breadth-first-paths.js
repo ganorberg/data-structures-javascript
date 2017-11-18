@@ -84,6 +84,7 @@ describe('BreadthFirstPaths', () => {
   });
 
   it('should work for number and string data types', () => {
+    // Arrange
     const edges = [
       ['dog', 'woof'],
       ['dog', 'bark'],
@@ -93,8 +94,11 @@ describe('BreadthFirstPaths', () => {
     ];
     
     graph = new UndirectedGraph(edges);
+
+    // Act
     paths = new BreadthFirstPaths(graph, SOURCE_VERTEX);
         
+    // Assert
     expect(paths.visited.has('0')).to.be.true;
     expect(paths.visited.has('meow')).to.be.true;
     expect(paths.visited.has('cat')).to.be.true;
