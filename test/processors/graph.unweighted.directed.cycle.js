@@ -16,7 +16,6 @@ try {
     'the processor or graph files.');
 }
 
-// TODO: test 0->2->0, 0->1->2->0 and 3->3
 describe('DirectedCycle', () => {
   beforeEach(() => {
     graph = new DirectedGraph();
