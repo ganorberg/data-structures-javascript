@@ -36,7 +36,10 @@ If you need to squeeze every ounce of performance out of your data structures, J
 
 Although I generally avoid for in loops in my code and prefer the Airbnb style guide way of accessing object properties through Object.keys, this is highly inefficient for large data sets. All data structures in this library are built to scale with time efficiency as the primary goal, and the linear time operation of Object.keys is simply too costly to use at scale.
 
-The graphs in this library are dynamic and flexible -- vertices can be added or deleted at whim. This means that naming vertices from 0 to n-1, as array-based adjacency lists do, is out of the question because values in the middle of the array could be deleted -- the program would have to track these holes in addtion to the last index inserted. Objects avoid these issues given that keys can be named anything and still accessed in constant time.
+### Dynamic graphs
+The graphs in this library are dynamic and flexible -- vertices can be added or deleted at whim. This means that the traditional method of building graphs with vertices labeled 0 to n-1 in an array-based adjacency lists is out of the question. In that case, extra values would need to be tracked -- for example, deleting values from the middle of the array would leave holes that need to be filled and looping would be complicated. The index for the next addition would also need to be tracked. 
+
+Object-oriented adjacency lists avoid these issues given that keys can be named anything and still accessed in constant time.
 
 ### Library structure: ES6 classes vs OLOO pattern
 
