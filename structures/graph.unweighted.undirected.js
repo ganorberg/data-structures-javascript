@@ -40,8 +40,7 @@ class UndirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {Array<String | Number>} v1, v2 - vertices sharing new edge
-   * @returns {Boolean} true - represents successful insertion
+   * @param {Array<String|Number>} v1, v2 - vertices sharing new edge
    */
   addEdge([v1, v2]) {
     if (!this.adjacencyList.hasOwnProperty(v1)) { this.addVertex(v1); }
@@ -49,7 +48,6 @@ class UndirectedGraph {
     this.adjacencyList[v1].push(String(v2));
     this.adjacencyList[v2].push(String(v1));
     this.totalEdges++;
-    return true;
   }
 
   /**
@@ -65,8 +63,7 @@ class UndirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String | Number} vertex - vertex added to graph
-   * @returns {Boolean} true - represents successful insertion
+   * @param {String|Number} vertex - vertex added to graph
    */
   addVertex(vertex) {
     if (this.adjacencyList.hasOwnProperty(vertex)) {
@@ -75,7 +72,6 @@ class UndirectedGraph {
 
     this.adjacencyList[vertex] = [];
     this.totalVertices++;
-    return true;
   }
 
   /**
@@ -88,7 +84,7 @@ class UndirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String | Number} vertex - vertex with potential adjacent vertices
+   * @param {String|Number} vertex - vertex with potential adjacent vertices
    * @returns {Array} - list of vertices adjacent to input vertex
    */
   adjacentVertices(vertex) {
@@ -129,7 +125,7 @@ class UndirectedGraph {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String | Number} vertex - vertex whose degree is sought
+   * @param {String|Number} vertex - vertex whose degree is sought
    * @returns {Number} - degree of vertex
    */
   degree(vertex) {

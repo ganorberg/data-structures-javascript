@@ -94,8 +94,6 @@ class EdgeWeightedUndirectedGraph {
    * Space complexity: O(1)
    *
    * @param {Array<String|Number>} v1, v2, weight - edge vertices and weight
-   *
-   * @returns {Boolean} true - represents successful insertion
    */
   addEdge([v1, v2, weight]) {
     if (!this.adjacencyList.hasOwnProperty(v1)) { this.addVertex(v1); }
@@ -106,7 +104,6 @@ class EdgeWeightedUndirectedGraph {
     this.adjacencyList[v1].push(edge);
     this.adjacencyList[v2].push(edge);
     this.totalEdges++;
-    return true;
   }
 
   /**
@@ -121,8 +118,6 @@ class EdgeWeightedUndirectedGraph {
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex added to graph
-   *
-   * @returns {Boolean} true - represents successful insertion
    */
   addVertex(vertex) {
     if (this.adjacencyList.hasOwnProperty(vertex)) {
@@ -131,7 +126,6 @@ class EdgeWeightedUndirectedGraph {
 
     this.adjacencyList[vertex] = [];
     this.totalVertices++;
-    return true;
   }
 
   /**

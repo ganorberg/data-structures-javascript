@@ -81,7 +81,6 @@ class EdgeWeightedDirectedGraph {
    * Space complexity: O(1)
    *
    * @param {Array<String|Number>} v1, v2, weight - directed edge created where v1 -> v2
-   * @returns {Boolean} true - represents successful insertion
    */
   addEdge([v1, v2, weight]) {
     if (!this.adjacencyList.hasOwnProperty(v1)) { this.addVertex(v1); }
@@ -91,7 +90,6 @@ class EdgeWeightedDirectedGraph {
 
     this.adjacencyList[v1].push(edge);
     this.totalEdges++;
-    return true;
   }
 
   /**
@@ -106,8 +104,6 @@ class EdgeWeightedDirectedGraph {
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex added to graph
-   *
-   * @returns {Boolean} true - represents successful insertion
    */
   addVertex(vertex) {
     if (this.adjacencyList.hasOwnProperty(vertex)) {
@@ -116,7 +112,6 @@ class EdgeWeightedDirectedGraph {
 
     this.adjacencyList[vertex] = [];
     this.totalVertices++;
-    return true;
   }
 
   /**
