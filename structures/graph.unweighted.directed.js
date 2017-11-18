@@ -255,7 +255,7 @@ class DirectedGraph {
    *
    * IF REVERSED GRAPH DOES NOT EXIST
    *
-   * Time complexity: O(E + V^2), where V is total vertices and E is total edges
+   * Time complexity: O(EV + V^2), where V is total vertices and E is total edges
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex whose degree is sought
