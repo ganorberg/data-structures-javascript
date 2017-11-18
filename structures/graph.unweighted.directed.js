@@ -1,3 +1,79 @@
+/**
+ * @description Private method called in buildGraph function to add new edges to
+ * the graph. Note this method mutates the graph.
+ *
+ * Strategy: Add second vertex to first vertex's adjacency list as a string.
+ *
+ * Time complexity: O(1)
+ * Space complexity: O(1)
+ *
+ * @param {Object} adjacencyList - the graph object representation
+ * @param {Array<String|Number>} v1, v2 - directed edge created where v1 -> v2
+ *
+ * @private
+ */
+function addEdge(adjacencyList, [v1, v2]) {
+  adjacencyList[v1].push(String(v2));
+}
+
+/**
+ * @description Private method called in buildGraph function to add new vertices
+ * to the graph. Note this method mutates the graph.
+ *
+ * Strategy: In graph object, keys are vertices and values are arrays.
+ *
+ * Time complexity: O(1)
+ * Space complexity: O(1)
+ *
+ * @param {Object} adjacencyList - the graph object representation
+ * @param {String|Number} vertex - vertex to be added
+ *
+ * @private
+ */
+function addVertex(adjacencyList, vertex) {
+  adjacencyList[vertex] = [];
+}
+
+/**
+ * @description Private method called in constructor to deliver initial values
+ * for graph.
+ *
+ * Strategy: Loop through edges array. At each iteration, add the edge to the
+ * graph and any new vertices encountered. Update metrics when adding.
+ *
+ * Time complexity: O(N)
+ * Space complexity: O(N)
+ *
+ * @param {Array=} edges - array of subarrays containing pairs of vertices [v1, v2]
+ *
+ * @returns {Object} - initial values for Graph instance
+ *
+ * @private
+ */
+function buildGraph(edges = []) {
+  const adjacencyList = {};
+  let totalEdges = 0;
+  let totalVertices = 0;
+
+  edges.forEach(edge => {
+    const [v1, v2] = edge;
+    
+    if (!adjacencyList.hasOwnProperty(v1)) {
+      addVertex(adjacencyList, v1);
+      totalVertices++;
+    }
+    if (!adjacencyList.hasOwnProperty(v2)) {
+      addVertex(adjacencyList, v2);
+      totalVertices++;
+    }
+
+    addEdge(adjacencyList, edge);
+    totalEdges++;
+  });
+
+  return { adjacencyList, totalEdges, totalVertices };
+}
+
 /** Class representing a graph with directed edges */
 class DirectedGraph {
   /**
@@ -8,20 +84,23 @@ class DirectedGraph {
    *
    * This graph allows self-loops and parallel edges.
    *
-   * To build the graph, call addEdge with all edge pairs. The addEdge method
-   * will dynamically add vertices to the adjacency list if they did not exist
-   * prior.
+   * To build the graph, instantiate with an array of edges or call addEdge
+   * manually with all edge pairs. The addEdge method will dynamically add
+   * vertices to the adjacency list if they did not exist prior.
    *
    * @constructor
+   *
+   * @param {Array=} edges - array of subarrays containing pairs of vertices [v1, v2]
    *
    * @property {Object} adjacencyList - the graph itself
    * @property {Number} totalVertices - incremented when a vertex is added
    * @property {Number} totalEdges - incremented when an edge is added
    */
-  constructor() {
-    this.adjacencyList = {};
-    this.totalVertices = 0;
-    this.totalEdges = 0;
+  constructor(edges = []) {
+    const { adjacencyList, totalEdges, totalVertices } = buildGraph(edges);
+    this.adjacencyList = adjacencyList;
+    this.totalEdges = totalEdges;
+    this.totalVertices = totalVertices;
   }
 
   /**
