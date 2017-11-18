@@ -69,8 +69,6 @@ class Queue {
    * Space complexity: O(1)
    *
    * @param {*} val - value added to queue
-   *
-   * @returns {Number} - size of queue after value inserted
    */
   enqueue(val) {
     if (this.size >= this.capacity) { return; }
@@ -78,15 +76,14 @@ class Queue {
     const node = new Node(val);
     this.size++;
 
-    // if queue was empty
+    // Empty queue check. Allows this.size++ to be in one place above.
     if (this.front === null) {
       this.front = this.rear = node;
-      return this.size;
+      return;
     }
 
     this.rear.next = node;
     this.rear = this.rear.next;
-    return this.size;
   }
 
   /** 

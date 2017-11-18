@@ -94,8 +94,6 @@ class HashTable {
    * @param {*} value - value to be inserted with its key
    * @param {Number} size - size of storage where key-value pair is inserted
    * @param {Array} storage - storage where key-value pair is inserted
-   *
-   * @returns {Boolean} - true means insertion was successful
    */
   insert(key, value, size = this.size, storage = this.storage) {
     /* Do not allow resize to reference 'this' keyword, which typically points
@@ -115,7 +113,6 @@ class HashTable {
     const address = hashCode(key, size);
     if (storage[address] === undefined) { storage[address] = {}; }
     storage[address][key] = value;
-    return true;
   }
 
   /**

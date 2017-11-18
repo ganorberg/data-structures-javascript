@@ -144,7 +144,7 @@ class BinarySearchTree {
     // If tree is empty...
     if (this.root === null) {
       this.root = newNode;
-      return true;
+      return;
     }
 
     let node = this.root;
@@ -157,7 +157,7 @@ class BinarySearchTree {
       if (value < node.value) {
         if (node.left === null) { 
           node.left = newNode;
-          return true;
+          return;
         }
 
         node = node.left;
@@ -167,7 +167,7 @@ class BinarySearchTree {
       if (value > node.value) {
         if (node.right === null) { 
           node.right = newNode;
-          return true;
+          return;
         }
 
         node = node.right;

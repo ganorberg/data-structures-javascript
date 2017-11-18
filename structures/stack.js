@@ -83,16 +83,11 @@ class Stack {
    * Space complexity: O(1)
    *
    * @param {*} val - value added to stack
-   *
-   * @returns {Number} - size of stack after value inserted
    */
   push(val) {
-    if (this.storage.length < this.capacity) {
-      this.storage.push(val);
-      if (val >= this.maxes[this.maxes.length - 1]) { this.maxes.push(val); }
-    }
-
-    return this.storage.length;
+    if (this.storage.length >= this.capacity) { return; }
+    this.storage.push(val);
+    if (val >= this.maxes[this.maxes.length - 1]) { this.maxes.push(val); }
   }
 
   /**

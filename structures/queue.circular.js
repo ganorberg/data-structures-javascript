@@ -73,8 +73,6 @@ class CircularQueue {
    * Space complexity: O(1)
    *
    * @param {*} value - item inserted into queue
-   *
-   * @returns {Boolean} - true to represent successful insertion
    */
   enqueue(value) {
     this.newest = incrementIndex(this.newest, this.size);
@@ -85,7 +83,6 @@ class CircularQueue {
     }
 
     this.ring[this.newest] = value;
-    return true;
   }
 }
 
