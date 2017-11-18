@@ -13,8 +13,8 @@ const MinimumPriorityQueue = require('../structures/queue.priority.min');
  * its edges to compare distances from the source. If a smaller distance is
  * found, update the distance, the parent, and add to the priority queue.
  *
- * Time complexity: O(ElogV)
- * Space complexity: O(E)
+ * Time complexity: O(ElogV), where V is total vertices and E is total edges
+ * Space complexity: O(E), where E is total edges
  *
  * TIME COMPLEXITY EXPLAINED
  * Breadth-first search operates in O(V + E), where V is total vertices and E is
@@ -26,14 +26,23 @@ const MinimumPriorityQueue = require('../structures/queue.priority.min');
  * Without decrease key, the priority queue has the potential to add all edges
  * from the graph. Therefore, the space complexity is O(E), which is greater
  * than O(V) from the visited Set.
+ *
+ * @param {Object} distanceFromSource - track weight for each vertex from source
+ * @param {Object} graph - graph being processed
+ * @param {Object} parent - track how algorithm reaches each vertex
+ * @param {String|Number} source - source vertex for all paths
+ * @param {Set} visited - track which vertices have already been visited
+ *
+ * @private
  */
-function dijkstra(
-  source,
-  graph,
-  visited,
+function initializeDijkstra(
   distanceFromSource,
+  graph,
   parent,
+  source,
+  visited,
 ) {
+  if (!graph) { throw new Error('The graph is not loaded, my friend!'); }  
   if (!graph.adjacencyList.hasOwnProperty(source)) {
     throw new Error('This source vertex is not in the graph, my friend!');
   }
@@ -81,21 +90,31 @@ class ShortestPath {
    * to trade space for better time complexity as outlined in this research paper:
    * https://pdfs.semanticscholar.org/5c50/a1593b6cbb16b578dc57ebf38c26d479c317.pdf
    *
-   * Run initialize method once to populate constructor values. Then use methods
-   * to access information.
-   *
    * @constructor
    *
    * @param {Graph} graph - graph being processed
    * @param {String|Number} sourceVertex - source vertex for all paths
+   *
+   * @property {Object} distanceFromSource - track weight for each vertex from source
+   * @property {Object} graph - graph being processed
+   * @property {Object} parent - track how algorithm reaches each vertex
+   * @property {String|Number} sourceVertex - source vertex for all paths
+   * @property {Set} visited - track which vertices have already been visited
    */
   constructor(graph, sourceVertex) {
     this.distanceFromSource = {};
     this.graph = graph;
-    this.initialized = false;
     this.parent = {};
     this.sourceVertex = String(sourceVertex);
     this.visited = new Set();
+
+    initializeDijkstra(
+      this.distanceFromSource,
+      this.graph,
+      this.parent,
+      this.sourceVertex,
+      this.visited,
+    );
   }
 
   /**
@@ -112,7 +131,6 @@ class ShortestPath {
    * @returns {Number} - distance from source vertex to input vertex
    */
   distanceTo(vertex) {
-    if (!this.initialized) { throw new Error('Please initialize, my friend!'); }
     if (!this.hasPathTo(vertex)) { return null; }
     return this.distanceFromSource[vertex];
   }
@@ -125,12 +143,11 @@ class ShortestPath {
    * Time complexity: O(1)
    * Space complexity: O(1)
    *
-   * @param {String | Number} vertex - vertex that may be connected to source vertex
+   * @param {String|Number} vertex - vertex that may be connected to source vertex
    *
    * @returns {Boolean} - true if vertex is connected to source vertex
    */
   hasPathTo(vertex) {
-    if (!this.initialized) { throw new Error('Please initialize, my friend!'); }
     if (!this.graph.adjacencyList.hasOwnProperty(vertex)) {
       throw new Error('The input vertex is not in the graph, my friend!');
     }
@@ -140,43 +157,19 @@ class ShortestPath {
   }
 
   /**
-   * @description Initialize constructor values.
-   *
-   * Strategy: Call dijkstra private method.
-   * 
-   * Time complexity: O(ElogV), where E is total edges and V is total vertices
-   * Space complexity: O(E)
-   */
-  initialize() {
-    if (this.initialized) { throw new Error('Already initialized, my friend!'); }
-    if (!this.graph) { throw new Error('The graph is not loaded, my friend!'); }
-
-    this.initialized = true;
-
-    dijkstra(
-      this.sourceVertex,
-      this.graph,
-      this.visited,
-      this.distanceFromSource,
-      this.parent,
-    );
-  }
-
-  /**
    * @description Get the shortest path from the source vertex to the input
    * vertex.
    *
    * Strategy: Traverse parent object until source vertex is reached.
    *
-   * Time complexity: O(path length)
-   * Space complexity: O(path length)
+   * Time complexity: O(P), where P is path length
+   * Space complexity: O(P), where P is path length
    *
    * @param {String|Number} destinationVertex - vertex whose path is sought
    *
    * @returns {Array} - shortest path from destination to source
    */
   shortestPathTo(destinationVertex) {
-    if (!this.initialized) { throw new Error('Please initialize, my friend!'); }
     if (!this.hasPathTo(destinationVertex)) { return null; }
     
     const path = [];

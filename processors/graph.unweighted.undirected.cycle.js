@@ -1,26 +1,25 @@
 /**
- * @description Private method that detects cycles using depth-first search. It
- * is called in the public initialize method.
+ * @description Private method that detects cycles using depth-first search.
  *
  * Strategy: Loop through adjacent vertices. If we see the same vertex twice
  * (not including parent of vertex in each DFS call), then there is a cycle.
  * Track visits using a set.
  *
- * Time complexity: O(visited this pass)
- * Space complexity: O(visited this pass)
+ * Time complexity: O(V + E), where V is total vertices and E is total edges
+ * Space complexity: O(V), where V is total vertices
  *
  * @param {Graph} graph - graph being processed
- * @param {String | Number} vertex - current vertex being traversed
  * @param {String} parent - parent of the vertex whose adjacency list is looped
+ * @param {String|Number} vertex - current vertex being traversed
  * @param {Set} visited - vertices already visited
- * @param {Object} cycleProcessor - UndirectedCycle class instance
+ *
+ * @private
  */
 function depthFirstSearch(
   graph,
-  vertex,
   parent,
+  vertex,
   visited,
-  cycleProcessor,
 ) {
   if (!graph.adjacencyList.hasOwnProperty(vertex)) {
     throw new Error('The input vertex is not in the graph, my friend!');
@@ -32,19 +31,22 @@ function depthFirstSearch(
       if (adjacentVertex === parent) { continue; }
 
       // If already visited and NOT the parent, the graph has a cycle!
-      cycleProcessor.hasCycle = true;
-      return;
+      return true;
     }
 
     visited.add(adjacentVertex);
-    depthFirstSearch(
+
+    const hasCycle = depthFirstSearch(
       graph,
-      adjacentVertex,
       vertex,
+      adjacentVertex,
       visited,
-      cycleProcessor,
     );
+
+    if (hasCycle) { return true; }
   }
+
+  return false;
 }
 
 /**
@@ -53,11 +55,13 @@ function depthFirstSearch(
  * Strategy: Loop through adjacency lists looking for duplicates.
  *
  * Time complexity: O(V + E), where V is total vertices and E is total edges
- * Space complexity: O(longest adjacent list)
+ * Space complexity: O(A), where A is longest adjacent list
  *
  * @param {Graph} graph - graph being processed
  *
  * @returns {Boolean} - true if parallel edges found, otherwise false
+ *
+ * @private
  */
 function hasParallelEdges(graph) {
   for (const vertex in graph.adjacencyList) {
@@ -88,6 +92,8 @@ function hasParallelEdges(graph) {
  * @param {Graph} graph - graph being processed
  *
  * @returns {Boolean} - true if self loop found, otherwise false
+ *
+ * @private
  */
 function hasSelfLoop(graph) {
   for (const vertex in graph.adjacencyList) {
@@ -95,64 +101,82 @@ function hasSelfLoop(graph) {
     if (!graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
     const adjacentVertices = graph.adjacencyList[vertex];
     for (const adjacentVertex of adjacentVertices) {
-      if (vertex == adjacentVertex) { return true; }
+      if (vertex === adjacentVertex) { return true; }
     }
   }
 
   return false;
 }
 
-/** Class representing cycle processor for undirected graphs */
+/**
+ * @description Check whether a cycle exists in the graph.
+ *
+ * Strategy: Check for self loops and parallel edges first, since those are
+ * considered cycles. If none, loop through every vertex in the graph. Track
+ * visits with a set. Call depth-first search on vertices that have not
+ * already been visited. If DFS ever returns true, return true immediately.
+ *
+ * Time complexity: O(V + E), where V is total vertices and E is total edges
+ * Space complexity: O(V)
+ *
+ * @param {Object} graph - graph being processed
+ *
+ * @returns {Boolean} - true if cycle found, otherwise false
+ *
+ * @private
+ */
+function hasCycle(graph) {
+  if (!graph) { throw new Error('The graph is not loaded, my friend!'); }
+  if (hasSelfLoop(graph) || hasParallelEdges(graph)) { return true; }
+
+  const visited = new Set();
+  for (const vertex in graph.adjacencyList) {
+    // Ignore prototype chain
+    if (!graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
+    
+    if (visited.has(vertex)) { continue; }
+    visited.add(vertex);
+    
+    const hasCycle = depthFirstSearch(
+      graph,
+      null,
+      vertex,
+      visited,
+    );
+    
+    if (hasCycle) { return true; }
+  }
+
+  return false;
+}
+  
+/** Class representing cycle processor for unweighted undirected graphs */
 class UndirectedCycle {
+  /**
+   * @constructor
+   *
+   * @param {Object} graph - graph being processed
+   *
+   * @property {Object} graph - graph being processed
+   * @property {Boolean} checkCycle - true if cycle found, otherwise false
+   */
   constructor(graph) {
     this.graph = graph;
-    this.hasCycle = null;
-    this.initialized = false;
+    this.checkCycle = hasCycle(graph);
   }
+
   /**
-   * @description Initialize constructor values. After running, hasCycle will
-   * contain a boolean value indicating whether a cycle was detected or not.
+   * @description Check whether graph has a cycle.
    *
-   * Strategy: Check for self loops and parallel edges first, since those are
-   * considered cycles. If none, loop through every vertex in the graph. Track
-   * visits with a set. Call depth-first search on vertices that have not
-   * already been visited. If DFS ever returns true, return true immediately.
+   * Strategy: Read checkCycle property.
    *
-   * Time complexity: O(V + E), where V is total vertices and E is total edges
-   * Space complexity: O(V)
+   * Time complexity: O(1)
+   * Space complexity: O(1)
    *
-   * @returns {Boolean} - true if cycle found, otherwise false
+   * @returns {Boolean} - true if cycle present, otherwise false
    */
-  initialize() {
-    if (this.initialized) { throw new Error('Already initialized, my friend!'); }
-    if (!this.graph) { throw new Error('The graph is not loaded, my friend!'); }
-
-    this.initialized = true;
-
-    if (hasSelfLoop(this.graph) || hasParallelEdges(this.graph)) {
-      return this.hasCycle = true;
-    }
-
-    const visited = new Set();
-    for (const vertex in this.graph.adjacencyList) {
-      // Ignore prototype chain
-      if (!this.graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
-      if (visited.has(vertex)) { continue; }
-      visited.add(vertex);
-      
-      // Side effect: mutates this.hasCycle to true if cycle is found
-      depthFirstSearch(
-        this.graph,
-        vertex,
-        null,
-        visited,
-        this,
-      );
-      
-      if (this.hasCycle) { return true; }
-    }
-
-    return this.hasCycle = false;
+  hasCycle() {
+    return this.checkCycle;
   }
 }
 

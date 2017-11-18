@@ -2,19 +2,21 @@ const MinimumPriorityQueue = require('../structures/queue.priority.min');
 
 /**
  * @description Private method that visits vertices placed in the minimum
- * spanning tree. Called in findMST private method.
+ * spanning tree. Called in initializeMST.
  *
  * Strategy: Add input vertex to the Set of vertices in the MST. Loop through
  * its edges. If the other vertex is not in the MST, add the edge to the
  * priority queue.
  *
- * Time complexity: O(adjacent vertices)
+ * Time complexity: O(A), where A is adjacent vertices
  * Space complexity: O(1)
  *
- * @param {String | Number} vertex - current vertex visited
+ * @param {String|Number} vertex - current vertex visited
  * @param {Graph} graph - graph being processed
  * @param {Set} MSTvertices - vertices in the minimum spanning tree
  * @param {PriorityQueue} priorityQueue - minPQ tracking edge weights
+ *
+ * @private
  */
 function visit(vertex, graph, MSTvertices, priorityQueue) {
   if (!graph.adjacencyList.hasOwnProperty(vertex)) {
@@ -38,12 +40,16 @@ function visit(vertex, graph, MSTvertices, priorityQueue) {
  * vertices.
  *
  * Time complexity: O(ElogV), where E is total edges and V is total vertices
- * Space complexity: O(E)
+ * Space complexity: O(E), where E is total edges
  *
  * @param {Graph} graph - graph being processed
  * @param {Set} MSTedges - edges in the minimum spanning tree
+ *
+ * @private
  */
-function findMST(graph, MSTedges) {
+function initializeMST(graph, MSTedges) {
+  if (!graph) { throw new Error('The graph is not loaded, my friend!'); }
+  
   // Ugly but efficient way to grab a starting vertex from graph
   let sourceVertex;
   for (const vertex in graph.adjacencyList) {
@@ -80,35 +86,35 @@ function findMST(graph, MSTedges) {
  * Class representing a minimum spanning tree processor for weighted undirected
  * connected graphs
  */
-class MinSpanningTree {
+class MinimumSpanningTree {
   /**
    * Prim's algorithm (lazy).
    *
    * @param {Object} graph - graph being processed
+   *
+   * @property {Object} graph - graph being processed
+   * @property {Set} minimumSpanningTree - edges of MST
    */
   constructor(graph) {
     this.graph = graph;
-    this.initialized = false;
     this.minimumSpanningTree = new Set();
+
+    initializeMST(this.graph, this.minimumSpanningTree);
   }
 
   /**
-   * @description Initialize constructor values. After running, the minimum
-   * spanning tree property will contain the set of edges in the MST.
+   * @description Get the edges that comprise the minimum spanning tree.
    *
-   * Strategy: Call the private findMST method.
-   * 
-   * Time complexity: O(ElogV), where V is total vertices and E is total edges
-   * Space complexity: O(E)
+   * Strategy: Access minimumSpanningTree property.
+   *
+   * Time complexity: O(1)
+   * Space complexity: O(1)
+   *
+   * @returns {Set} - set of edges comprising MST
    */
-  initialize() {
-    if (this.initialized) { throw new Error('Already initialized, my friend!'); }
-    if (!this.graph) { throw new Error('The graph is not loaded, my friend!'); }
-
-    this.initialized = true;
-
-    findMST(this.graph, this.minimumSpanningTree);
+  getMinimumSpanningTree() {
+    return this.minimumSpanningTree;
   }
 }
 
-module.exports = MinSpanningTree;
+module.exports = MinimumSpanningTree;
