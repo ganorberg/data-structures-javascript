@@ -2,12 +2,23 @@ const expect = require('chai').expect;
 
 let UndirectedGraph;
 let graph;
+
 let UndirectedCycle;
 let cycleProcessor;
 
+const TEST_EDGES = [
+  [0, 7],
+  [0, 1],
+  [1, 2],
+  [2, 4],
+  [1, 3],
+  [3, 5],
+];
+
 try {
   UndirectedGraph = require('../../structures/graph.unweighted.undirected');
-  graph = new UndirectedGraph();
+  graph = new UndirectedGraph(TEST_EDGES);
+
   UndirectedCycle = require('../../processors/graph.unweighted.undirected.cycle');
   cycleProcessor = new UndirectedCycle(graph);
 } catch (e) {
@@ -18,15 +29,7 @@ try {
 
 describe('UndirectedCycle', () => {
   beforeEach(() => {
-    graph = new UndirectedGraph();
-    const edges = [
-      [0, 7],
-      [0, 1],
-      [1, 2],
-      [2, 4],
-      [1, 3],
-      [3, 5],
-    ];
+    graph = new UndirectedGraph(TEST_EDGES);
 
     /*
       No cycles initially:
@@ -35,8 +38,6 @@ describe('UndirectedCycle', () => {
         <-> 1 <-> 2 <-> 4
               <-> 3 <-> 5
     */
-    
-    edges.forEach(edge => graph.addEdge(edge));
 
     cycleProcessor = new UndirectedCycle(graph);
   });

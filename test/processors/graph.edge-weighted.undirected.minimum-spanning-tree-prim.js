@@ -2,13 +2,32 @@ const expect = require('chai').expect;
 
 let UndirectedGraph;
 let graph;
+
 let MinimumSpanningTree;
 let mst;
 
+const TEST_EDGES = [
+  [0, 7, 0.16],
+  [2, 3, 0.17],
+  [1, 7, 0.19],
+  [0, 2, 0.26],
+  [5, 7, 0.28],
+  [1, 3, 0.29],
+  [1, 5, 0.32],
+  [2, 7, 0.34],
+  [4, 5, 0.35],
+  [1, 2, 0.36],
+  [4, 7, 0.37],
+  [0, 4, 0.38],
+  [6, 2, 0.40],
+  [3, 6, 0.52],
+  [6, 0, 0.58],
+  [6, 4, 0.93],
+];
+
 try {
   UndirectedGraph = require('../../structures/graph.edge-weighted.undirected');
-  graph = new UndirectedGraph();
-  graph.addVertex(0);
+  graph = new UndirectedGraph(TEST_EDGES);
 
   MinimumSpanningTree = require('../../processors/graph.edge-weighted.undirected.minimum-spanning-tree-prim');
   mst = new MinimumSpanningTree(graph);
@@ -20,29 +39,7 @@ try {
 
 describe('MinimumSpanningTree', () => {
   beforeEach(() => {
-    graph = new UndirectedGraph();
-
-    const edges = [
-      [0, 7, 0.16],
-      [2, 3, 0.17],
-      [1, 7, 0.19],
-      [0, 2, 0.26],
-      [5, 7, 0.28],
-      [1, 3, 0.29],
-      [1, 5, 0.32],
-      [2, 7, 0.34],
-      [4, 5, 0.35],
-      [1, 2, 0.36],
-      [4, 7, 0.37],
-      [0, 4, 0.38],
-      [6, 2, 0.40],
-      [3, 6, 0.52],
-      [6, 0, 0.58],
-      [6, 4, 0.93],
-    ];
-    
-    edges.forEach(edge => graph.addEdge(edge));
-
+    graph = new UndirectedGraph(TEST_EDGES);
     mst = new MinimumSpanningTree(graph);
   });
 

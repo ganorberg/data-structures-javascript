@@ -2,12 +2,23 @@ const expect = require('chai').expect;
 
 let DirectedGraph;
 let graph;
+
 let TopologicalSort;
 let topologicalProcessor;
 
+const TEST_EDGES = [
+  [0, 7],
+  [0, 1],
+  [1, 2],
+  [2, 4],
+  [1, 3],
+  [3, 5],
+];
+
 try {
   DirectedGraph = require('../../structures/graph.unweighted.directed');
-  graph = new DirectedGraph();
+  graph = new DirectedGraph(TEST_EDGES);
+
   TopologicalSort = require('../../processors/graph.unweighted.directed.topological-sort');
   topologicalProcessor = new TopologicalSort(graph);
 } catch (e) {
@@ -18,23 +29,13 @@ try {
 
 describe('TopologicalSort', () => {
   beforeEach(() => {
-    graph = new DirectedGraph();
-    const edges = [
-      [0, 7],
-      [0, 1],
-      [1, 2],
-      [2, 4],
-      [1, 3],
-      [3, 5],
-    ];
+    graph = new DirectedGraph(TEST_EDGES);
 
     /*
       0 -> 7
         -> 1 -> 2 -> 4
              -> 3 -> 5
     */
-    
-    edges.forEach(edge => graph.addEdge(edge));
 
     topologicalProcessor = new TopologicalSort(graph);
   });

@@ -2,12 +2,32 @@ const expect = require('chai').expect;
 
 let UndirectedGraph;
 let graph;
+
 let ConnectedComponents;
 let connected;
 
+const TEST_EDGES = [
+  [0, 5],
+  [4, 3],
+  [0, 1],
+  [9, 12],
+  [6, 4],
+  [5, 4],
+  [0, 2],
+  [11, 12],
+  [9, 10],
+  [0, 6],
+  [7, 8],
+  [9, 11],
+  [5, 3],
+  [5, 5],
+  [14, 14],
+];
+
 try {
   UndirectedGraph = require('../../structures/graph.unweighted.undirected');
-  graph = new UndirectedGraph();
+  graph = new UndirectedGraph(TEST_EDGES);
+
   ConnectedComponents = require('../../processors/graph.unweighted.undirected.connected-components');
   connected = new ConnectedComponents(graph);
 } catch (e) {
@@ -18,28 +38,7 @@ try {
 
 describe('ConnectedComponents', () => {
   beforeEach(() => {
-    graph = new UndirectedGraph();
-
-    const edges = [
-      [0, 5],
-      [4, 3],
-      [0, 1],
-      [9, 12],
-      [6, 4],
-      [5, 4],
-      [0, 2],
-      [11, 12],
-      [9, 10],
-      [0, 6],
-      [7, 8],
-      [9, 11],
-      [5, 3],
-      [5, 5],
-      [14, 14],
-    ];
-    
-    edges.forEach(edge => graph.addEdge(edge));
-
+    graph = new UndirectedGraph(TEST_EDGES);
     connected = new ConnectedComponents(graph);
   });
 
@@ -64,8 +63,6 @@ describe('ConnectedComponents', () => {
 
   it('should work for number and string data types', () => {
     // Arrange
-    graph = new UndirectedGraph();
-    
     const edges = [
       ['dog', 'woof'],
       ['dog', 'bark'],
@@ -73,8 +70,8 @@ describe('ConnectedComponents', () => {
       [0, 'meow'],
       [14, 'dog'],
     ];
-    
-    edges.forEach(edge => graph.addEdge(edge));
+
+    graph = new UndirectedGraph(edges);
 
     // Act
     connected = new ConnectedComponents(graph);

@@ -2,14 +2,32 @@ const expect = require('chai').expect;
 
 let UndirectedGraph;
 let graph;
+
 let DepthFirstPaths;
 let paths;
+
 const SOURCE_VERTEX = 0;
+const TEST_EDGES = [
+  [0, 5],
+  [4, 3],
+  [0, 1],
+  [9, 12],
+  [6, 4],
+  [5, 4],
+  [0, 2],
+  [11, 12],
+  [9, 10],
+  [0, 6],
+  [7, 8],
+  [9, 11],
+  [5, 3],
+  [5, 5],
+  [14, 14],
+];
 
 try {
   UndirectedGraph = require('../../structures/graph.unweighted.undirected');
-  graph = new UndirectedGraph();
-  graph.addVertex(SOURCE_VERTEX);
+  graph = new UndirectedGraph(TEST_EDGES);
 
   DepthFirstPaths = require('../../processors/graph.unweighted.depth-first-paths');
   paths = new DepthFirstPaths(graph, SOURCE_VERTEX);
@@ -21,28 +39,7 @@ try {
 
 describe('Undirected DepthFirstPaths', () => {
   beforeEach(() => {
-    graph = new UndirectedGraph();
-
-    const edges = [
-      [0, 5],
-      [4, 3],
-      [0, 1],
-      [9, 12],
-      [6, 4],
-      [5, 4],
-      [0, 2],
-      [11, 12],
-      [9, 10],
-      [0, 6],
-      [7, 8],
-      [9, 11],
-      [5, 3],
-      [5, 5],
-      [14, 14],
-    ];
-    
-    edges.forEach(edge => graph.addEdge(edge));
-
+    graph = new UndirectedGraph(TEST_EDGES);
     paths = new DepthFirstPaths(graph, SOURCE_VERTEX);
   });
 
@@ -86,8 +83,7 @@ describe('Undirected DepthFirstPaths', () => {
   });
 
   it('should work for number and string data types', () => {
-    graph = new UndirectedGraph();
-    
+    // Arrange
     const edges = [
       ['dog', 'woof'],
       ['dog', 'bark'],
@@ -96,9 +92,12 @@ describe('Undirected DepthFirstPaths', () => {
       [14, 'dog'],
     ];
     
-    edges.forEach(edge => graph.addEdge(edge));
+    graph = new UndirectedGraph(edges);
+    
+    // Act
     paths = new DepthFirstPaths(graph, SOURCE_VERTEX);
   
+    // Assert
     expect(paths.visited.has('0')).to.be.true;
     expect(paths.visited.has('meow')).to.be.true;
     expect(paths.visited.has('cat')).to.be.true;

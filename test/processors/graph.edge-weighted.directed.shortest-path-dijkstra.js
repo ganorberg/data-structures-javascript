@@ -2,14 +2,34 @@ const expect = require('chai').expect;
 
 let DirectedGraph;
 let graph;
+
 let ShortestPath;
 let path;
+
 const SOURCE_VERTEX = 0;
+const TEST_EDGES = [
+  [0, 1, 5],
+  [0, 4, 9],
+  [0, 7, 8],
+  [1, 2, 12],
+  [1, 3, 15],
+  [1, 7, 4],
+  [2, 3, 3],
+  [2, 6, 11],
+  [3, 6, 9],
+  [4, 5, 4],
+  [4, 6, 20],
+  [4, 7, 5],
+  [5, 2, 1],
+  [5, 6, 13],
+  [7, 5, 6],
+  [7, 2, 7],
+  [11, 12, 13],
+];
 
 try {
   DirectedGraph = require('../../structures/graph.edge-weighted.directed');
-  graph = new DirectedGraph();
-  graph.addVertex(SOURCE_VERTEX);
+  graph = new DirectedGraph(TEST_EDGES);
   
   ShortestPath = require('../../processors/graph.edge-weighted.directed.shortest-path-dijkstra');
   path = new ShortestPath(graph, SOURCE_VERTEX);
@@ -18,33 +38,10 @@ try {
     'likely from an incorrect file path or exporting a non-constructor from ' +
     'the processor or graph files.');
 }
- 
+
 describe('ShortestPath', () => {
   beforeEach(() => {
-    graph = new DirectedGraph();
-
-    const edges = [
-      [0, 1, 5],
-      [0, 4, 9],
-      [0, 7, 8],
-      [1, 2, 12],
-      [1, 3, 15],
-      [1, 7, 4],
-      [2, 3, 3],
-      [2, 6, 11],
-      [3, 6, 9],
-      [4, 5, 4],
-      [4, 6, 20],
-      [4, 7, 5],
-      [5, 2, 1],
-      [5, 6, 13],
-      [7, 5, 6],
-      [7, 2, 7],
-      [11, 12, 13],
-    ];
-    
-    edges.forEach(edge => graph.addEdge(edge));
-
+    graph = new DirectedGraph(TEST_EDGES);
     path = new ShortestPath(graph, SOURCE_VERTEX);
   });
 
