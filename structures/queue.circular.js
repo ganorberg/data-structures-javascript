@@ -5,7 +5,6 @@
  * so, wrap around by setting index to 0. If not, increment index by 1.
  *
  * Time complexity: O(1)
- * 
  * Space complexity: O(1)
  *
  * @param {Number} index - pointer for oldest or newest element in queue
@@ -50,7 +49,6 @@ class CircularQueue {
    * Do nothing if no values to dequeue.
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @returns {*} - dequeued item
@@ -72,7 +70,6 @@ class CircularQueue {
    * overwriting. Then set value.
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @param {*} value - item inserted into queue

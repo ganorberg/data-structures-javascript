@@ -47,7 +47,6 @@ class Queue {
    * Strategy: Reassign front to next node
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @returns {*} - value removed from queue, or undefined if empty
@@ -67,7 +66,6 @@ class Queue {
    * Strategy: Use native Array push method if under capacity
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @param {*} val - value added to queue
@@ -97,7 +95,6 @@ class Queue {
    * Strategy: Use size property
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @returns {Boolean} - true if empty, or false otherwise
@@ -112,7 +109,6 @@ class Queue {
    * Strategy: Check if size equals capacity
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @returns {Boolean} - true if full, or false otherwise
@@ -127,7 +123,6 @@ class Queue {
    * Strategy: Look at front property
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @returns {*} - value at front of queue
@@ -142,7 +137,6 @@ class Queue {
    * Strategy: Use size property
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - total amount of items in queue

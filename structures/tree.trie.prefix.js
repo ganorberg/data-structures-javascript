@@ -5,7 +5,6 @@
  * Strategy: Check if the current node ends a word or forks to other words.
  *
  * Time complexity: O(1)
- *
  * Space complexity: O(1)
  *
  * @param {Object} currentNode - node visited
@@ -47,7 +46,6 @@ class PrefixTrie {
    * prepend the prefix to all words found.
    *
    * Time complexity: O(s * N), where s is suffix length and N is number of matched words
-   *
    * Space complexity: O(N)
    *
    * @param {String} prefix - prefix to be matched
@@ -83,7 +81,6 @@ class PrefixTrie {
    * letter at root, which removes whole word.
    *
    * Time complexity: O(c), where c is number of characters in word
-   *
    * Space complexity: O(1)
    *
    * @param {String} word - word to be removed
@@ -130,7 +127,6 @@ class PrefixTrie {
    * not exist in trie, word does not exist. If word completes, return value.
    *
    * Time complexity: O(c), where c is number of characters in key
-   *
    * Space complexity: O(1)
    *
    * @param {String} word - key to access value
@@ -160,7 +156,6 @@ class PrefixTrie {
    * if traversal ends successfully.
    *
    * Time complexity: O(c), where c is number of characters in prefix
-   *
    * Space complexity: O(1)
    *
    * @param {String} prefix - prefix to be searched
@@ -189,7 +184,6 @@ class PrefixTrie {
    * Strategy: Use public get method.
    *
    * Time complexity: O(c), where c is number of characters in word
-   *
    * Space complexity: O(1)
    *
    * @param {String} word - key to be searched
@@ -212,7 +206,6 @@ class PrefixTrie {
    * ensure alphabetical order.
    *
    * Time complexity: O(N)
-   *
    * Space complexity: O(N)
    *
    * @param {Object=} node - node being traversed
@@ -239,7 +232,6 @@ class PrefixTrie {
    * not exist in trie, create it. When word completes, add value to next node.
    *
    * Time complexity: O(c), where c is number of characters
-   *
    * Space complexity: O(1)
    *
    * Tradeoffs: A small amount of extra space is used to store value in a

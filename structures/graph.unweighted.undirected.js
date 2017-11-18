@@ -38,7 +38,6 @@ class UndirectedGraph {
    * for methods like averageDegree. 
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @param {Array<String | Number>} v1, v2 - vertices sharing new edge
@@ -64,7 +63,6 @@ class UndirectedGraph {
    * Edge case: throw error if vertex already exists
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex added to graph
@@ -88,7 +86,6 @@ class UndirectedGraph {
    * Edge case: vertex does not exist in graph
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex with potential adjacent vertices
@@ -111,7 +108,6 @@ class UndirectedGraph {
    * the average degree.
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - average degree of graph
@@ -131,7 +127,6 @@ class UndirectedGraph {
    * Edge case: vertex does not exist in graph
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @param {String | Number} vertex - vertex whose degree is sought
@@ -151,8 +146,7 @@ class UndirectedGraph {
    * Strategy: Loop through each vertex with a for in loop. Calculate each
    * vertex's degree, then update max if it's the highest degree so far.
    *
-   * Time complexity: O(total vertices)
-   * 
+   * Time complexity: O(V), where V is total vertices
    * Space complexity: O(1)
    *
    * @returns {Number} - largest degree in graph
@@ -179,7 +173,6 @@ class UndirectedGraph {
    * list.
    *
    * Time complexity: O(V + E) where V is total vertices and E is total edges
-   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - number of self loops, as you might have guessed!

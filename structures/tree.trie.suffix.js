@@ -6,6 +6,9 @@
  * make trie case insensitive. Ignore whitespace with regex check. Notice that
  * the index is placed in the node after the final letter.
  *
+ * Time complexity: O(c), where c is number of characters in suffix
+ * Space complexity: O(c), where c is number of characters in suffix
+ *
  * @param {String} suffix - suffix inserted into trie
  * @param {Object} trie - suffix trie where suffix is being inserted
  * @param {Number} index - index where suffix begins in original string
@@ -40,6 +43,9 @@ function insert(suffix, trie, index) {
  * Strategy: Create root object. Insert every possible suffix of input string.
  * Build suffix string by prepending one character at a time starting at end of
  * word. For example, BANANA inserts A, NA, ANA, NANA, ANANA, BANANA.
+ *
+ * Time complexity: O(N)
+ * Space complexity: O(N)
  *
  * @param {String} string - string that suffix trie represents
  *
@@ -88,7 +94,6 @@ class SuffixTrie {
    * if traversal ends successfully and the final node has a terminating marker.
    *
    * Time complexity: O(c), where c is number of characters in suffix
-   *
    * Space complexity: O(1)
    *
    * @param {String} suffix - suffix to be searched
@@ -120,7 +125,6 @@ class SuffixTrie {
    * Edge case: empty string returns true
    *
    * Time complexity: O(c), where c is number of characters in suffix
-   *
    * Space complexity: O(1)
    *
    * @param {String} pattern - pattern to be searched

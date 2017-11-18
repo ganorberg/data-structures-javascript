@@ -91,7 +91,6 @@ class EdgeWeightedUndirectedGraph {
    * for methods like averageDegree. 
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @param {Array<String|Number>} v1, v2, weight - edge vertices and weight
@@ -119,7 +118,6 @@ class EdgeWeightedUndirectedGraph {
    * Edge case: throw error if vertex already exists
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex added to graph
@@ -144,7 +142,6 @@ class EdgeWeightedUndirectedGraph {
    * Edge case: vertex does not exist in graph
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex with potential adjacent vertices
@@ -168,7 +165,6 @@ class EdgeWeightedUndirectedGraph {
    * the average degree.
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - average degree of graph
@@ -188,7 +184,6 @@ class EdgeWeightedUndirectedGraph {
    * Edge case: vertex does not exist in graph
    *
    * Time complexity: O(1)
-   * 
    * Space complexity: O(1)
    *
    * @param {String|Number} vertex - vertex whose degree is sought
@@ -209,8 +204,7 @@ class EdgeWeightedUndirectedGraph {
    * Strategy: Loop through each vertex with a for in loop. Calculate each
    * vertex's degree, then update max if it's the highest degree so far.
    *
-   * Time complexity: O(total vertices)
-   * 
+   * Time complexity: O(V), where V is total vertices
    * Space complexity: O(1)
    *
    * @returns {Number} - largest degree in graph
@@ -237,7 +231,6 @@ class EdgeWeightedUndirectedGraph {
    * list.
    *
    * Time complexity: O(V + E) where V is total vertices and E is total edges
-   * 
    * Space complexity: O(1)
    *
    * @returns {Number} - number of self loops, as you might have guessed!
