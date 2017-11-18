@@ -11,7 +11,6 @@ try {
   'from an incorrect file path or exporting a non-constructor from the file.');
 }
 
-// AAA (Arrange -> Act -> Assert) test pattern
 // In tree drawings, routes with parentheses represent red links
 describe('RedBlackTree', () => {
   beforeEach(() => {

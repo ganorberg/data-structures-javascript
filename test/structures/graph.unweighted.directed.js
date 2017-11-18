@@ -11,7 +11,6 @@ try {
   'from an incorrect file path or exporting a non-constructor from the file.');
 }
 
-// AAA (Arrange -> Act -> Assert) test pattern
 describe('DirectedGraph', () => {
   beforeEach(() => {
     graph = new DirectedGraph();

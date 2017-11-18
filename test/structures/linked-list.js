@@ -11,7 +11,6 @@ try {
   'from an incorrect file path or exporting a non-constructor from the file.');
 }
 
-// Follows AAA (Arrange -> Act -> Assert) unit testing pattern
 describe('LinkedList', () => {
   beforeEach(() => {
     list = new LinkedList();

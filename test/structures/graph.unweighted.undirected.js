@@ -13,7 +13,6 @@ try {
 
 // TODO: test other data types
 
-// AAA (Arrange -> Act -> Assert) test pattern
 describe('UndirectedGraph', () => {
   beforeEach(() => {
     graph = new UndirectedGraph();

@@ -13,7 +13,6 @@ try {
 
 // TODO: test other data types
 
-// AAA (Arrange -> Act -> Assert) test pattern
 describe('WeightedDigraph', () => {
   beforeEach(() => {
     graph = new WeightedDigraph();
