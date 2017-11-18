@@ -129,33 +129,6 @@ describe('Stack', () => {
     });
   });
 
-  describe('#push()', () => {
-    it('should increase size of stack by 1', () => {
-      stack.push(0);
-
-      expect(stack.storage.length).to.equal(1);
-    });
-
-    it('should append input to top of stack', () => {
-      stack.push(0);
-      stack.push(1);
-
-      expect(stack.storage[stack.storage.length - 1]).to.equal(1);
-    });
-
-    it('should return new stack length', () => {
-      expect(stack.push(0)).to.equal(1);
-    });
-
-    it('should not insert item if stack is at capacity', () => {
-      const cappedStack = new Stack(0);
-
-      stack.push('never pushed');
-
-      expect(cappedStack.storage.length).to.equal(0);
-    });
-  });
-
   describe('#pop()', () => {
     it('should decrease size of stack by 1', () => {
       stack.push(0);
@@ -179,6 +152,29 @@ describe('Stack', () => {
       stack.push(0);
 
       expect(stack.pop()).to.equal(0);
+    });
+  });
+
+  describe('#push()', () => {
+    it('should increase size of stack by 1', () => {
+      stack.push(0);
+
+      expect(stack.storage.length).to.equal(1);
+    });
+
+    it('should append input to top of stack', () => {
+      stack.push(0);
+      stack.push(1);
+
+      expect(stack.storage[stack.storage.length - 1]).to.equal(1);
+    });
+
+    it('should not insert item if stack is at capacity', () => {
+      const cappedStack = new Stack(0);
+
+      stack.push('never pushed');
+
+      expect(cappedStack.storage.length).to.equal(0);
     });
   });
 

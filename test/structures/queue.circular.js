@@ -48,10 +48,6 @@ describe('CircularQueue', () => {
 
       expect(queue.ring[1]).to.equal(6);
     });
-    
-    it('should return true', () => {
-      expect(queue.enqueue(0)).to.equal(true);
-    });
 
     it('should not change size of queue', () => {
       queue.enqueue(0);

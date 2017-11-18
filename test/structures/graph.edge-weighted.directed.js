@@ -69,10 +69,6 @@ describe('WeightedDigraph', () => {
 
       expect(graph.totalEdges).to.equal(1);
     });
-
-    it('should return true for successful insertion', () => {
-      expect(graph.addEdge([10, 12, 0.1])).to.equal(true);
-    });
   });
 
   describe('#addVertex', () => {
@@ -86,10 +82,6 @@ describe('WeightedDigraph', () => {
       graph.addVertex(0);
 
       expect(graph.totalVertices).to.equal(1);
-    });
-  
-    it('should return true for successful insertion', () => {
-      expect(graph.addVertex(0)).to.equal(true);
     });
   
     it('should throw an error if the vertex already exists in the graph', () => {

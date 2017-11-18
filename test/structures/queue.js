@@ -37,61 +37,6 @@ describe('Queue', () => {
     });
   });
 
-  describe('#isFull()', () => {
-    it('should return false if queue has not reached capacity', () => {
-      const cappedQueue = new Q(1);
-
-      expect(cappedQueue.isFull()).to.equal(false);
-    });
-
-    it('should return true if queue has reached capacity', () => {
-      const cappedQueue = new Q(1);
-
-      cappedQueue.enqueue(0);
-
-      expect(cappedQueue.isFull()).to.equal(true);
-    });
-  });
-
-  describe('#peek()', () => {
-    it('should return value at top of queue', () => {
-      queue.enqueue(0);
-
-      expect(queue.peek()).to.equal(0);
-    });
-
-    it('should return undefined for empty queue', () => {
-      expect(queue.peek()).to.equal(undefined);
-    });
-  });
-
-  describe('#enqueue()', () => {
-    it('should increase size of queue by 1', () => {
-      queue.enqueue(0);
-
-      expect(queue.size).to.equal(1);
-    });
-
-    it('should append input to end of queue', () => {
-      queue.enqueue(0);
-      queue.enqueue(1);
-
-      expect(queue.rear.value).to.equal(1);
-    });
-
-    it('should return new queue length', () => {
-      expect(queue.enqueue(0)).to.equal(1);
-    });
-
-    it('should not insert item if queue is at capacity', () => {
-      const cappedQueue = new Q(0);
-
-      queue.enqueue('never enqueues');
-
-      expect(cappedQueue.size).to.equal(0);
-    });
-  });
-
   describe('#dequeue()', () => {
     it('should decrease size of queue by 1', () => {
       queue.enqueue(0);
@@ -118,6 +63,30 @@ describe('Queue', () => {
     });
   });
 
+
+  describe('#enqueue()', () => {
+    it('should increase size of queue by 1', () => {
+      queue.enqueue(0);
+
+      expect(queue.size).to.equal(1);
+    });
+
+    it('should append input to end of queue', () => {
+      queue.enqueue(0);
+      queue.enqueue(1);
+
+      expect(queue.rear.value).to.equal(1);
+    });
+
+    it('should not insert item if queue is at capacity', () => {
+      const cappedQueue = new Q(0);
+
+      queue.enqueue('never enqueues');
+
+      expect(cappedQueue.size).to.equal(0);
+    });
+  });
+
   describe('#getSize()', () => {
     it('should return 0 if queue is empty', () => {
       expect(queue.getSize()).to.equal(0);
@@ -127,6 +96,34 @@ describe('Queue', () => {
       queue.enqueue(0);
 
       expect(queue.getSize()).to.equal(1);
+    });
+  });
+
+  describe('#isFull()', () => {
+    it('should return false if queue has not reached capacity', () => {
+      const cappedQueue = new Q(1);
+
+      expect(cappedQueue.isFull()).to.equal(false);
+    });
+
+    it('should return true if queue has reached capacity', () => {
+      const cappedQueue = new Q(1);
+
+      cappedQueue.enqueue(0);
+
+      expect(cappedQueue.isFull()).to.equal(true);
+    });
+  });
+
+  describe('#peek()', () => {
+    it('should return value at top of queue', () => {
+      queue.enqueue(0);
+
+      expect(queue.peek()).to.equal(0);
+    });
+
+    it('should return undefined for empty queue', () => {
+      expect(queue.peek()).to.equal(undefined);
     });
   });
 });

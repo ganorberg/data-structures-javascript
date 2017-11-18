@@ -87,10 +87,6 @@ describe('HashTable', () => {
 
       expect(table.entries).to.equal(1);
     });
-
-    it('should return true upon successful insertion', () => {
-      expect(table.insert('dog', 'woof')).to.equal(true);
-    });
   });
 
   describe('#remove()', () => {
