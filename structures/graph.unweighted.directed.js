@@ -355,14 +355,6 @@ class DirectedGraph {
    * adjacent vertices, store parents in their child's array in the reversed
    * graph.
    *
-   * ALTERNATE STRATEGY: This could be done in linear time while graph is
-   * being built. The reversed graph structure could be instantiated with the
-   * constructor call, then addEdge and addVertex could build it up with every
-   * addition. However, this essentially stores the graph twice on constructor
-   * call, which most users probably would not expect. Therefore, this method
-   * allows users to reverse the graph by their choice later on, although the
-   * time taken will be untenable for large, dense graphs.
-   *
    * Time complexity: O(V + E), where V is total vertices and E is total edges
    * Space complexity: O(V + E), where V is total vertices and E is total edges
    *
