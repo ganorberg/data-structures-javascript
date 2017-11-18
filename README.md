@@ -4,9 +4,10 @@
 
 Fast, fully tested and documented data structures built with JavaScript.
 
+
 ## Testing
 
-This library is 100% black box tested with 500+ unit tests. This means the test suite covers the public API and ignores implementation details (like private methods), thereby avoiding brittle tests and unnecessary re-work over time.
+This library is 100% black box tested with 400+ unit tests. This means the test suite covers the public API and ignores implementation details (like private methods), thereby avoiding brittle tests and unnecessary re-work over time.
 
 Unit tests follow AAA testing pattern (Arrange -> Act -> Assert).
 
@@ -26,6 +27,10 @@ If you would like to run the test suite after cloning the repo, run `npm install
 - give users access to class properties
 
 ## General notes
+
+### Performance compared to other languages
+
+If you need to squeeze every ounce of performance out of your data structures, JavaScript is likely not your language of choice given its high level of abstraction. That said, I imagine many JavaScript developers still build data structures on a daily basis. This library provides those developers with clean, performant examples that take into account all of JavaScript's quirks.
 
 ### Object key iteration: for in loops vs Object.keys
 
