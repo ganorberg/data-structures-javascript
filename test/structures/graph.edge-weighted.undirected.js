@@ -1,21 +1,19 @@
 const expect = require('chai').expect;
 
-let WeightedGraph;
+let EdgeWeightedUndirectedGraph;
 let graph;
 
 try {
-  WeightedGraph = require('../../structures/graph.edge-weighted.undirected');
-  graph = new WeightedGraph();
+  EdgeWeightedUndirectedGraph = require('../../structures/graph.edge-weighted.undirected');
+  graph = new EdgeWeightedUndirectedGraph();
 } catch (e) {
-  throw new Error('WeightedGraph could not be tested due to faulty import, likely ' +
+  throw new Error('EdgeWeightedUndirectedGraph could not be tested due to faulty import, likely ' +
   'from an incorrect file path or exporting a non-constructor from the file.');
 }
 
-// TODO: test other data types
-
-describe('WeightedGraph', () => {
+describe('EdgeWeightedUndirectedGraph', () => {
   beforeEach(() => {
-    graph = new WeightedGraph();
+    graph = new EdgeWeightedUndirectedGraph();
   });
 
   it('should be extensible', () => {

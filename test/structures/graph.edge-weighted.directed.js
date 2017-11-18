@@ -1,21 +1,19 @@
 const expect = require('chai').expect;
 
-let WeightedDigraph;
+let EdgeWeightedDirectedGraph;
 let graph;
 
 try {
-  WeightedDigraph = require('../../structures/graph.edge-weighted.directed');
-  graph = new WeightedDigraph();
+  EdgeWeightedDirectedGraph = require('../../structures/graph.edge-weighted.directed');
+  graph = new EdgeWeightedDirectedGraph();
 } catch (e) {
-  throw new Error('WeightedDigraph could not be tested due to faulty import, likely ' +
+  throw new Error('EdgeWeightedDirectedGraph could not be tested due to faulty import, likely ' +
   'from an incorrect file path or exporting a non-constructor from the file.');
 }
 
-// TODO: test other data types
-
-describe('WeightedDigraph', () => {
+describe('EdgeWeightedDirectedGraph', () => {
   beforeEach(() => {
-    graph = new WeightedDigraph();
+    graph = new EdgeWeightedDirectedGraph();
   });
 
   it('should be extensible', () => {

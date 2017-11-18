@@ -11,8 +11,6 @@ try {
   'from an incorrect file path or exporting a non-constructor from the file.');
 }
 
-// TODO: test other data types
-
 describe('UndirectedGraph', () => {
   beforeEach(() => {
     graph = new UndirectedGraph();
