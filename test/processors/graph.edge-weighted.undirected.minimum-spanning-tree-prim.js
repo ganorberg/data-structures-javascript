@@ -2,21 +2,23 @@ const expect = require('chai').expect;
 
 let UndirectedGraph;
 let graph;
-let MinSpanningTree;
+let MinimumSpanningTree;
 let mst;
 
 try {
   UndirectedGraph = require('../../structures/graph.edge-weighted.undirected');
   graph = new UndirectedGraph();
-  MinSpanningTree = require('../../processors/graph.edge-weighted.undirected.minimum-spanning-tree-prim');
-  mst = new MinSpanningTree();
+  graph.addVertex(0);
+
+  MinimumSpanningTree = require('../../processors/graph.edge-weighted.undirected.minimum-spanning-tree-prim');
+  mst = new MinimumSpanningTree(graph);
 } catch (e) {
-  throw new Error('MinSpanningTree could not be tested due to faulty import, ' +
+  throw new Error('MinimumSpanningTree could not be tested due to faulty import, ' +
     'likely from an incorrect file path or exporting a non-constructor from ' +
     'the processor or graph files.');
 }
 
-describe('MinSpanningTree', () => {
+describe('MinimumSpanningTree', () => {
   beforeEach(() => {
     graph = new UndirectedGraph();
 
@@ -41,7 +43,7 @@ describe('MinSpanningTree', () => {
     
     edges.forEach(edge => graph.addEdge(edge));
 
-    mst = new MinSpanningTree(graph);
+    mst = new MinimumSpanningTree(graph);
   });
 
   it('should be extensible', () => {
@@ -51,32 +53,11 @@ describe('MinSpanningTree', () => {
   it('should have properties granted from constructor call', () => {
     expect(mst).to.have.all.keys(
       'graph',
-      'initialized',
       'minimumSpanningTree',
     );
   });
-  
-  it('should not be initialized before its initialize method is called', () => {
-    expect(mst.initialized).to.be.false;
-  });
 
-  it('should initially have an empty MST set', () => {
-    expect(mst.minimumSpanningTree).to.deep.equal(new Set());
-  });
-
-  describe('#initialize', () => {
-    it('should set the initialize property to true', () => {
-      mst.initialize();
-
-      expect(mst.initialized).to.be.true;
-    });
-
-    it('should throw an error if called twice', () => {
-      mst.initialize();
-
-      expect(() => mst.initialize()).to.throw(Error);
-    });
-
+  describe('#getMinimumSpanningTree()', () => {
     it('should build the correct minimum spanning tree', () => {
       const correctEdges = [
         { v1: '0', v2: '7', weight: 0.16 },
@@ -90,9 +71,7 @@ describe('MinSpanningTree', () => {
 
       const correctSet = new Set(correctEdges);
 
-      mst.initialize();
-
-      expect(mst.minimumSpanningTree).to.deep.equal(correctSet);
+      expect(mst.getMinimumSpanningTree()).to.deep.equal(correctSet);
     });
   });
 });

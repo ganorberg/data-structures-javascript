@@ -9,7 +9,7 @@ try {
   UndirectedGraph = require('../../structures/graph.unweighted.undirected');
   graph = new UndirectedGraph();
   ConnectedComponents = require('../../processors/graph.unweighted.undirected.connected-components');
-  connected = new ConnectedComponents();
+  connected = new ConnectedComponents(graph);
 } catch (e) {
   throw new Error('ConnectedComponents could not be tested due to faulty import, ' +
     'likely from an incorrect file path or exporting a non-constructor from ' +
@@ -52,88 +52,60 @@ describe('ConnectedComponents', () => {
       'componentCount',
       'graph',
       'id',
-      'initialized',
     );
   });
+
+  it('should process all vertices in the graph', () => {
+    const graphVertices = Object.keys(graph.adjacencyList);
+    const processedVertices = Object.keys(connected.id);
+
+    expect(graphVertices).to.deep.equal(processedVertices);
+  });
+
+  it('should work for number and string data types', () => {
+    // Arrange
+    graph = new UndirectedGraph();
+    
+    const edges = [
+      ['dog', 'woof'],
+      ['dog', 'bark'],
+      ['cat', 'meow'],
+      [0, 'meow'],
+      [14, 'dog'],
+    ];
+    
+    edges.forEach(edge => graph.addEdge(edge));
+
+    // Act
+    connected = new ConnectedComponents(graph);
   
-  it('should not be initialized before its initialize method is called', () => {
-    expect(connected.initialized).to.be.false;
+    // Assert
+    expect(connected.id.hasOwnProperty(0)).to.be.true;
+    expect(connected.id.hasOwnProperty('meow')).to.be.true;
+    expect(connected.id.hasOwnProperty('cat')).to.be.true;
+    expect(connected.id.hasOwnProperty(14)).to.be.true;
+    expect(connected.id.hasOwnProperty('dog')).to.be.true;
+    expect(connected.id.hasOwnProperty('woof')).to.be.true;
+    expect(connected.id.hasOwnProperty('bark')).to.be.true;
   });
 
-  it('should initially have an empty id object', () => {
-    expect(connected.id).to.deep.equal({});
+  describe('#getComponentCount', () => {
+    it('should return the number of components in the graph', () => {
+      expect(connected.getComponentCount()).to.equal(4);
+    });
   });
 
-  it('should initially have 0 components ', () => {
-    expect(connected.componentCount).to.equal(0);
-  });
-
-  describe('#componentId', () => {
-    it('should return the component id for the given vertex', () => {
-      connected.initialize();
-      
-      expect(connected.componentId(6)).to.equal(0);
+  describe('#getComponentId', () => {
+    it('should return the component id for a vertex in the first component', () => {
+      expect(connected.getComponentId(6)).to.equal(0);
     });
 
-    it('should throw an error if the processor has not been initialized', () => {
-      expect(() => connected.componentId(0)).to.throw(Error);
+    it('should return the component id for a vertex in the last component', () => {
+      expect(connected.getComponentId(14)).to.equal(3);
     });
 
     it('should throw an error if the vertex is not in the graph', () => {
-      connected.initialize();
-
-      expect(() => connected.componentId('not in graph')).to.throw(Error);
-    });
-  });
-
-  describe('#initialize', () => {
-    it('should set the initialize property to true', () => {
-      connected.initialize();
-
-      expect(connected.initialized).to.be.true;
-    });
-
-    it('should process all vertices in the graph', () => {
-      connected.initialize();
-
-      const graphVertices = Object.keys(graph.adjacencyList);
-      const processedVertices = Object.keys(connected.id);
-
-      expect(graphVertices).to.deep.equal(processedVertices);
-    });
-
-    it('should throw an error if called twice', () => {
-      connected.initialize();
-
-      expect(() => connected.initialize()).to.throw(Error);
-    });
-
-    it('should work for number and string data types', () => {
-      // Arrange
-      graph = new UndirectedGraph();
-      
-      const edges = [
-        ['dog', 'woof'],
-        ['dog', 'bark'],
-        ['cat', 'meow'],
-        [0, 'meow'],
-        [14, 'dog'],
-      ];
-      
-      edges.forEach(edge => graph.addEdge(edge));
-      connected = new ConnectedComponents(graph);
-    
-      // Act
-      connected.initialize();
-    
-      // Assert
-      expect(connected.id.hasOwnProperty('0')).to.be.true;
-      expect(connected.id.hasOwnProperty('meow')).to.be.true;
-      expect(connected.id.hasOwnProperty('cat')).to.be.true;
-      expect(connected.id.hasOwnProperty('14')).to.be.true;
-      expect(connected.id.hasOwnProperty('dog')).to.be.true;
-      expect(connected.id.hasOwnProperty('woof')).to.be.true;
-      expect(connected.id.hasOwnProperty('bark')).to.be.true;
+      expect(() => connected.getComponentId('not in graph')).to.throw(Error);
     });
   });
 });
