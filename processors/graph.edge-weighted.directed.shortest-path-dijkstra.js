@@ -13,19 +13,19 @@ const MinimumPriorityQueue = require('../structures/queue.priority.min');
  * its edges to compare distances from the source. If a smaller distance is
  * found, update the distance, the parent, and add to the priority queue.
  *
- * Time complexity: O(ElogV), where V is total vertices and E is total edges
- * Space complexity: O(E), where E is total edges
+ * Time complexity: O((E + V) * logV), where V is total vertices and E is total edges
+ * Space complexity: O(V + E), where V is total vertices and E is total edges
  *
  * TIME COMPLEXITY EXPLAINED
- * Breadth-first search operates in O(V + E), where V is total vertices and E is
- * total edges. Each search has the potential to trigger a priority queue
- * insertion, which operates in O(logV). Therefore, multiplying these two gives
- * O((V + E)logV), which simplifies to O(ElogV) because E > V.
+ * Each vertex will be removed from the priority queue once, which is a logV
+ * operation on V vertices yielding VlogV. Each edge has the potential to be
+ * inserted into the priority queue, which is a logV operation on E edges
+ * yielding ElogV. Adding these two gives VlogV + ElogV = logV * (V + E)
  *
  * SPACE COMPLEXITY EXPLAINED
  * Without decrease key, the priority queue has the potential to add all edges
- * from the graph. Therefore, the space complexity is O(E), which is greater
- * than O(V) from the visited Set.
+ * from the graph. This requires O(E) space. The visited Set will always take
+ * O(V) space. Therefore, the space complexity is O(V + E).
  *
  * @param {Object} distanceFromSource - track weight for each vertex from source
  * @param {Object} graph - graph being processed
