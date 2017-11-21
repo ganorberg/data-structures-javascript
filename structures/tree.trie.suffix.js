@@ -44,8 +44,8 @@ function insert(suffix, trie, index) {
  * Build suffix string by prepending one character at a time starting at end of
  * word. For example, BANANA inserts A, NA, ANA, NANA, ANANA, BANANA.
  *
- * Time complexity: O(N)
- * Space complexity: O(N)
+ * Time complexity: O(c^2), where c is number of characters in input string
+ * Space complexity: O(c^2), where c is number of characters in input string
  *
  * @param {String} string - string that suffix trie represents
  *
@@ -124,7 +124,7 @@ class SuffixTrie {
    *
    * Edge case: empty string returns true
    *
-   * Time complexity: O(c), where c is number of characters in suffix
+   * Time complexity: O(c), where c is number of characters in input pattern
    * Space complexity: O(1)
    *
    * @param {String} pattern - pattern to be searched
