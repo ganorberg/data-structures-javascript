@@ -46,3 +46,7 @@ Object-oriented adjacency lists avoid these issues given that keys can be named 
 I chose to use class syntax for its familiarity compared to classic object-oriented approaches to data structures. Users transitioning from object-oriented languages like Java or Python should understand the JavaScript implementations immediately.
 
 If I were to build these structures without "classes", I would use Kyle Simpson's OLOO pattern (objects linked to other objects). The performance would be nearly the same, yet the code would be cleaner and more flexible. Without extraneous constructors and the new keyword, we could directly and explicitly embrace the prototype chain without the middle man.
+
+### Space complexity vs auxiliary space
+
+When I describe space complexity in this library, I am only referring to the *extra* space the algorithm uses with respect to the input size. I do not include the space used by the input. The formal definition for this is auxiliary space, although I prefer the term space complexity. For example, I would describe methods that modify every element of an array in-place as having O(1) space complexity because extra space is not required.
