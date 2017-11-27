@@ -55,6 +55,22 @@ describe('Queue', () => {
       expect(queue.front.value).to.equal(1);
     });
 
+    it('should set front to null when dequeuing the last node', () => {
+      queue.enqueue(1);
+
+      queue.dequeue();
+
+      expect(queue.front).to.be.null;
+    });
+
+    it('should set rear to null when dequeuing the last node', () => {
+      queue.enqueue(1);
+
+      queue.dequeue();
+
+      expect(queue.rear).to.be.null;
+    });
+
     it('should return removed value', () => {
       queue.enqueue(0);
 
