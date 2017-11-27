@@ -55,7 +55,10 @@ class Queue {
     if (this.size === 0) { return; }
 
     const value = this.front.value;
+
     this.front = this.front.next;
+    if (this.size === 1) { this.rear = null; }
+
     this.size--;
     return value;
   }
