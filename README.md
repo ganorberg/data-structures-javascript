@@ -50,3 +50,7 @@ If I were to build these structures without "classes", I would use Kyle Simpson'
 ### Space complexity vs auxiliary space
 
 When I describe space complexity in this library, I am only referring to the *extra* space the algorithm uses with respect to the input size. I do not include the space used by the input. The formal definition for this is auxiliary space, although I prefer the term space complexity. For example, I would describe methods that modify every element of an array in-place as having O(1) space complexity because extra space is not required.
+
+### Space complexity does not include call stack
+
+My space complexities refer to heap memory consumed rather than call stack space consumed. Call stack space is typically (logN) for depth-first search on trees and O(N) to traverse linear structures with recursive calls that aren't tail-call optimized.
