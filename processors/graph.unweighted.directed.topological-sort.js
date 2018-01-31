@@ -23,9 +23,10 @@ function depthFirstSearch(
   vertex,
   visited,
 ) {
+  visited.add(vertex);
+
   graph.adjacencyList[vertex].forEach(adjacentVertex => {
     if (visited.has(adjacentVertex)) { return; }
-    visited.add(adjacentVertex);
 
     depthFirstSearch(
       graph,
@@ -60,16 +61,14 @@ function initializeSort(graph, sorted) {
   // Use another processor to check if there is a cycle
   const hasCycle = new DirectedCycle(graph).hasCycle();
   if (hasCycle) {
-    throw new Error('Cycle found. Topological sort requires no cycles in the graph.') 
+    throw new Error('Cycle found. Topological sort requires no cycles in the graph.')
   };
 
   const visited = new Set();
   for (const vertex in graph.adjacencyList) {
     // Ignore prototype chain
     if (!graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
-
     if (visited.has(vertex)) { continue; }
-    visited.add(vertex);
 
     depthFirstSearch(
       graph,
