@@ -1,23 +1,19 @@
 {
   "plugins": ["plugins/markdown"],
   "markdown": {
-    // Hard wrap text at line breaks
     "hardwrap": true
   },
   "recurseDepth": 10,
   "source": {
-      // Only process files ending in .js, .jsdoc, and .jsx
-      "includePattern": ".+\\.js(doc|x)?$"
+    "includePattern": ".+\\.js(doc|x)?$"
   },
-  // Support code that uses ES2015 modules
   "sourceType": "module",
   "tags": {
-      "allowUnknownTags": true,
-      "dictionaries": ["jsdoc","closure"]
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
   },
-  // Render inline {@link} tags in plain text
   "templates": {
-      "cleverLinks": false,
-      "monospaceLinks": false
+    "cleverLinks": false,
+    "monospaceLinks": false
   }
 }

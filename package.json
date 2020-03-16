@@ -1,5 +1,5 @@
 {
-  "name": "data-structures-javascript",
+  "name": "@ganorberg/data-structures-javascript",
   "version": "0.1.0",
   "description": "Fully tested JavaScript data structures library",
   "scripts": {
@@ -10,6 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/ganorberg/data-structures-javascript.git"
   },
+  "main": "index.js",
   "keywords": [
     "data structures",
     "javascript",
@@ -51,6 +52,7 @@
   "homepage": "https://github.com/ganorberg/data-structures-javascript#readme",
   "devDependencies": {
     "chai": "^4.2.0",
+    "jsdoc": "^3.6.3",
     "mocha": "^7.1.0"
   }
 }

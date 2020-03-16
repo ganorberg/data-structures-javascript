@@ -12,6 +12,10 @@ Unit tests follow AAA testing pattern (Arrange -> Act -> Assert).
 
 If you would like to run the test suite after cloning the repo, run `npm install` then `npm test`.
 
+## Generate documentation
+
+You can easily build JSDoc documentation by running `npm run doc`.
+
 ## Technical decisions:
 
 - prefer using space to improve time complexity
