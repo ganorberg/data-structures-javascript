@@ -15,29 +15,21 @@
  *
  * @private
  */
-function depthFirstSearch(
-  graph,
-  parent,
-  vertex,
-  visited,
-) {
+function depthFirstSearch(graph, parent, vertex, visited) {
   if (!graph.adjacencyList.hasOwnProperty(vertex)) {
-    throw new Error('The input vertex is not in the graph, my friend!');
+    throw new Error("The input vertex is not in the graph");
   }
 
   graph.adjacencyList[vertex].forEach(adjacentVertex => {
-    if (visited.has(adjacentVertex)) { return; }
+    if (visited.has(adjacentVertex)) {
+      return;
+    }
     visited.add(adjacentVertex);
 
     // Store path information for public methods to use later
     parent[adjacentVertex] = vertex;
-    
-    depthFirstSearch(
-      graph,
-      parent,
-      adjacentVertex,
-      visited,
-    );
+
+    depthFirstSearch(graph, parent, adjacentVertex, visited);
   });
 }
 
@@ -58,25 +50,17 @@ function depthFirstSearch(
  *
  * @private
  */
-function findPaths(
-  graph,
-  parent,
-  sourceVertex,
-  visited,
-) {
-  if (!graph) { throw new Error('The graph is not loaded, my friend!'); }
+function findPaths(graph, parent, sourceVertex, visited) {
+  if (!graph) {
+    throw new Error("The graph is not loaded");
+  }
   if (!graph.adjacencyList.hasOwnProperty(sourceVertex)) {
-    throw new Error('The source vertex is not in the graph, my friend!');
+    throw new Error("The source vertex is not in the graph");
   }
 
   visited.add(sourceVertex);
 
-  depthFirstSearch(
-    graph,
-    parent,
-    sourceVertex,
-    visited,
-  );
+  depthFirstSearch(graph, parent, sourceVertex, visited);
 }
 
 /** Class representing depth-first path processor for unweighted graphs */
@@ -100,12 +84,7 @@ class DepthFirstPaths {
     this.sourceVertex = String(sourceVertex);
     this.visited = new Set();
 
-    findPaths(
-      this.graph,
-      this.parent,
-      this.sourceVertex,
-      this.visited,
-    );
+    findPaths(this.graph, this.parent, this.sourceVertex, this.visited);
   }
 
   /**
@@ -122,7 +101,7 @@ class DepthFirstPaths {
    */
   hasPathTo(vertex) {
     if (!this.graph.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('The input vertex is not in the graph, my friend!');
+      throw new Error("The input vertex is not in the graph");
     }
 
     // Stringify to allow the user to call this method with numbers
@@ -142,8 +121,10 @@ class DepthFirstPaths {
    * @returns {Array} - path from destination to source
    */
   pathTo(destinationVertex) {
-    if (!this.hasPathTo(destinationVertex)) { return null; }
-    
+    if (!this.hasPathTo(destinationVertex)) {
+      return null;
+    }
+
     const path = [];
     for (
       // Stringify to allow the user to call this method with numbers

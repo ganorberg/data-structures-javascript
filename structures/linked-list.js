@@ -1,4 +1,4 @@
-/** 
+/**
  * Class representing a node
  * @private
  */
@@ -53,7 +53,9 @@ class LinkedList {
    */
   push(value) {
     if (value === null || value === undefined) {
-      throw new Error('Please avoid pushing silly values like null and undefined');
+      throw new Error(
+        "This Linked List does not allow empty values like null and undefined"
+      );
     }
 
     const node = new Node(value);
@@ -64,7 +66,7 @@ class LinkedList {
       this.head = this.tail = node;
       return;
     }
-    
+
     this.tail.next = node;
     this.tail = node;
   }
@@ -81,11 +83,14 @@ class LinkedList {
    * @param {*} value - checked if exists in list
    *
    * @returns {Boolean} - whether or not value exists in list
-   */  
+   */
+
   contains(value) {
     let curr = this.head;
     while (curr !== null) {
-      if (curr.value === value) { return true; }
+      if (curr.value === value) {
+        return true;
+      }
       curr = curr.next;
     }
 
@@ -109,7 +114,9 @@ class LinkedList {
    */
   remove(value) {
     // Edge case: empty list
-    if (this.size === 0) { throw new Error('Your list is already empty, my friend!'); }
+    if (this.size === 0) {
+      throw new Error("This Linked List is already empty");
+    }
 
     // Edge case: if head matches, need to update head
     if (this.head.value === value) {
@@ -117,7 +124,9 @@ class LinkedList {
       this.head = this.head.next;
 
       // Edge case: if removing final node in list
-      if (this.size === 1) { this.tail = null; }
+      if (this.size === 1) {
+        this.tail = null;
+      }
 
       this.size--;
       return node;
@@ -128,9 +137,10 @@ class LinkedList {
 
     while (curr !== null) {
       if (curr.value === value) {
-
         // Edge case: if tail matches, need to update tail
-        if (curr === this.tail) { this.tail = prev; }
+        if (curr === this.tail) {
+          this.tail = prev;
+        }
 
         const node = curr;
         prev.next = curr.next;
@@ -142,7 +152,7 @@ class LinkedList {
       curr = curr.next;
     }
 
-    throw new Error('Value does not exist in list... sorry!');
+    throw new Error("That value does not exist in this Linked List");
   }
 }
 

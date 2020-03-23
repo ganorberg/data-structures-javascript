@@ -24,9 +24,13 @@ function insert(suffix, trie, index) {
     const letter = suffix[i].toLowerCase();
 
     // Ignore whitespace
-    if (/\s/.test(letter)) { continue; }
+    if (/\s/.test(letter)) {
+      continue;
+    }
 
-    if (!currentNode.hasOwnProperty(letter)) { currentNode[letter] = {}; }
+    if (!currentNode.hasOwnProperty(letter)) {
+      currentNode[letter] = {};
+    }
 
     // Traverse to next node unless last letter
     currentNode = currentNode[letter];
@@ -54,12 +58,12 @@ function insert(suffix, trie, index) {
  * @private
  */
 function buildTrie(string) {
-  if (string === '' || typeof string !== 'string') {
-    throw new Error('Please insert a non-empty string upon instantiation, my friend!');
+  if (string === "" || typeof string !== "string") {
+    throw new Error("Insert a non-empty string upon instantiation");
   }
 
   const trie = {};
-  let suffix = '';
+  let suffix = "";
 
   for (let i = string.length - 1; i >= 0; i--) {
     const letter = string[i];
@@ -101,19 +105,22 @@ class SuffixTrie {
    * @returns {Boolean} - true if suffix exists, or false otherwise
    */
   hasSuffix(suffix) {
-    if (typeof suffix !== 'string') {
-      throw new Error('This trie only stores strings, my friend!');
+    if (typeof suffix !== "string") {
+      throw new Error("This trie only stores strings");
     }
 
     let currentNode = this.root;
 
     for (let i = 0; i < suffix.length; i++) {
       const letter = suffix[i];
-      if (!currentNode.hasOwnProperty(letter)) { return false; }
+      if (!currentNode.hasOwnProperty(letter)) {
+        return false;
+      }
+
       currentNode = currentNode[letter];
     }
 
-    return currentNode.hasOwnProperty('index');
+    return currentNode.hasOwnProperty("index");
   }
 
   /**
@@ -132,15 +139,18 @@ class SuffixTrie {
    * @returns {Boolean} - true if pattern exists, or false otherwise
    */
   matchesPattern(pattern) {
-    if (typeof pattern !== 'string') {
-      throw new Error('This trie only stores strings, my friend!');
+    if (typeof pattern !== "string") {
+      throw new Error("This trie only stores strings");
     }
 
     let currentNode = this.root;
 
     for (let i = 0; i < pattern.length; i++) {
       const letter = pattern[i];
-      if (!currentNode.hasOwnProperty(letter)) { return false; }
+      if (!currentNode.hasOwnProperty(letter)) {
+        return false;
+      }
+
       currentNode = currentNode[letter];
     }
 

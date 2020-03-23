@@ -58,7 +58,7 @@ function buildGraph(edges = []) {
 
   edges.forEach(edge => {
     const [v1, v2] = edge;
-    
+
     if (!adjacencyList.hasOwnProperty(v1)) {
       addVertex(adjacencyList, v1);
       totalVertices++;
@@ -99,7 +99,7 @@ class UndirectedGraph {
    */
   constructor(edges = []) {
     const { adjacencyList, totalEdges, totalVertices } = buildGraph(edges);
-    this.adjacencyList = adjacencyList
+    this.adjacencyList = adjacencyList;
     this.totalEdges = totalEdges;
     this.totalVertices = totalVertices;
   }
@@ -115,7 +115,7 @@ class UndirectedGraph {
    * Edge case: if vertices are the same (i.e. self-loop), add both to same
    * adjacency list. This maintains mathematical consistency whereby each edge
    * represents two values in adjacency list, providing convenient calculations
-   * for methods like averageDegree. 
+   * for methods like averageDegree.
    *
    * Time complexity: O(1)
    * Space complexity: O(1)
@@ -123,8 +123,12 @@ class UndirectedGraph {
    * @param {Array<String|Number>} v1, v2 - vertices sharing new edge
    */
   addEdge([v1, v2]) {
-    if (!this.adjacencyList.hasOwnProperty(v1)) { this.addVertex(v1); }
-    if (!this.adjacencyList.hasOwnProperty(v2)) { this.addVertex(v2); }
+    if (!this.adjacencyList.hasOwnProperty(v1)) {
+      this.addVertex(v1);
+    }
+    if (!this.adjacencyList.hasOwnProperty(v2)) {
+      this.addVertex(v2);
+    }
     this.adjacencyList[v1].push(String(v2));
     this.adjacencyList[v2].push(String(v1));
     this.totalEdges++;
@@ -147,7 +151,7 @@ class UndirectedGraph {
    */
   addVertex(vertex) {
     if (this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That node already exists in the graph, my friend!');
+      throw new Error("That node already exists in the graph");
     }
 
     this.adjacencyList[vertex] = [];
@@ -169,7 +173,7 @@ class UndirectedGraph {
    */
   adjacentVertices(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That vertex does not exist in the graph, my friend!');
+      throw new Error("That vertex does not exist in the graph");
     }
 
     return this.adjacencyList[vertex];
@@ -192,7 +196,7 @@ class UndirectedGraph {
     // Cannot divide by 0
     return this.totalVertices === 0
       ? 0
-      : 2 * this.totalEdges / this.totalVertices;
+      : (2 * this.totalEdges) / this.totalVertices;
   }
 
   /**
@@ -210,7 +214,7 @@ class UndirectedGraph {
    */
   degree(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That vertex does not exist in the graph, my friend!');
+      throw new Error("That vertex does not exist in the graph");
     }
 
     return this.adjacencyList[vertex].length;
@@ -231,10 +235,14 @@ class UndirectedGraph {
     let max = 0;
     for (const vertex in this.adjacencyList) {
       // Ignore prototype chain
-      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+      if (!this.adjacencyList.hasOwnProperty(vertex)) {
+        continue;
+      }
 
       const degree = this.degree(vertex);
-      if (degree > max) { max = degree; }
+      if (degree > max) {
+        max = degree;
+      }
     }
 
     return max;
@@ -257,10 +265,14 @@ class UndirectedGraph {
     let count = 0;
     for (const vertex in this.adjacencyList) {
       // Ignore prototype chain
-      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+      if (!this.adjacencyList.hasOwnProperty(vertex)) {
+        continue;
+      }
 
       this.adjacencyList[vertex].forEach(adjacentVertex => {
-        if (vertex === adjacentVertex) { count++; }
+        if (vertex === adjacentVertex) {
+          count++;
+        }
       });
     }
 

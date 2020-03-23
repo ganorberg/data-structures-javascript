@@ -57,7 +57,7 @@ function buildGraph(edges = []) {
 
   edges.forEach(edge => {
     const [v1, v2] = edge;
-    
+
     if (!adjacencyList.hasOwnProperty(v1)) {
       addVertex(adjacencyList, v1);
       totalVertices++;
@@ -117,8 +117,12 @@ class DirectedGraph {
    * @param {Array<String|Number>} v1, v2 - directed edge created where v1 -> v2
    */
   addEdge([v1, v2]) {
-    if (!this.adjacencyList.hasOwnProperty(v1)) { this.addVertex(v1); }
-    if (!this.adjacencyList.hasOwnProperty(v2)) { this.addVertex(v2); }
+    if (!this.adjacencyList.hasOwnProperty(v1)) {
+      this.addVertex(v1);
+    }
+    if (!this.adjacencyList.hasOwnProperty(v2)) {
+      this.addVertex(v2);
+    }
     this.adjacencyList[v1].push(String(v2));
     this.totalEdges++;
   }
@@ -140,7 +144,7 @@ class DirectedGraph {
    */
   addVertex(vertex) {
     if (this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That node already exists in the graph, my friend!');
+      throw new Error("That node already exists in the graph");
     }
 
     this.adjacencyList[vertex] = [];
@@ -163,7 +167,7 @@ class DirectedGraph {
    */
   adjacentVertices(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That vertex does not exist in the graph, my friend!');
+      throw new Error("That vertex does not exist in the graph");
     }
 
     return this.adjacencyList[vertex];
@@ -216,7 +220,7 @@ class DirectedGraph {
    */
   inDegree(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That vertex does not exist in the graph, my friend!');
+      throw new Error("That vertex does not exist in the graph");
     }
 
     // If user has called reverse method, they can get indegree in constant time!
@@ -227,11 +231,15 @@ class DirectedGraph {
     let degree = 0;
     for (const vertexKeys in this.adjacencyList) {
       // Ignore prototype chain
-      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+      if (!this.adjacencyList.hasOwnProperty(vertex)) {
+        continue;
+      }
 
       this.adjacencyList[vertexKeys].forEach(adjacentVertex => {
         // Loose equality allows user to input numbers
-        if (vertex == adjacentVertex) { degree++; }
+        if (vertex == adjacentVertex) {
+          degree++;
+        }
       });
     }
 
@@ -266,10 +274,14 @@ class DirectedGraph {
     let max = 0;
     for (const vertex in this.adjacencyList) {
       // Ignore prototype chain
-      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
-      
+      if (!this.adjacencyList.hasOwnProperty(vertex)) {
+        continue;
+      }
+
       const degree = this.inDegree(vertex);
-      if (degree > max) { max = degree; }
+      if (degree > max) {
+        max = degree;
+      }
     }
 
     return max;
@@ -290,10 +302,14 @@ class DirectedGraph {
     let max = 0;
     for (const vertex in this.adjacencyList) {
       // Ignore prototype chain
-      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+      if (!this.adjacencyList.hasOwnProperty(vertex)) {
+        continue;
+      }
 
       const degree = this.outDegree(vertex);
-      if (degree > max) { max = degree; }
+      if (degree > max) {
+        max = degree;
+      }
     }
 
     return max;
@@ -314,10 +330,14 @@ class DirectedGraph {
     let count = 0;
     for (const vertex in this.adjacencyList) {
       // Ignore prototype chain
-      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+      if (!this.adjacencyList.hasOwnProperty(vertex)) {
+        continue;
+      }
 
       this.adjacencyList[vertex].forEach(adjacentVertex => {
-        if (vertex === adjacentVertex) { count++; }
+        if (vertex === adjacentVertex) {
+          count++;
+        }
       });
     }
 
@@ -340,7 +360,7 @@ class DirectedGraph {
    */
   outDegree(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That vertex does not exist in the graph, my friend!');
+      throw new Error("That vertex does not exist in the graph");
     }
 
     return this.adjacencyList[vertex].length;
@@ -366,15 +386,19 @@ class DirectedGraph {
     // Logic much simpler if two loops are used: first to initialize, second to push
     for (const vertex in this.adjacencyList) {
       // Ignore prototype chain
-      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+      if (!this.adjacencyList.hasOwnProperty(vertex)) {
+        continue;
+      }
 
       this.reversedGraph[vertex] = [];
     }
 
     for (const vertex in this.adjacencyList) {
       // Ignore prototype chain
-      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
-      
+      if (!this.adjacencyList.hasOwnProperty(vertex)) {
+        continue;
+      }
+
       this.adjacencyList[vertex].forEach(adjacentVertex => {
         this.reversedGraph[adjacentVertex].push(vertex);
       });

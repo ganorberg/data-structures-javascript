@@ -1,4 +1,4 @@
-/** 
+/**
  * Class representing a node in the tree
  * @private
  */
@@ -21,7 +21,6 @@ class Node {
   }
 }
 
-
 /**
  * @description: Helper for deleteNode function. Finds minimum of tree and
  * deletes it.
@@ -43,8 +42,8 @@ class Node {
  */
 function deleteMin(root) {
   let parent = root;
-  if (parent === null || typeof parent !== 'object') {
-    throw new Error('Please insert valid tree');
+  if (parent === null || typeof parent !== "object") {
+    throw new Error("Insert a valid tree");
   }
 
   let child = root.left;
@@ -85,8 +84,12 @@ function deleteMin(root) {
  */
 function deleteNode(node) {
   let numberOfChildren = 0;
-  if (node.left !== null) { numberOfChildren++; }
-  if (node.right !== null) { numberOfChildren++; }
+  if (node.left !== null) {
+    numberOfChildren++;
+  }
+  if (node.right !== null) {
+    numberOfChildren++;
+  }
 
   switch (numberOfChildren) {
     case 0:
@@ -99,7 +102,7 @@ function deleteNode(node) {
 
       // if right subtree min is node's right child, then replace with null
       // to avoid accidental circular reference
-      rightMin.right = node.right === rightMin ? null : node.right; 
+      rightMin.right = node.right === rightMin ? null : node.right;
       return rightMin;
   }
 }
@@ -135,12 +138,14 @@ class BinarySearchTree {
    */
   add(value) {
     // Type checking
-    if (value === undefined || typeof value === 'object' || isNaN(value)) {
-      throw new Error('Please avoid adding silly values like undefined, null, objects or NaN');
+    if (value === undefined || typeof value === "object" || isNaN(value)) {
+      throw new Error(
+        "This tree assumes that values do not include undefined, null, objects, or NaN"
+      );
     }
 
     let newNode = new Node(value);
-    
+
     // If tree is empty...
     if (this.root === null) {
       this.root = newNode;
@@ -151,11 +156,13 @@ class BinarySearchTree {
 
     // Traverse tree
     while (node !== null) {
-      if (value === node.value) { throw new Error('Cannot add duplicate values'); }
-      
+      if (value === node.value) {
+        throw new Error("Cannot add duplicate values");
+      }
+
       // Lesser values move us left or create new left tree
       if (value < node.value) {
-        if (node.left === null) { 
+        if (node.left === null) {
           node.left = newNode;
           return;
         }
@@ -165,7 +172,7 @@ class BinarySearchTree {
 
       // Greater values move us right or create new right tree
       if (value > node.value) {
-        if (node.right === null) { 
+        if (node.right === null) {
           node.right = newNode;
           return;
         }
@@ -187,7 +194,10 @@ class BinarySearchTree {
    * @param {Function} callback - calls all values in breadth-first order
    */
   breadthFirstSearch(callback) {
-    if (this.root === null) { throw new Error('Empty tree, my friend!'); }
+    if (this.root === null) {
+      throw new Error("The tree is empty");
+    }
+
     let queue = [this.root];
     while (true) {
       // use another queue to avoid expensive shifting costs
@@ -196,12 +206,18 @@ class BinarySearchTree {
       // key idea is to use nodes in queue to set up next queue
       queue.forEach(node => {
         callback(node.value);
-        if (node.left !== null) { newQueue.push(node.left); }
-        if (node.right !== null) { newQueue.push(node.right); }
+        if (node.left !== null) {
+          newQueue.push(node.left);
+        }
+        if (node.right !== null) {
+          newQueue.push(node.right);
+        }
       });
 
       // nothing added to new queue means everything has been searched
-      if (newQueue.length === 0) { return; }
+      if (newQueue.length === 0) {
+        return;
+      }
 
       // reassign queue to list of nodes in next level of tree
       queue = newQueue;
@@ -224,9 +240,15 @@ class BinarySearchTree {
     let node = this.root;
 
     while (node !== null) {
-      if (value === node.value) { return true; }
-      if (value < node.value) { node = node.left; }
-      if (value > node.value) { node = node.right; }
+      if (value === node.value) {
+        return true;
+      }
+      if (value < node.value) {
+        node = node.left;
+      }
+      if (value > node.value) {
+        node = node.right;
+      }
     }
 
     return false;
@@ -250,9 +272,14 @@ class BinarySearchTree {
    * @returns {Object} - node removed
    */
   delete(value) {
-    if (this.root === null) { throw new Error('Tree is empty, my dear friend!'); }
-    if (value === undefined || typeof value === 'object' || isNaN(value)) {
-      throw new Error('Values like undefined, null, objects and NaN do not exist for deletion');
+    if (this.root === null) {
+      throw new Error("The tree is empty");
+    }
+
+    if (value === undefined || typeof value === "object" || isNaN(value)) {
+      throw new Error(
+        "Values like undefined, null, objects and NaN are not allowed in this tree"
+      );
     }
 
     let parent = this.root;
@@ -270,10 +297,10 @@ class BinarySearchTree {
     // set initial child to check value against
     if (value < parent.value) {
       child = parent.left;
-      direction = 'left';
+      direction = "left";
     } else if (value > parent.value) {
       child = parent.right;
-      direction = 'right';
+      direction = "right";
     }
 
     // traverse tree
@@ -285,15 +312,15 @@ class BinarySearchTree {
       } else if (value < child.value) {
         child = child.left;
         parent = parent[direction];
-        direction = 'left';
+        direction = "left";
       } else if (value > child.value) {
         child = child.right;
         parent = parent[direction];
-        direction = 'right';
+        direction = "right";
       }
     }
 
-    throw new Error('No match found for deletion.');
+    throw new Error("No match found for deletion");
   }
 
   /**
@@ -313,11 +340,17 @@ class BinarySearchTree {
    * @param {Object=} node - current node being traversed and called
    */
   depthInOrder(callback, node = this.root) {
-    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
-    
-    if (node.left !== null) { this.depthInOrder(callback, node.left); }
+    if (node === null) {
+      throw new Error("The tree is empty");
+    }
+
+    if (node.left !== null) {
+      this.depthInOrder(callback, node.left);
+    }
     callback(node.value);
-    if (node.right !== null) { this.depthInOrder(callback, node.right); }
+    if (node.right !== null) {
+      this.depthInOrder(callback, node.right);
+    }
   }
 
   /**
@@ -337,10 +370,16 @@ class BinarySearchTree {
    * @param {Object=} node - current node being traversed and called
    */
   depthPostOrder(callback, node = this.root) {
-    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
-    
-    if (node.left !== null) { this.depthPostOrder(callback, node.left); }
-    if (node.right !== null) { this.depthPostOrder(callback, node.right); }
+    if (node === null) {
+      throw new Error("The tree is empty");
+    }
+
+    if (node.left !== null) {
+      this.depthPostOrder(callback, node.left);
+    }
+    if (node.right !== null) {
+      this.depthPostOrder(callback, node.right);
+    }
     callback(node.value);
   }
 
@@ -361,11 +400,17 @@ class BinarySearchTree {
    * @param {Object=} node - current node being traversed and called
    */
   depthPreOrder(callback, node = this.root) {
-    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
+    if (node === null) {
+      throw new Error("The tree is empty");
+    }
 
     callback(node.value);
-    if (node.left !== null) { this.depthPreOrder(callback, node.left); }
-    if (node.right !== null) { this.depthPreOrder(callback, node.right); }
+    if (node.left !== null) {
+      this.depthPreOrder(callback, node.left);
+    }
+    if (node.right !== null) {
+      this.depthPreOrder(callback, node.right);
+    }
   }
 
   /**
@@ -384,8 +429,12 @@ class BinarySearchTree {
    */
   max() {
     let node = this.root;
-    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
-    while (node.right !== null) { node = node.right; }
+    if (node === null) {
+      throw new Error("The tree is empty");
+    }
+    while (node.right !== null) {
+      node = node.right;
+    }
     return node.value;
   }
 
@@ -405,8 +454,12 @@ class BinarySearchTree {
    */
   min() {
     let node = this.root;
-    if (node === null) { throw new Error('Tree is empty, my dear friend!'); }
-    while (node.left !== null) { node = node.left; }
+    if (node === null) {
+      throw new Error("The tree is empty");
+    }
+    while (node.left !== null) {
+      node = node.left;
+    }
     return node.value;
   }
 }

@@ -1,4 +1,4 @@
-/** 
+/**
  * Class representing a weighted edge
  * @private
  */
@@ -104,7 +104,7 @@ function buildGraph(edges = []) {
 
   edges.forEach(edge => {
     const [v1, v2] = edge;
-    
+
     if (!adjacencyList.hasOwnProperty(v1)) {
       addVertex(adjacencyList, v1);
       totalVertices++;
@@ -165,8 +165,12 @@ class EdgeWeightedDirectedGraph {
    * @param {Array<String|Number>} v1, v2, weight - directed edge created where v1 -> v2
    */
   addEdge([v1, v2, weight]) {
-    if (!this.adjacencyList.hasOwnProperty(v1)) { this.addVertex(v1); }
-    if (!this.adjacencyList.hasOwnProperty(v2)) { this.addVertex(v2); }
+    if (!this.adjacencyList.hasOwnProperty(v1)) {
+      this.addVertex(v1);
+    }
+    if (!this.adjacencyList.hasOwnProperty(v2)) {
+      this.addVertex(v2);
+    }
 
     const edge = new Edge([v1, v2, weight]);
 
@@ -189,7 +193,7 @@ class EdgeWeightedDirectedGraph {
    */
   addVertex(vertex) {
     if (this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That node already exists in the graph, my friend!');
+      throw new Error("That node already exists in the graph");
     }
 
     this.adjacencyList[vertex] = [];
@@ -212,7 +216,7 @@ class EdgeWeightedDirectedGraph {
    */
   adjacentVertices(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That vertex does not exist in the graph, my friend!');
+      throw new Error("That vertex does not exist in the graph");
     }
 
     return this.adjacencyList[vertex];

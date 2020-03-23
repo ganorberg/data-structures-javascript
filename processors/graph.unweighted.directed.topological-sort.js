@@ -1,4 +1,4 @@
-const DirectedCycle = require('./graph.unweighted.directed.cycle');
+const DirectedCycle = require("./graph.unweighted.directed.cycle");
 
 /**
  * @description Private method that sorts vertices topologically using
@@ -17,23 +17,15 @@ const DirectedCycle = require('./graph.unweighted.directed.cycle');
  *
  * @private
  */
-function depthFirstSearch(
-  graph,
-  sorted,
-  vertex,
-  visited,
-) {
+function depthFirstSearch(graph, sorted, vertex, visited) {
   visited.add(vertex);
 
   graph.adjacencyList[vertex].forEach(adjacentVertex => {
-    if (visited.has(adjacentVertex)) { return; }
+    if (visited.has(adjacentVertex)) {
+      return;
+    }
 
-    depthFirstSearch(
-      graph,
-      sorted,
-      adjacentVertex,
-      visited,
-    );
+    depthFirstSearch(graph, sorted, adjacentVertex, visited);
   });
 
   // Here is the magic! At the end of DFS the vertex becomes sorted.
@@ -46,7 +38,7 @@ function depthFirstSearch(
  * Strategy: If the graph does not contain any cycles, then loop through every
  * vertex in the graph. If the vertex has not already been visited, then call
  * the private depth-first search method that will build up the sorted list.
- * 
+ *
  * Time complexity: O(V + E), where V is total vertices and E is total edges
  * Space complexity: O(V), where V is total vertices
  *
@@ -56,26 +48,29 @@ function depthFirstSearch(
  * @private
  */
 function initializeSort(graph, sorted) {
-  if (!graph) { throw new Error('The graph is not loaded, my friend!'); }
+  if (!graph) {
+    throw new Error("The graph is not loaded");
+  }
 
   // Use another processor to check if there is a cycle
   const hasCycle = new DirectedCycle(graph).hasCycle();
   if (hasCycle) {
-    throw new Error('Cycle found. Topological sort requires no cycles in the graph.')
-  };
+    throw new Error(
+      "Cycle found. Topological sort requires no cycles in the graph."
+    );
+  }
 
   const visited = new Set();
   for (const vertex in graph.adjacencyList) {
     // Ignore prototype chain
-    if (!graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
-    if (visited.has(vertex)) { continue; }
+    if (!graph.adjacencyList.hasOwnProperty(vertex)) {
+      continue;
+    }
+    if (visited.has(vertex)) {
+      continue;
+    }
 
-    depthFirstSearch(
-      graph,
-      sorted,
-      vertex,
-      visited,
-    );
+    depthFirstSearch(graph, sorted, vertex, visited);
   }
 }
 

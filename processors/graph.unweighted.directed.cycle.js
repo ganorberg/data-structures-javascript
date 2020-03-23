@@ -16,20 +16,19 @@
  *
  * @private
  */
-function depthFirstSearch(
-  graph,
-  vertex,
-  visited,
-  visitedThisPass,
-) {
+function depthFirstSearch(graph, vertex, visited, visitedThisPass) {
   if (!graph.adjacencyList.hasOwnProperty(vertex)) {
-    throw new Error('The input vertex is not in the graph, my friend!');
+    throw new Error("The input vertex is not in the graph");
   }
-  
+
   // for of loop used instead of forEach to allow early return that breaks loop
   for (const adjacentVertex of graph.adjacencyList[vertex]) {
-    if (visitedThisPass.has(adjacentVertex)) { return true; }
-    if (visited.has(adjacentVertex)) { continue; }
+    if (visitedThisPass.has(adjacentVertex)) {
+      return true;
+    }
+    if (visited.has(adjacentVertex)) {
+      continue;
+    }
 
     visitedThisPass.add(adjacentVertex);
     visited.add(adjacentVertex);
@@ -38,10 +37,12 @@ function depthFirstSearch(
       graph,
       adjacentVertex,
       visited,
-      visitedThisPass,
+      visitedThisPass
     );
 
-    if (hasCycle) { return true; }
+    if (hasCycle) {
+      return true;
+    }
   }
 
   return false;
@@ -56,7 +57,7 @@ function depthFirstSearch(
  * a cycle is detected, return immediately. Otherwise, update the visited set
  * with all the values that were just visited on that DFS pass and continue
  * looping.
- * 
+ *
  * Time complexity: O(V + E), where V is total vertices and E is total edges
  * Space complexity: O(V), where V is total vertices
  *
@@ -67,29 +68,32 @@ function depthFirstSearch(
  * @private
  */
 function hasCycle(graph) {
-  if (!graph) { throw new Error('The graph is not loaded, my friend!'); }
+  if (!graph) {
+    throw new Error("The graph is not loaded");
+  }
 
   const visited = new Set();
 
   for (const vertex in graph.adjacencyList) {
     // Ignore prototype chain
-    if (!graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
+    if (!graph.adjacencyList.hasOwnProperty(vertex)) {
+      continue;
+    }
 
     // No need to repeat visits since DFS would have detected cycle on that pass
-    if (visited.has(vertex)) { continue; }
-    
+    if (visited.has(vertex)) {
+      continue;
+    }
+
     // If DFS visits a vertex twice since the initial call, then there is a cycle
     const visitedThisPass = new Set();
     visitedThisPass.add(vertex);
 
-    const hasCycle = depthFirstSearch(
-      graph,
-      vertex,
-      visited,
-      visitedThisPass,
-    );
+    const hasCycle = depthFirstSearch(graph, vertex, visited, visitedThisPass);
 
-    if (hasCycle) { return true; }
+    if (hasCycle) {
+      return true;
+    }
   }
 
   return false;

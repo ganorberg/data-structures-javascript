@@ -17,7 +17,7 @@
  * @param {Object} distanceFromSource - track how far each vertex is from source
  * @param {Object} graph - graph being processed
  * @param {Object} parent - track how algorithm reaches each vertex
- * @param {String} sourceVertex - vertex where DFS begins
+ * @param {String} sourceVertex - vertex where BFS begins
  * @param {Set} visited - track which vertices have already been visited
  *
  * @private
@@ -27,12 +27,16 @@ function initializeBFS(
   graph,
   parent,
   sourceVertex,
-  visited,
+  visited
 ) {
-  if (!graph) { throw new Error('The graph is not loaded, my friend!'); }  
+  if (!graph) {
+    throw new Error("The graph is not loaded");
+  }
   if (!graph.adjacencyList.hasOwnProperty(sourceVertex)) {
-    throw new Error("Please input a source vertex into the constructor that " +
-      "exists in the graph.");
+    throw new Error(
+      "Please input a source vertex into the constructor that " +
+        "exists in the graph."
+    );
   }
 
   // Begin search with source vertex at distance 0
@@ -49,7 +53,9 @@ function initializeBFS(
     // Key idea is to use vertices in queue to set up next queue
     queue.forEach(vertex => {
       graph.adjacencyList[vertex].forEach(adjacentVertex => {
-        if (visited.has(adjacentVertex)) { return; }
+        if (visited.has(adjacentVertex)) {
+          return;
+        }
         nextQueue.push(adjacentVertex);
         visited.add(adjacentVertex);
 
@@ -60,7 +66,9 @@ function initializeBFS(
     });
 
     // Exit condition: nothing new to see
-    if (nextQueue.length === 0) { return; }
+    if (nextQueue.length === 0) {
+      return;
+    }
 
     // Loop resumes with a new queue of vertices whose adjacent lists will be searched
     queue = nextQueue;
@@ -80,7 +88,7 @@ class BreadthFirstPaths {
    * @property {Object} distanceFromSource - track how far each vertex is from source
    * @property {Object} graph - graph being processed
    * @property {Object} parent - track how algorithm reaches each vertex
-   * @property {String|Number} sourceVertex - vertex where DFS begins
+   * @property {String|Number} sourceVertex - vertex where BFS begins
    * @property {Set} visited - track which vertices have already been visited
    */
   constructor(graph, sourceVertex) {
@@ -95,8 +103,8 @@ class BreadthFirstPaths {
       this.graph,
       this.parent,
       this.sourceVertex,
-      this.visited,
-    )
+      this.visited
+    );
   }
 
   /**
@@ -112,7 +120,9 @@ class BreadthFirstPaths {
    * @returns {Number} - distance from source vertex to input vertex
    */
   distanceTo(vertex) {
-    if (!this.hasPathTo(vertex)) { return null; }
+    if (!this.hasPathTo(vertex)) {
+      return null;
+    }
     return this.distanceFromSource[vertex];
   }
 
@@ -130,13 +140,13 @@ class BreadthFirstPaths {
    */
   hasPathTo(vertex) {
     if (!this.graph.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('The input vertex is not in the graph, my friend!');
+      throw new Error("The input vertex is not in the graph");
     }
 
     // Stringify to allow the user to call this method with numbers
     return this.visited.has(String(vertex));
   }
-  
+
   /**
    * @description Get the shortest path from the source vertex to the input
    * vertex.
@@ -151,8 +161,10 @@ class BreadthFirstPaths {
    * @returns {Array} - shortest path from destination to source
    */
   shortestPathTo(destinationVertex) {
-    if (!this.hasPathTo(destinationVertex)) { return null; }
-    
+    if (!this.hasPathTo(destinationVertex)) {
+      return null;
+    }
+
     const path = [];
     for (
       // Stringify to allow the user to call this method with numbers

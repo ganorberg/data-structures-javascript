@@ -1,4 +1,4 @@
-const MinimumPriorityQueue = require('../structures/queue.priority.min');
+const MinimumPriorityQueue = require("../structures/queue.priority.min");
 
 /**
  * @description Use Dijkstra's shortest path algorithm to find the shortest path
@@ -40,23 +40,27 @@ function initializeDijkstra(
   graph,
   parent,
   source,
-  visited,
+  visited
 ) {
-  if (!graph) { throw new Error('The graph is not loaded, my friend!'); }  
+  if (!graph) {
+    throw new Error("The graph is not loaded");
+  }
   if (!graph.adjacencyList.hasOwnProperty(source)) {
-    throw new Error('This source vertex is not in the graph, my friend!');
+    throw new Error("This source vertex is not in the graph");
   }
 
   // All vertices begin with infinity for distance comparisons later
   for (const vertex in graph.adjacencyList) {
-    if (!graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
+    if (!graph.adjacencyList.hasOwnProperty(vertex)) {
+      continue;
+    }
     distanceFromSource[vertex] = Infinity;
   }
 
   // Source begins with 0 distance. Use constant to avoid magic numbers.
   const SOURCE_DISTANCE_FROM_ITSELF = 0;
   distanceFromSource[source] = SOURCE_DISTANCE_FROM_ITSELF;
-  
+
   // Efficient for sparse graphs, as most real-world graphs tend to be
   const minPQ = new MinimumPriorityQueue();
   minPQ.insert(SOURCE_DISTANCE_FROM_ITSELF, source);
@@ -66,7 +70,9 @@ function initializeDijkstra(
     const minVertex = minPQ.deleteMin().value;
 
     // Allow dupes on priority queue but only visit one with smallest distance
-    if (visited.has(minVertex)) { continue; }
+    if (visited.has(minVertex)) {
+      continue;
+    }
     visited.add(minVertex);
 
     graph.adjacencyList[minVertex].forEach(edge => {
@@ -74,7 +80,9 @@ function initializeDijkstra(
       const adjacentVertex = edge.to();
 
       // Take action only if we find a shorter distance path
-      if (distance >= distanceFromSource[adjacentVertex]) { return; }
+      if (distance >= distanceFromSource[adjacentVertex]) {
+        return;
+      }
       distanceFromSource[adjacentVertex] = distance;
       parent[adjacentVertex] = minVertex;
       minPQ.insert(distance, adjacentVertex);
@@ -113,7 +121,7 @@ class ShortestPath {
       this.graph,
       this.parent,
       this.sourceVertex,
-      this.visited,
+      this.visited
     );
   }
 
@@ -131,7 +139,9 @@ class ShortestPath {
    * @returns {Number} - distance from source vertex to input vertex
    */
   distanceTo(vertex) {
-    if (!this.hasPathTo(vertex)) { return null; }
+    if (!this.hasPathTo(vertex)) {
+      return null;
+    }
     return this.distanceFromSource[vertex];
   }
 
@@ -149,7 +159,7 @@ class ShortestPath {
    */
   hasPathTo(vertex) {
     if (!this.graph.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('The input vertex is not in the graph, my friend!');
+      throw new Error("The input vertex is not in the graph");
     }
 
     // Stringify to allow the user to call this method with numbers
@@ -170,8 +180,10 @@ class ShortestPath {
    * @returns {Array} - shortest path from destination to source
    */
   shortestPathTo(destinationVertex) {
-    if (!this.hasPathTo(destinationVertex)) { return null; }
-    
+    if (!this.hasPathTo(destinationVertex)) {
+      return null;
+    }
+
     const path = [];
     for (
       // Stringify to allow the user to call this method with numbers

@@ -19,29 +19,19 @@
  *
  * @private
  */
-function depthFirstSearch(
-  componentCount,
-  graph,
-  id,
-  vertex,
-  visited,
-) {
+function depthFirstSearch(componentCount, graph, id, vertex, visited) {
   if (!graph.adjacencyList.hasOwnProperty(vertex)) {
-    throw new Error('The input vertex is not in the graph, my friend!');
+    throw new Error("The input vertex is not in the graph");
   }
 
   id[vertex] = componentCount;
   visited.add(vertex);
 
   graph.adjacencyList[vertex].forEach(adjacentVertex => {
-    if (visited.has(adjacentVertex)) { return; }
-    depthFirstSearch(
-      componentCount,
-      graph,
-      id,
-      adjacentVertex,
-      visited,
-    );
+    if (visited.has(adjacentVertex)) {
+      return;
+    }
+    depthFirstSearch(componentCount, graph, id, adjacentVertex, visited);
   });
 }
 
@@ -66,31 +56,31 @@ function depthFirstSearch(
  * @private
  */
 function countComponents(graph, id) {
-  if (!graph) { throw new Error('The graph is not loaded, my friend!'); }
+  if (!graph) {
+    throw new Error("The graph is not loaded");
+  }
 
   const visited = new Set();
   let componentCount = 0;
 
   for (const vertex in graph.adjacencyList) {
     // Ignore prototype chain
-    if (!graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
-    
-    if (visited.has(vertex)) { continue; }
+    if (!graph.adjacencyList.hasOwnProperty(vertex)) {
+      continue;
+    }
 
-    depthFirstSearch(
-      componentCount,
-      graph,
-      id,
-      vertex,
-      visited,
-    );
+    if (visited.has(vertex)) {
+      continue;
+    }
+
+    depthFirstSearch(componentCount, graph, id, vertex, visited);
 
     componentCount++;
   }
 
   return componentCount;
 }
-  
+
 /** Class representing connection processor for unweighted undirected graphs */
 class ConnectedComponents {
   /**
@@ -142,7 +132,7 @@ class ConnectedComponents {
    */
   getComponentId(vertex) {
     if (!this.graph.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('The input vertex is not in the graph, my friend!');
+      throw new Error("The input vertex is not in the graph");
     }
 
     return this.id[vertex];

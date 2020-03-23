@@ -7,11 +7,11 @@
  * larger than largest child, it means it is larger than both of them, so we
  * can stop sinking. If parent is smaller than largest child, then regardless
  * of whether it is smaller than smaller child, it will swap with largest
- * child to maintain invariant. 
+ * child to maintain invariant.
  *
  * Time complexity: O(log N)
  * Space complexity: O(1)
- * 
+ *
  * @param {Object} heap - the PriorityQueueMax instance's heap array
  * @param {Number} parentIndex - array index representing sinking element
  *
@@ -19,12 +19,12 @@
  */
 function sink(heap, parentIndex) {
   if (
-    !Array.isArray(heap)
-    || !Number.isSafeInteger(parentIndex)
-    || parentIndex < 0
-    || parentIndex > heap.length
+    !Array.isArray(heap) ||
+    !Number.isSafeInteger(parentIndex) ||
+    parentIndex < 0 ||
+    parentIndex > heap.length
   ) {
-    throw new Error('Please input valid inputs, my friend!');
+    throw new Error('Invalid input. See "sink" function for valid inputs.');
   }
 
   // Repeat if any children exist
@@ -34,12 +34,13 @@ function sink(heap, parentIndex) {
     const childIndexB = parentIndex * 2 + 1;
 
     // Child B may be undefined, in which case select childA. Tie also prefers A.
-    const indexOfLargerChild = heap[childIndexB] > heap[childIndexA]
-      ? childIndexB
-      : childIndexA;
-    
+    const indexOfLargerChild =
+      heap[childIndexB] > heap[childIndexA] ? childIndexB : childIndexA;
+
     // Stop sinking when you're at least as large as your largest child
-    if (parent >= heap[indexOfLargerChild]) { return; }
+    if (parent >= heap[indexOfLargerChild]) {
+      return;
+    }
 
     // Child is larger, so swap
     swap(heap, parentIndex, indexOfLargerChild);
@@ -65,14 +66,16 @@ function sink(heap, parentIndex) {
  */
 function swap(arr, indexA, indexB) {
   if (
-    !Array.isArray(arr)
-    || !Number.isSafeInteger(indexA)
-    || !Number.isSafeInteger(indexB)
-    || indexA < 0
-    || indexB < 0
-    || indexA > arr.length
-    || indexB > arr.length
-  ) { throw new Error('Please insert valid inputs, my friend!'); }
+    !Array.isArray(arr) ||
+    !Number.isSafeInteger(indexA) ||
+    !Number.isSafeInteger(indexB) ||
+    indexA < 0 ||
+    indexB < 0 ||
+    indexA > arr.length ||
+    indexB > arr.length
+  ) {
+    throw new Error('Invalid input. See "swap" function for valid inputs.');
+  }
 
   [arr[indexA], arr[indexB]] = [arr[indexB], arr[indexA]];
 }
@@ -86,7 +89,7 @@ function swap(arr, indexA, indexB) {
  *
  * Time complexity: O(log N)
  * Space complexity: O(1)
- * 
+ *
  * @param {Object} heap - the PriorityQueueMax instance's heap array
  * @param {Number} childsIndex - array index representing the element swimming up
  *
@@ -94,12 +97,12 @@ function swap(arr, indexA, indexB) {
  */
 function swim(heap, childsIndex) {
   if (
-    !Array.isArray(heap)
-    || !Number.isSafeInteger(childsIndex)
-    || childsIndex < 0
-    || childsIndex > heap.length
+    !Array.isArray(heap) ||
+    !Number.isSafeInteger(childsIndex) ||
+    childsIndex < 0 ||
+    childsIndex > heap.length
   ) {
-    throw new Error('Please input valid inputs, my friend!');
+    throw new Error('Invalid input. See "swim" function for valid inputs.');
   }
 
   // Avoid reassinging input parameters
@@ -142,11 +145,13 @@ class PriorityQueueMax {
    *
    * Time complexity: O(log N)
    * Space complexity: O(1)
-   * 
+   *
    * @returns {Number|String} - max removed from heap
    */
   deleteMax() {
-    if (this.isEmpty()) { throw new Error('Heap is empty, my friend!'); }
+    if (this.isEmpty()) {
+      throw new Error("Cannot delete because the heap is empty.");
+    }
     swap(this.heap, 1, this.heap.length - 1);
     const max = this.heap.pop();
     sink(this.heap, 1);
@@ -160,12 +165,14 @@ class PriorityQueueMax {
    *
    * Time complexity: O(log N)
    * Space complexity: O(1)
-   * 
+   *
    * @param {Number|String} key - value inserted into heap
    */
   insert(key) {
-    if (isNaN(key) || (typeof key !== 'string' && typeof key !== 'number')) {
-      throw new Error('Please insert valid number or string character into heap');
+    if (isNaN(key) || (typeof key !== "string" && typeof key !== "number")) {
+      throw new Error(
+        "Please insert valid number or string character into heap"
+      );
     }
 
     this.heap.push(key);
@@ -193,11 +200,16 @@ class PriorityQueueMax {
    *
    * Time complexity: O(1)
    * Space complexity: O(1)
-   * 
+   *
    * @returns {Number|String} - maximum value
    */
   peekMax() {
-    if (this.isEmpty()) { throw new Error('Heap is empty, my friend!'); }
+    if (this.isEmpty()) {
+      throw new Error(
+        "The heap is empty. Avoid peeking until there are values in the heap."
+      );
+    }
+
     return this.heap[1];
   }
 }

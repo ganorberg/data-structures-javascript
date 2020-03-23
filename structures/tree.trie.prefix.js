@@ -15,13 +15,13 @@
  * @private
  */
 function isCutOffNode(currentNode, isFinalLetter) {
-   return (
+  return (
     // Has prefix that is a stored word
-    (currentNode.hasOwnProperty('value') && !isFinalLetter)
-    ||
-    // Forks to another word 
-    (!currentNode.hasOwnProperty('value') && Object.keys(currentNode).length > 1)
-  )
+    (currentNode.hasOwnProperty("value") && !isFinalLetter) ||
+    // Forks to another word
+    (!currentNode.hasOwnProperty("value") &&
+      Object.keys(currentNode).length > 1)
+  );
 }
 
 /** Class representing a prefix trie */
@@ -53,18 +53,23 @@ class PrefixTrie {
    * @returns {Array} - all keys matching input prefix
    */
   autoComplete(prefix) {
-    if (typeof prefix !== 'string') {
-      throw new Error('This trie only stores strings, my friend!');
+    if (typeof prefix !== "string") {
+      throw new Error("This trie only stores strings");
     }
 
     // Could also cache previous searches and return those here
-    if (prefix === '') { return []; }
+    if (prefix === "") {
+      return [];
+    }
 
     let currentNode = this.root;
 
     for (let i = 0; i < prefix.length; i++) {
       const letter = prefix[i];
-      if (!currentNode.hasOwnProperty(letter)) { return []; }
+      if (!currentNode.hasOwnProperty(letter)) {
+        return [];
+      }
+
       currentNode = currentNode[letter];
     }
 
@@ -87,7 +92,7 @@ class PrefixTrie {
    */
   delete(word) {
     if (!this.hasWord(word)) {
-      throw new Error('That word is not in the trie, my friend!');
+      throw new Error("That word is not in the trie");
     }
 
     let currentNode = this.root;
@@ -99,7 +104,7 @@ class PrefixTrie {
       if (isCutOffNode(currentNode, isFinalLetter)) {
         cutOff = { node: currentNode, letter };
       }
-      
+
       // Move to next letter in word
       currentNode = currentNode[letter];
     }
@@ -134,19 +139,22 @@ class PrefixTrie {
    * @returns {*} - value if key found, or null otherwise
    */
   get(word) {
-    if (typeof word !== 'string') {
-      throw new Error('This trie only stores strings, my friend!');
+    if (typeof word !== "string") {
+      throw new Error("This trie only stores strings");
     }
 
     let currentNode = this.root;
 
     for (let i = 0; i < word.length; i++) {
       const letter = word[i];
-      if (!currentNode.hasOwnProperty(letter)) { return null; }
+      if (!currentNode.hasOwnProperty(letter)) {
+        return null;
+      }
+
       currentNode = currentNode[letter];
     }
 
-    return currentNode.hasOwnProperty('value') ? currentNode.value : null;
+    return currentNode.hasOwnProperty("value") ? currentNode.value : null;
   }
 
   /**
@@ -163,15 +171,18 @@ class PrefixTrie {
    * @returns {Boolean} - true if prefix exists, or false otherwise
    */
   hasPrefix(prefix) {
-    if (typeof prefix !== 'string' || prefix.length === 0) {
-      throw new Error('This trie only stores non-empty strings, my friend!');
+    if (typeof prefix !== "string" || prefix.length === 0) {
+      throw new Error("This trie only stores non-empty strings");
     }
 
     let currentNode = this.root;
 
     for (let i = 0; i < prefix.length; i++) {
       const letter = prefix[i];
-      if (!currentNode.hasOwnProperty(letter)) { return false; }
+      if (!currentNode.hasOwnProperty(letter)) {
+        return false;
+      }
+
       currentNode = currentNode[letter];
     }
 
@@ -191,8 +202,8 @@ class PrefixTrie {
    * @returns {Boolean} - true if word exists, or false otherwise
    */
   hasWord(word) {
-    if (typeof word !== 'string' || word.length === 0) {
-      throw new Error('This trie only stores non-empty strings, my friend!');
+    if (typeof word !== "string" || word.length === 0) {
+      throw new Error("This trie only stores non-empty strings");
     }
 
     return this.get(word) !== null;
@@ -214,13 +225,19 @@ class PrefixTrie {
    *
    * @returns {Array} - alphabetical list of all words in trie
    */
-  orderWords(node = this.root, words = [], word = '') {
-    if (node.hasOwnProperty('value')) { words.push(word); }
+  orderWords(node = this.root, words = [], word = "") {
+    if (node.hasOwnProperty("value")) {
+      words.push(word);
+    }
 
-    Object.keys(node).sort().forEach(key => {
-      if (key === 'value') { return; }
-      this.orderWords(node[key], words, word + key);
-    });
+    Object.keys(node)
+      .sort()
+      .forEach(key => {
+        if (key === "value") {
+          return;
+        }
+        this.orderWords(node[key], words, word + key);
+      });
 
     return words;
   }
@@ -244,15 +261,18 @@ class PrefixTrie {
    * @param {*} value - inserted as value property in node after word's final character
    */
   put(word, value) {
-    if (typeof word !== 'string' || word.length === 0) {
-      throw new Error('This trie requires non-empty string keys, my friend!');
+    if (typeof word !== "string" || word.length === 0) {
+      throw new Error("This trie requires non-empty string keys");
     }
 
     let currentNode = this.root;
 
     for (let i = 0; i < word.length; i++) {
       const letter = word[i];
-      if (!currentNode.hasOwnProperty(letter)) { currentNode[letter] = {}; }
+      if (!currentNode.hasOwnProperty(letter)) {
+        currentNode[letter] = {};
+      }
+
       currentNode = currentNode[letter];
     }
 

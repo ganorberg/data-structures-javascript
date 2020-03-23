@@ -44,7 +44,7 @@ class Edge {
   other(vertex) {
     // Use loose equality to allow users to input numbers
     if (this.v1 != vertex && this.v2 != vertex) {
-      throw new Error('Must insert one of the vertices in this edge, my friend!');
+      throw new Error("This edge does not contain that vertex");
     }
 
     return vertex == this.v1 ? this.v2 : this.v1;
@@ -111,7 +111,7 @@ function buildGraph(edges = []) {
 
   edges.forEach(edge => {
     const [v1, v2] = edge;
-    
+
     if (!adjacencyList.hasOwnProperty(v1)) {
       addVertex(adjacencyList, v1);
       totalVertices++;
@@ -170,7 +170,7 @@ class EdgeWeightedUndirectedGraph {
    * Edge case: if vertices are the same (i.e. self-loop), add both to same
    * adjacency list. This maintains mathematical consistency whereby each edge
    * represents two values in adjacency list, providing convenient calculations
-   * for methods like averageDegree. 
+   * for methods like averageDegree.
    *
    * Time complexity: O(1)
    * Space complexity: O(1)
@@ -178,8 +178,12 @@ class EdgeWeightedUndirectedGraph {
    * @param {Array<String|Number>} v1, v2, weight - edge vertices and weight
    */
   addEdge([v1, v2, weight]) {
-    if (!this.adjacencyList.hasOwnProperty(v1)) { this.addVertex(v1); }
-    if (!this.adjacencyList.hasOwnProperty(v2)) { this.addVertex(v2); }
+    if (!this.adjacencyList.hasOwnProperty(v1)) {
+      this.addVertex(v1);
+    }
+    if (!this.adjacencyList.hasOwnProperty(v2)) {
+      this.addVertex(v2);
+    }
 
     const edge = new Edge([v1, v2, weight]);
 
@@ -203,7 +207,7 @@ class EdgeWeightedUndirectedGraph {
    */
   addVertex(vertex) {
     if (this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That node already exists in the graph, my friend!');
+      throw new Error("That node already exists in the graph");
     }
 
     this.adjacencyList[vertex] = [];
@@ -226,7 +230,7 @@ class EdgeWeightedUndirectedGraph {
    */
   adjacentVertices(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That vertex does not exist in the graph, my friend!');
+      throw new Error("That vertex does not exist in the graph");
     }
 
     return this.adjacencyList[vertex];
@@ -249,7 +253,7 @@ class EdgeWeightedUndirectedGraph {
     // Cannot divide by 0
     return this.totalVertices === 0
       ? 0
-      : 2 * this.totalEdges / this.totalVertices;
+      : (2 * this.totalEdges) / this.totalVertices;
   }
 
   /**
@@ -268,7 +272,7 @@ class EdgeWeightedUndirectedGraph {
    */
   degree(vertex) {
     if (!this.adjacencyList.hasOwnProperty(vertex)) {
-      throw new Error('That vertex does not exist in the graph, my friend!');
+      throw new Error("That vertex does not exist in the graph");
     }
 
     return this.adjacencyList[vertex].length;
@@ -289,10 +293,14 @@ class EdgeWeightedUndirectedGraph {
     let max = 0;
     for (const vertex in this.adjacencyList) {
       // Ignore prototype chain
-      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+      if (!this.adjacencyList.hasOwnProperty(vertex)) {
+        continue;
+      }
 
       const degree = this.degree(vertex);
-      if (degree > max) { max = degree; }
+      if (degree > max) {
+        max = degree;
+      }
     }
 
     return max;
@@ -315,10 +323,14 @@ class EdgeWeightedUndirectedGraph {
     let count = 0;
     for (const vertex in this.adjacencyList) {
       // Ignore prototype chain
-      if (!this.adjacencyList.hasOwnProperty(vertex)) { continue; }
+      if (!this.adjacencyList.hasOwnProperty(vertex)) {
+        continue;
+      }
 
       this.adjacencyList[vertex].forEach(edge => {
-        if (edge.v1 === edge.v2) { count++; }
+        if (edge.v1 === edge.v2) {
+          count++;
+        }
       });
     }
 

@@ -15,20 +15,17 @@
  *
  * @private
  */
-function depthFirstSearch(
-  graph,
-  parent,
-  vertex,
-  visited,
-) {
+function depthFirstSearch(graph, parent, vertex, visited) {
   if (!graph.adjacencyList.hasOwnProperty(vertex)) {
-    throw new Error('The input vertex is not in the graph, my friend!');
+    throw new Error("The input vertex is not in the graph");
   }
 
   for (const adjacentVertex of graph.adjacencyList[vertex]) {
     if (visited.has(adjacentVertex)) {
       // Ignore backedges. Without this, a single edge is considered a cycle.
-      if (adjacentVertex === parent) { continue; }
+      if (adjacentVertex === parent) {
+        continue;
+      }
 
       // If already visited and NOT the parent, the graph has a cycle!
       return true;
@@ -36,14 +33,11 @@ function depthFirstSearch(
 
     visited.add(adjacentVertex);
 
-    const hasCycle = depthFirstSearch(
-      graph,
-      vertex,
-      adjacentVertex,
-      visited,
-    );
+    const hasCycle = depthFirstSearch(graph, vertex, adjacentVertex, visited);
 
-    if (hasCycle) { return true; }
+    if (hasCycle) {
+      return true;
+    }
   }
 
   return false;
@@ -66,13 +60,17 @@ function depthFirstSearch(
 function hasParallelEdges(graph) {
   for (const vertex in graph.adjacencyList) {
     // Ignore prototype chain
-    if (!graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
-    
+    if (!graph.adjacencyList.hasOwnProperty(vertex)) {
+      continue;
+    }
+
     const adjacentVertices = graph.adjacencyList[vertex];
     const visited = new Set();
 
     for (const adjacentVertex of adjacentVertices) {
-      if (visited.has(adjacentVertex)) { return true; }
+      if (visited.has(adjacentVertex)) {
+        return true;
+      }
       visited.add(adjacentVertex);
     }
   }
@@ -98,10 +96,14 @@ function hasParallelEdges(graph) {
 function hasSelfLoop(graph) {
   for (const vertex in graph.adjacencyList) {
     // Ignore prototype chain
-    if (!graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
+    if (!graph.adjacencyList.hasOwnProperty(vertex)) {
+      continue;
+    }
     const adjacentVertices = graph.adjacencyList[vertex];
     for (const adjacentVertex of adjacentVertices) {
-      if (vertex === adjacentVertex) { return true; }
+      if (vertex === adjacentVertex) {
+        return true;
+      }
     }
   }
 
@@ -126,30 +128,35 @@ function hasSelfLoop(graph) {
  * @private
  */
 function hasCycle(graph) {
-  if (!graph) { throw new Error('The graph is not loaded, my friend!'); }
-  if (hasSelfLoop(graph) || hasParallelEdges(graph)) { return true; }
+  if (!graph) {
+    throw new Error("The graph is not loaded");
+  }
+  if (hasSelfLoop(graph) || hasParallelEdges(graph)) {
+    return true;
+  }
 
   const visited = new Set();
   for (const vertex in graph.adjacencyList) {
     // Ignore prototype chain
-    if (!graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
-    
-    if (visited.has(vertex)) { continue; }
+    if (!graph.adjacencyList.hasOwnProperty(vertex)) {
+      continue;
+    }
+
+    if (visited.has(vertex)) {
+      continue;
+    }
     visited.add(vertex);
-    
-    const hasCycle = depthFirstSearch(
-      graph,
-      null,
-      vertex,
-      visited,
-    );
-    
-    if (hasCycle) { return true; }
+
+    const hasCycle = depthFirstSearch(graph, null, vertex, visited);
+
+    if (hasCycle) {
+      return true;
+    }
   }
 
   return false;
 }
-  
+
 /** Class representing cycle processor for unweighted undirected graphs */
 class UndirectedCycle {
   /**

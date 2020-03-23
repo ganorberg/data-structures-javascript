@@ -1,4 +1,4 @@
-const MinimumPriorityQueue = require('../structures/queue.priority.min');
+const MinimumPriorityQueue = require("../structures/queue.priority.min");
 
 /**
  * @description Private method that visits vertices placed in the minimum
@@ -20,14 +20,16 @@ const MinimumPriorityQueue = require('../structures/queue.priority.min');
  */
 function visit(vertex, graph, MSTvertices, priorityQueue) {
   if (!graph.adjacencyList.hasOwnProperty(vertex)) {
-    throw new Error('That vertex does not exist in the graph, my friend!');
+    throw new Error("That vertex does not exist in the graph");
   }
-  
+
   MSTvertices.add(vertex);
 
   // Insert edges only if both vertices not in MST
   graph.adjacencyList[vertex].forEach(edge => {
-    if (MSTvertices.has(edge.other(vertex))) { return; }
+    if (MSTvertices.has(edge.other(vertex))) {
+      return;
+    }
     priorityQueue.insert(edge.weight, edge);
   });
 }
@@ -48,18 +50,22 @@ function visit(vertex, graph, MSTvertices, priorityQueue) {
  * @private
  */
 function initializeMST(graph, MSTedges) {
-  if (!graph) { throw new Error('The graph is not loaded, my friend!'); }
-  
+  if (!graph) {
+    throw new Error("The graph is not loaded");
+  }
+
   // Ugly but efficient way to grab a starting vertex from graph
   let sourceVertex;
   for (const vertex in graph.adjacencyList) {
-    if (!graph.adjacencyList.hasOwnProperty(vertex)) { continue; }
+    if (!graph.adjacencyList.hasOwnProperty(vertex)) {
+      continue;
+    }
     sourceVertex = vertex;
     break;
   }
 
   if (sourceVertex === undefined) {
-    throw new Error('Your graph is empty, my friend!');
+    throw new Error("Your graph is empty");
   }
 
   const MSTvertices = new Set();
@@ -71,14 +77,19 @@ function initializeMST(graph, MSTedges) {
   while (MSTvertices.size < graph.totalVertices) {
     const edge = priorityQueue.deleteMin().value;
     const { v1, v2 } = edge;
-    if (MSTvertices.has(v1) && MSTvertices.has(v2)) { continue; }
+    if (MSTvertices.has(v1) && MSTvertices.has(v2)) {
+      continue;
+    }
 
     // Greedily add min edge to MST as long as only one vertex is in MST
     MSTedges.add(edge);
 
     // Populate priority queue and mark the vertex as visited
-    if (!MSTvertices.has(v1)) { visit(v1, graph, MSTvertices, priorityQueue); }
-    else if (!MSTvertices.has(v2)) { visit(v2, graph, MSTvertices, priorityQueue); }
+    if (!MSTvertices.has(v1)) {
+      visit(v1, graph, MSTvertices, priorityQueue);
+    } else if (!MSTvertices.has(v2)) {
+      visit(v2, graph, MSTvertices, priorityQueue);
+    }
   }
 }
 
