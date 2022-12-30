@@ -53,6 +53,6 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "jsdoc": "^3.6.3",
-    "mocha": "^7.1.0"
+    "mocha": "^10.2.0"
   }
 }
